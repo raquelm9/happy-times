@@ -1,7 +1,8 @@
 import React from 'react';
 
 
-const HappyHourMenu = () => {
+class HappyHourMenu extends React.Component{
+    render() {
     return (
         <>
         <h2 className='ui header centered'>Happy Hour Menu</h2>
@@ -15,5 +16,6 @@ const HappyHourMenu = () => {
 
     );
 };
+}
 
 export default HappyHourMenu;
