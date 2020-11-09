@@ -3,12 +3,15 @@ import React from 'react';
 
 
 
-const PaddedContainerSegment = (props) => {
+class PaddedContainerSegment extends React.Component {
+    render () {
     return (
-        <div className="ui raised very padded container segment">{props.children}
-  </div>
+        <div className="ui raised very padded container segment">
+            {this.props.children}
+        </div>
     );
 
 };
+}
 
 export default PaddedContainerSegment;
