@@ -4,7 +4,8 @@ import HappyHourMenu from '../HappyHourMenu/HappyHourMenu';
 import PaddedContainerSegment from '../PaddedContainerSegment/PaddedContainerSegment';
 
 
-const Grid = () => {
+class Grid extends React.Component {
+    render () {
     return (
         <div className="ui stackable two column grid" style={{marginLeft:'5px', marginRight:'5px'}}>
   <div className="column" >
@@ -25,5 +26,6 @@ const Grid = () => {
   </div>
     );
 };
+}
 
 export default Grid;

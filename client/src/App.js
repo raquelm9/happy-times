@@ -6,7 +6,8 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import MainPage from './pages/MainPage';
 import RestaurantDetail from './pages/RestaurantDetail';
 
-const App = () => {
+class App extends React.Component {
+  render() {
   return (
     <Router>
       <Switch>
@@ -17,5 +18,6 @@ const App = () => {
 
   );
 };
+}
 
 export default App;

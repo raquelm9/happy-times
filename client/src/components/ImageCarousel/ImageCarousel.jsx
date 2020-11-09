@@ -3,7 +3,8 @@ import Carousel from 'react-bootstrap/Carousel';
 
 
 
-const ImageCarousel = () => {
+class ImageCarousel extends React.Component{
+  render() {
     return (
 <Carousel>
   <Carousel.Item>
@@ -31,5 +32,6 @@ const ImageCarousel = () => {
 
     );
 };
+}
 
 export default ImageCarousel;
