@@ -235,18 +235,18 @@ app.put(
       (restaurant) => restaurantId === restaurant.id
     );
 
-    const hh = rest.happyHours.find(
+    const happyHr = rest.happyHours.find(
       (happyHour) => happyHourId === happyHour.id
     );
 
-    const HappyHourItem = rest.hh.menu.items.find(
+    const index1 = rest.happyHours.indexOf(happyHr);
+
+    const happyHourItem = rest.happyHours[index1].menu.items.find(
       (item) => happyHourItemID === item.id
     );
 
     if (happyHourItem) {
-      const index1 = rest.happyHours.indexOf(hh);
-      const index2 = rest.happyHours[index1].menu.items.indexOf(HappyHourItem);
-
+      var index2 = rest.happyHours[index1].menu.items.indexOf(happyHourItem);
       if (req.body.name) {
         rest.happyHours[index1].menu.items[index2].setName(req.body.name);
       }
@@ -258,9 +258,7 @@ app.put(
       }
 
       if (req.body.price) {
-        rest.happyHours[index1].menu.items[index2].setDescription(
-          req.body.price
-        );
+        rest.happyHours[index1].menu.items[index2].setPrice(req.body.price);
       }
 
       if (req.body.category) {
@@ -268,11 +266,10 @@ app.put(
           req.body.category
         );
       }
-
       res.status(200).send(restaurants);
     } else if (!rest) {
       res.status(400).send({ error: "Restaurant Id not found" });
-    } else if (!happyHourUpdate) {
+    } else if (!happyHr) {
       res.status(400).send({ error: "Happy Hour Id not found" });
     } else if (!HappyHourItem) {
       res.status(400).send({ error: "Item Id not found" });

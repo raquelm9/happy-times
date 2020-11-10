@@ -82,4 +82,25 @@ rest1.registerHappyHour(
   )
 );
 
-export const restaurants = [rest1];
+const rest2 = new Restaurant(
+  "23446",
+  "abc",
+  "Lorem ipsum dolor sit amet.",
+  "https://abc.com",
+  "http://localhost:3000/uploads/2020-11-03T18:56:45.481Zcoding_img.png",
+  new Address(710, 5, "T2R0Y6", "Calgary", "AB")
+);
+rest2.registerHappyHour(
+  new HappyHour(
+    "2346",
+    new OpenDays([OpenDays.weekDays.MON, OpenDays.weekDays.TUE]),
+    "3:00PM",
+    "6:00PM",
+    new Menu([
+      new MenuItem("546", "a", "b", 2, "food"),
+      new MenuItem("768", "a", "b", 3, "food"),
+    ])
+  )
+);
+
+export const restaurants = [rest1, rest2];
