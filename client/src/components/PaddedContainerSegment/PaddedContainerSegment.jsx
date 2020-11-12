@@ -1,17 +1,13 @@
-import React from 'react';
-
-
-
+import React from "react";
 
 class PaddedContainerSegment extends React.Component {
-    render () {
+  render() {
     return (
-        <div className="ui raised very padded container segment">
-            {this.props.children}
-        </div>
+      <div className="ui raised very padded container segment">
+        {this.props.children}
+      </div>
     );
-
-};
+  }
 }
 
 export default PaddedContainerSegment;

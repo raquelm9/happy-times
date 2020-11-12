@@ -8,6 +8,7 @@ import { Menu } from "./restaurants/menu.js";
 import { OpenDays } from "./restaurants/open_days.js";
 
 import express from "express";
+import cors from "cors";
 import bodyParser from "body-parser";
 import multer from "multer";
 
@@ -29,6 +30,8 @@ var fileFilter = (req, file, cb) => {
 };
 
 var app = express();
+
+app.use(cors());
 
 var upload = multer({
   storage: storage,
@@ -277,6 +280,6 @@ app.put(
   }
 );
 
-app.listen(3000, function () {
-  console.log("First API running on port 3000!");
+app.listen(3001, function () {
+  console.log("First API running on port 3001!");
 });

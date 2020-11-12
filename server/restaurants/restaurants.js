@@ -67,7 +67,7 @@ const rest1 = new Restaurant(
   "Lorem ipsum dolor sit amet.",
   "https://abc.com",
   "http://localhost:3000/uploads/2020-11-03T18:56:45.481Zcoding_img.png",
-  new Address(710, 5, "T2R0Y6", "Calgary", "AB")
+  new Address(710, "5 St SE", "T2R0Y6", "Calgary", "AB")
 );
 rest1.registerHappyHour(
   new HappyHour(
@@ -88,17 +88,21 @@ const rest2 = new Restaurant(
   "Lorem ipsum dolor sit amet.",
   "https://abc.com",
   "http://localhost:3000/uploads/2020-11-03T18:56:45.481Zcoding_img.png",
-  new Address(710, 5, "T2R0Y6", "Calgary", "AB")
+  new Address(710, "10 St NE", "T2R0Y6", "Calgary", "AB")
 );
 rest2.registerHappyHour(
   new HappyHour(
     "2346",
-    new OpenDays([OpenDays.weekDays.MON, OpenDays.weekDays.TUE]),
-    "3:00PM",
-    "6:00PM",
+    new OpenDays([
+      OpenDays.weekDays.WED,
+      OpenDays.weekDays.THU,
+      OpenDays.weekDays.FRI,
+    ]),
+    "5:00PM",
+    "7:00PM",
     new Menu([
       new MenuItem("546", "a", "b", 2, "food"),
-      new MenuItem("768", "a", "b", 3, "food"),
+      new MenuItem("768", "a", "b", 3, "drink"),
     ])
   )
 );
