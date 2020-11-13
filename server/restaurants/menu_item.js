@@ -26,8 +26,6 @@ export class MenuItem {
   setPrice(price) {
     if (!price) {
       throw "Menu item requires price";
-    } else if (isNaN(price)) {
-      throw "Menu item price must be a number";
     } else {
       this.price = price;
     }

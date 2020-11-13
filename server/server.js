@@ -170,14 +170,6 @@ app.put("/restaurants/:restaurantId", upload.single("image"), function (
   if (rest) {
     const address = req.body.address;
 
-    const newAddress = new Address(
-      address.unit,
-      address.street,
-      address.postalCode,
-      address.city,
-      address.province
-    );
-
     if (req.body.name) {
       rest.setName(req.body.name);
     }
@@ -194,7 +186,14 @@ app.put("/restaurants/:restaurantId", upload.single("image"), function (
       rest.setImage(req.file);
     }
 
-    if (newAddress) {
+    if (address) {
+      const newAddress = new Address(
+        address.unit,
+        address.street,
+        address.postalCode,
+        address.city,
+        address.province
+      );
       rest.setAddress(newAddress);
     }
 

@@ -5,7 +5,7 @@ class DetailRestaurantSegment extends React.Component {
   render() {
     return (
       <>
-        <h3 className="ui header">Name:{this.props.restaurant.name}</h3>
+        <h3 className="ui header">Name: {this.props.restaurant.name}</h3>
         <h4 className="address">
           Address: {addressLabel(this.props.restaurant)}
         </h4>
