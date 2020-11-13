@@ -161,7 +161,7 @@ const rest2 = new Restaurant(
   "Anejo",
   "Añejo Mexican Restaurant",
   "https://anejo.ca/",
-  "http://localhost:3001/uploads/2020-11-13T17:48:13.310Ztequila.jpg",
+  "http://localhost:3001/uploads/2020-11-13T18:13:09.094Ztequila.jpg",
   new Address(2116, "4 St SE", "T2S 1W7", "Calgary", "AB")
 );
 rest2.registerHappyHour(
@@ -210,7 +210,7 @@ const rest3 = new Restaurant(
   "Double Zero",
   "It'll be amore at first sight",
   "https://www.doublezeropizza.ca/",
-  "http://localhost:3001/uploads/2020-11-13T17:59:43.281ZDOUBLEZERO-7539.jpg",
+  "http://localhost:3001/uploads/2020-11-13T18:14:18.758ZDOUBLEZERO-7539.jpg",
   new Address(1133, "6455 Macleod Trail SW", "T2H 0K8", "Calgary", "AB")
 );
 rest3.registerHappyHour(
