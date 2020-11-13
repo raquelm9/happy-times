@@ -6,7 +6,6 @@ import PaddedContainerSegment from "../components/PaddedContainerSegment/PaddedC
 class RestaurantsListing extends React.Component {
   constructor(props) {
     super(props);
-
     this.state = { restaurants: [] };
   }
 

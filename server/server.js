@@ -49,6 +49,19 @@ app.get("/restaurants", function (req, res) {
   res.send(restaurants);
 });
 
+app.get("/restaurant/:restaurantId", function (req, res) {
+  var restaurantId = req.params.restaurantId;
+  const found = restaurants.find(
+    (restaurant) => restaurant.id === restaurantId
+  );
+
+  if (found) {
+    res.status(200).send(found);
+  } else {
+    res.status(404).send("Restaurant Id not found");
+  }
+});
+
 app.delete("/restaurants/:restaurantId", function (req, res) {
   var restaurantId = req.params.restaurantId;
 

@@ -13,7 +13,7 @@ class Grid extends React.Component {
         <div className="column">
           <div className="ui segment">
             <PaddedContainerSegment>
-              <DetailRestaurantSegment />
+              <DetailRestaurantSegment restaurant={this.props.restaurant} />
             </PaddedContainerSegment>
           </div>
         </div>

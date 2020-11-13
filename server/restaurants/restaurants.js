@@ -66,7 +66,7 @@ const rest1 = new Restaurant(
   "abc",
   "Lorem ipsum dolor sit amet.",
   "https://abc.com",
-  "http://localhost:3000/uploads/2020-11-03T18:56:45.481Zcoding_img.png",
+  "http://localhost:3001/uploads/2020-11-03T18:56:45.481Zcoding_img.png",
   new Address(710, "5 St SE", "T2R0Y6", "Calgary", "AB")
 );
 rest1.registerHappyHour(
@@ -87,7 +87,7 @@ const rest2 = new Restaurant(
   "abc",
   "Lorem ipsum dolor sit amet.",
   "https://abc.com",
-  "http://localhost:3000/uploads/2020-11-03T18:56:45.481Zcoding_img.png",
+  "http://localhost:3001/uploads/2020-11-03T18:56:45.481Zcoding_img.png",
   new Address(710, "10 St NE", "T2R0Y6", "Calgary", "AB")
 );
 rest2.registerHappyHour(

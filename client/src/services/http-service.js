@@ -9,4 +9,13 @@ export class HttpService {
     });
     return promise;
   };
+
+  getRestaurantDetail = (id) => {
+    var promise = new Promise((resolve, reject) => {
+      fetch("http://localhost:3001/restaurant/" + id).then((res) => {
+        resolve(res.json());
+      });
+    });
+    return promise;
+  };
 }
