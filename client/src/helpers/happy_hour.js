@@ -1,4 +1,6 @@
 export function todaysHappyHour(restaurant) {
+  if (!restaurant.id) return;
+
   const happyHours = restaurant.happyHours;
 
   //Getting current day of the week
@@ -24,4 +26,28 @@ export function todaysHappyHour(restaurant) {
   }
 
   return happyHourFound;
+}
+
+export function timeHappyHour(restaurant) {
+  if (!restaurant.id) {
+    return "";
+  }
+  const happyHour = todaysHappyHour(restaurant);
+
+  if (!happyHour) {
+    return "No Happy Hour For Today";
+  } else {
+    return happyHour.startTime + " - " + happyHour.endTime;
+  }
+}
+
+export function itemsByCategory(items) {
+  if (items.length === 0) {
+    return { food: [], drink: [] };
+  }
+
+  return {
+    food: items.filter((item) => item.category === "food"),
+    drink: items.filter((item) => item.category === "drink"),
+  };
 }

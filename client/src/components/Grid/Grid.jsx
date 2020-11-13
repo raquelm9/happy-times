@@ -20,7 +20,7 @@ class Grid extends React.Component {
         <div className="column">
           <div className="ui segment">
             <PaddedContainerSegment>
-              <HappyHourMenu />
+              <HappyHourMenu restaurant={this.props.restaurant} />
             </PaddedContainerSegment>
           </div>
         </div>
