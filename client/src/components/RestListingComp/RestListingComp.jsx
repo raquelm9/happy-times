@@ -44,18 +44,30 @@ class RestListingComp extends React.Component {
     });
   }
 
+  showCanDelete(){
+    if (this.props.canDelete) {
+      return (
+      <div className="deleteButton"><i className="trash alternate icon"></i></div>
+      )
+    } else {
+      return (
+      <p>
+        Happy Hour:<br></br>
+        {this.timeHappyHour()}
+      </p>)
+    }
+  }
+
   render() {
     const restaurant = this.props.restaurant;
 
     return (
       <div className="restaurant-card" onClick={this.viewHappyHour.bind(this)}>
-        <p>Name Restaurant: {restaurant.name}</p>
+        <p>Restaurant Name: {restaurant.name}</p>
         <p>Address: {addressLabel(restaurant)}</p>
-        <p>
-          Happy Hour:<br></br>
-          {this.timeHappyHour()}
-        </p>
-        <p>Category: {this.categoryHappyHour()}</p>
+        <>
+        {this.showCanDelete()}
+        </>
       </div>
     );
   }

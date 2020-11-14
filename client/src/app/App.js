@@ -7,6 +7,7 @@ import MainPage from "../pages/MainPage";
 import RestaurantDetail from "../pages/RestaurantDetail";
 import RestaurantsListing from "../pages/RestaurantsListing";
 import Map from "../pages/Map";
+import AdminRestaurants from "../pages/AdminRestaurants";
 
 class App extends React.Component {
   constructor(props) {
@@ -25,6 +26,7 @@ class App extends React.Component {
             component={RestaurantDetail}
           />
           <Route exact path="/map" component={Map} />
+          <Route exact path="/admin/restaurants" component={AdminRestaurants} />
         </Switch>
       </Router>
     );
