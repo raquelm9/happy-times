@@ -1,6 +1,5 @@
 import React from "react";
-import RestaurantsListing  from "../pages/RestaurantsListing";
-
+import RestaurantsListing from "../pages/RestaurantsListing";
 
 class AdminRestaurants extends React.Component {
   constructor(props) {
@@ -10,7 +9,8 @@ class AdminRestaurants extends React.Component {
   render() {
     return (
       <>
-       <RestaurantsListing canDelete={true}></RestaurantsListing>
+        <h1>Admin Access</h1>
+        <RestaurantsListing canDelete={true}></RestaurantsListing>
       </>
     );
   }

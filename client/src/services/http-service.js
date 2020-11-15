@@ -18,4 +18,15 @@ export class HttpService {
     });
     return promise;
   };
+
+  removeRestaurant = (id) => {
+    var promise = new Promise((resolve, reject) => {
+      fetch("http://localhost:3001/restaurants/" + id, {
+        method: "delete",
+      }).then((res) => {
+        resolve(res.json());
+      });
+    });
+    return promise;
+  };
 }

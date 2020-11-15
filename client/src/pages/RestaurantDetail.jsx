@@ -30,7 +30,6 @@ class RestaurantDetail extends React.Component {
   };
 
   render() {
-    console.log(this.state.restaurant);
     return (
       <div>
         <OneImage image={this.state.restaurant.image} />

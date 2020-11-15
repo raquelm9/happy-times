@@ -2,6 +2,7 @@ import React from "react";
 import { withRouter } from "react-router-dom";
 import { todaysHappyHour } from "../../helpers/happy_hour";
 import { addressLabel } from "../../helpers/address";
+import { HttpService } from "../../services/http-service";
 
 import "./RestListingComp.css";
 
@@ -44,17 +45,33 @@ class RestListingComp extends React.Component {
     });
   }
 
-  showCanDelete(){
+  deleteRest(event) {
+    //prevents the page to reroute to rest detail
+    event.stopPropagation();
+
+    const restaurant = this.props.restaurant;
+
+    console.log(this.props.onDelete);
+
+    new HttpService()
+      .removeRestaurant(restaurant.id)
+      .then(() => this.props.onDelete());
+  }
+
+  showCanDelete() {
     if (this.props.canDelete) {
       return (
-      <div className="deleteButton"><i className="trash alternate icon"></i></div>
-      )
+        <div className="deleteButton" onClick={this.deleteRest.bind(this)}>
+          <i className="trash alternate icon"></i>
+        </div>
+      );
     } else {
       return (
-      <p>
-        Happy Hour:<br></br>
-        {this.timeHappyHour()}
-      </p>)
+        <p>
+          Happy Hour:<br></br>
+          {this.timeHappyHour()}
+        </p>
+      );
     }
   }
 
@@ -65,9 +82,7 @@ class RestListingComp extends React.Component {
       <div className="restaurant-card" onClick={this.viewHappyHour.bind(this)}>
         <p>Restaurant Name: {restaurant.name}</p>
         <p>Address: {addressLabel(restaurant)}</p>
-        <>
-        {this.showCanDelete()}
-        </>
+        <>{this.showCanDelete()}</>
       </div>
     );
   }
