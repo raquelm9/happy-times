@@ -61,8 +61,11 @@ class RestListingComp extends React.Component {
   showCanDelete() {
     if (this.props.canDelete) {
       return (
-        <div className="deleteButton" onClick={this.deleteRest.bind(this)}>
-          <i className="trash alternate icon"></i>
+        <div className="deleteButton">
+          <i
+            className="trash alternate icon"
+            onClick={this.deleteRest.bind(this)}
+          ></i>
         </div>
       );
     } else {
