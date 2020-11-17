@@ -8,7 +8,7 @@ class AddRestaurant extends React.Component {
   }
 
   addNewRestaurant() {
-    this.props.history.push("/admin/restaurant/new");
+    this.props.history.push("/admin/restaurant/information");
   }
 
   render() {

@@ -3,6 +3,7 @@ import { HttpService } from "../services/http-service";
 import RestListingComp from "../components/RestListingComp/RestListingComp";
 import PaddedContainerSegment from "../components/PaddedContainerSegment/PaddedContainerSegment";
 import AddRestaurant from "../components/AddRestaurant/AddRestaurant";
+import AdminLoginButton from "../components/AdminLoginButton/AdminLoginButton";
 
 class RestaurantsListing extends React.Component {
   constructor(props) {
@@ -51,6 +52,7 @@ class RestaurantsListing extends React.Component {
   render() {
     return (
       <>
+        <AdminLoginButton></AdminLoginButton>
         <div className="ui stackable one column padded grid">
           {this.buildRestaurants()}
         </div>

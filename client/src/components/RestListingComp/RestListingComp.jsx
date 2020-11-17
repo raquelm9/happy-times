@@ -39,10 +39,17 @@ class RestListingComp extends React.Component {
   viewHappyHour() {
     const restaurant = this.props.restaurant;
 
-    this.props.history.push({
-      pathname: "/restaurant/happy-hour",
-      search: "id=" + restaurant.id,
-    });
+    if (this.props.canDelete) {
+      this.props.history.push({
+        pathname: "/admin/restaurant/information",
+        search: "id=" + restaurant.id,
+      });
+    } else {
+      this.props.history.push({
+        pathname: "/restaurant/happy-hour",
+        search: "id=" + restaurant.id,
+      });
+    }
   }
 
   deleteRest(event) {
@@ -50,8 +57,6 @@ class RestListingComp extends React.Component {
     event.stopPropagation();
 
     const restaurant = this.props.restaurant;
-
-    console.log(this.props.onDelete);
 
     new HttpService()
       .removeRestaurant(restaurant.id)

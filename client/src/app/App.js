@@ -30,7 +30,7 @@ class App extends React.Component {
           <Route exact path="/admin/restaurants" component={AdminRestaurants} />
           <Route
             exact
-            path="/admin/restaurant/new"
+            path="/admin/restaurant/information"
             component={AdminNewRestaurant}
           />
         </Switch>
