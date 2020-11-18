@@ -9,6 +9,7 @@ import RestaurantsListing from "../pages/RestaurantsListing";
 import Map from "../pages/Map";
 import AdminRestaurants from "../pages/AdminRestaurants";
 import AdminNewRestaurant from "../pages/AdminNewRestaurant.jsx";
+import AdminLogin from "../pages/AdminLogin";
 
 class App extends React.Component {
   constructor(props) {
@@ -27,6 +28,7 @@ class App extends React.Component {
             component={RestaurantDetail}
           />
           <Route exact path="/map" component={Map} />
+          <Route exact path="/admin" component={AdminLogin} />
           <Route exact path="/admin/restaurants" component={AdminRestaurants} />
           <Route
             exact

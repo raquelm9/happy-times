@@ -1,21 +1,26 @@
 import React from "react";
+import { withRouter } from "react-router-dom";
 
 class AdminLoginForm extends React.Component {
   constructor(props) {
     super(props);
+
     this.state = {
       formValues: {
         email: "",
         password: "",
       },
+
       formErrors: {
         email: "",
         password: "",
       },
+
       formValidity: {
         email: false,
         password: false,
       },
+
       isSubmitting: false,
     };
   }
@@ -68,6 +73,12 @@ class AdminLoginForm extends React.Component {
     if (Object.values(formValidity).every(Boolean)) {
       alert("Form is validated! Submitting the form...");
       this.setState({ isSubmitting: false });
+      if (
+        this.state.formValues.email === "abc@gmail.com" &&
+        this.state.formValues.password === "123"
+      ) {
+        this.props.history.push("/admin/restaurants");
+      }
     } else {
       for (let key in formValues) {
         let target = {
@@ -136,4 +147,4 @@ class AdminLoginForm extends React.Component {
   }
 }
 
-export default AdminLoginForm;
+export default withRouter(AdminLoginForm);
