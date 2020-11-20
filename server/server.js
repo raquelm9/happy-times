@@ -11,6 +11,7 @@ import express from "express";
 import cors from "cors";
 import bodyParser from "body-parser";
 import multer from "multer";
+import fs from "fs";
 
 var storage = multer.diskStorage({
   destination: function (req, file, cb) {
@@ -27,6 +28,18 @@ var fileFilter = (req, file, cb) => {
   } else {
     cb(null, false);
   }
+};
+
+const saveBase64Image = (base64Data) => {
+  const imageData = base64Data.replace(/^data:image\/.*;base64,/, "");
+  const imageName = new Date().toISOString();
+  const imagePath = `/uploads/${imageName}.png`;
+
+  fs.writeFile("." + imagePath, imageData, "base64", function (err) {
+    console.log(err);
+  });
+
+  return imagePath;
 };
 
 var app = express();
@@ -99,25 +112,25 @@ app.delete("/restaurants/:restaurantId/happy-hours/:happyhourId", function (
 });
 
 // Restaurant: name, description, website, image, address
-app.post("/restaurants", upload.single("image"), function (req, res) {
-  var reqBodyRest = req.body;
-  var newImage = req.file;
+app.post("/restaurants", function (req, res) {
+  const reqBodyRest = req.body;
+  const path = saveBase64Image(reqBodyRest.image);
 
-  var newRest = new Restaurant(
-    reqBodyRest.id,
-    reqBodyRest.name,
-    reqBodyRest.description,
-    reqBodyRest.website,
-    newImage.path,
-    newAddress
-  );
-
-  var newAddress = new Address(
+  const newAddress = new Address(
     reqBodyRest.address.unit,
     reqBodyRest.address.street,
     reqBodyRest.address.postalCode,
     reqBodyRest.address.city,
     reqBodyRest.address.province
+  );
+
+  const newRest = new Restaurant(
+    reqBodyRest.id,
+    reqBodyRest.name,
+    reqBodyRest.description,
+    reqBodyRest.website,
+    `http://localhost:3001${path}`,
+    newAddress
   );
 
   restaurants.push(newRest);

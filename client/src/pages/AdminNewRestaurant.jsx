@@ -1,6 +1,6 @@
 import React from "react";
 import { HttpService } from "../services/http-service";
-import AdminRestaurantForm from "../components/AdminRestaurantForm/AdminRestaurantForm";
+import AddRestaurantForm from "../components/AdminRestaurantForm/AdminRestaurantForm";
 
 class AdminNewRestaurant extends React.Component {
   constructor(props) {
@@ -31,9 +31,9 @@ class AdminNewRestaurant extends React.Component {
   render() {
     return (
       <>
-        <AdminRestaurantForm
+        <AddRestaurantForm
           restaurant={this.state.restaurant}
-        ></AdminRestaurantForm>
+        ></AddRestaurantForm>
       </>
     );
   }

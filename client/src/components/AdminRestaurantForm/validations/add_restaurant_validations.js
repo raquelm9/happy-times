@@ -1,0 +1,29 @@
+import * as Yup from "yup";
+
+export const AddRestaurantValidationSchema = Yup.object().shape({
+  name: Yup.string()
+    .min(3, "Name must be 3 characters at minimum")
+    .required("Name is required"),
+  website: Yup.string()
+    .min(3, "Website must be 3 characters at minimum")
+    .required("Website is required"),
+  description: Yup.string()
+    .min(3, "Description must be 3 characters at minimum")
+    .required("Description is required"),
+  image: Yup.mixed().required("An image is required"),
+  addressUnit: Yup.number()
+    .min(1, "Unit must be 1 number at minimum")
+    .required("Unit is required"),
+  addressStreet: Yup.string()
+    .min(1, "Street must be 1 character at minimum")
+    .required("Street is required"),
+  addressPostalcode: Yup.string()
+    .min(1, "Postal Code must be 1 character at minimum")
+    .required("Postal Code is required"),
+  addressCity: Yup.string()
+    .min(3, "City must be 3 characters at minimum")
+    .required("City is required"),
+  addressProvince: Yup.string()
+    .min(3, "Province must be 3 characters at minimum")
+    .required("Province is required"),
+});
