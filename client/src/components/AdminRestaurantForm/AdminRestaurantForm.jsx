@@ -3,37 +3,60 @@ import { Formik, Form, Field, ErrorMessage } from "formik";
 import { AddRestaurantValidationSchema } from "./validations/add_restaurant_validations";
 import { HttpService } from "../../services/http-service";
 import { base64Encode } from "../../helpers/images";
-
-const initialValues =
-  process.env.NODE_ENV === "development"
-    ? {
-        id: "9999",
-        name: "New Restaurant",
-        website: "http://restaurant.com",
-        description: "A fancy restaurant",
-        addressUnit: "109",
-        addressStreet: "15",
-        addressPostalcode: "T2R0Y6",
-        addressCity: "Calgary",
-        addressProvince: "Alberta",
-      }
-    : {
-        id: "",
-        name: "",
-        website: "",
-        description: "",
-        addressUnit: "",
-        addressStreet: "",
-        addressPostalcode: "",
-        addressCity: "",
-        addressProvince: "",
-      };
+import "./AdminRestaurantForm.css";
 
 class AddRestaurantForm extends React.Component {
+  initialValues(restaurant) {
+    if (!restaurant) {
+      return {};
+    } else {
+      return {
+        id: restaurant.id,
+        name: restaurant.name,
+        description: restaurant.description,
+        image: restaurant.image,
+        website: restaurant.website,
+        addressUnit: restaurant.address.unit,
+        addressStreet: restaurant.address.street,
+        addressPostalcode: restaurant.address.postalCode,
+        addressCity: restaurant.address.city,
+        addressProvince: restaurant.address.province,
+      };
+    }
+  }
+
+  /**
+   * @returns Promise
+   */
+  getImageForUpload(values) {
+    if (!values.image) {
+      throw new Error("Image is required");
+    }
+
+    if (values.image instanceof File) {
+      // File
+      return base64Encode(values.image);
+    } else if (!(values.image instanceof File)) {
+      // http://<backedn-url>/uploads/image.png
+      return Promise.resolve(values.image);
+    }
+  }
+
+  updateOrCreateRestaurant(id, restaurant) {
+    const service = new HttpService();
+
+    console.log(restaurant);
+
+    if (id) {
+      return service.editRestaurant(id, restaurant);
+    } else if (!id) {
+      return service.addRestaurant(restaurant);
+    }
+  }
+
   submitForm(values, actions) {
-    base64Encode(values.image)
+    this.getImageForUpload(values)
       .then((encodedImage) => ({
-        id: values.id,
         name: values.name,
         description: values.description,
         website: values.website,
@@ -46,7 +69,10 @@ class AddRestaurantForm extends React.Component {
           province: values.addressProvince,
         },
       }))
-      .then((newRestaurant) => new HttpService().addRestaurant(newRestaurant))
+      .then((restaurant) => {
+        const id = this.props.restaurant ? this.props.restaurant.id : undefined;
+        this.updateOrCreateRestaurant(id, restaurant);
+      })
       .finally(() => {
         actions.setSubmitting(false);
       });
@@ -63,29 +89,12 @@ class AddRestaurantForm extends React.Component {
         <div className="row">
           <div className="col-lg-12">
             <Formik
-              initialValues={initialValues}
+              initialValues={this.initialValues(this.props.restaurant)}
               validationSchema={AddRestaurantValidationSchema}
               onSubmit={this.submitForm.bind(this)}
             >
               {({ touched, errors, isSubmitting, setFieldValue }) => (
                 <Form>
-                  <div className="form-group">
-                    <label htmlFor="id">ID</label>
-                    <Field
-                      type="id"
-                      name="id"
-                      placeholder="Enter ID"
-                      className={`form-control ${
-                        touched.id && errors.id ? "is-invalid" : ""
-                      }`}
-                    />
-                    <ErrorMessage
-                      component="div"
-                      name="name"
-                      className="invalid-feedback"
-                    />
-                  </div>
-
                   <div className="form-group">
                     <label htmlFor="name">Name</label>
                     <Field
@@ -154,6 +163,13 @@ class AddRestaurantForm extends React.Component {
                       className="invalid-feedback"
                     />
                   </div>
+
+                  {this.props.restaurant ? (
+                    <img
+                      className="adminImage"
+                      src={this.props.restaurant.image}
+                    />
+                  ) : null}
 
                   <br></br>
                   <h2>Address:</h2>

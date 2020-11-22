@@ -7,52 +7,16 @@ import { MenuItem } from "./restaurants/menu_item.js";
 import { Menu } from "./restaurants/menu.js";
 import { OpenDays } from "./restaurants/open_days.js";
 
+import { saveBase64Image } from "./utils/images.js";
+import uniqueId from "lodash/uniqueId.js";
+
 import express from "express";
 import cors from "cors";
 import bodyParser from "body-parser";
-import multer from "multer";
-import fs from "fs";
-
-var storage = multer.diskStorage({
-  destination: function (req, file, cb) {
-    cb(null, "./uploads/");
-  },
-  filename: function (req, file, cb) {
-    cb(null, new Date().toISOString() + file.originalname);
-  },
-});
-
-var fileFilter = (req, file, cb) => {
-  if (file.mimetype === "image/jpeg" || file.mimetype === "image/png") {
-    cb(null, true);
-  } else {
-    cb(null, false);
-  }
-};
-
-const saveBase64Image = (base64Data) => {
-  const imageData = base64Data.replace(/^data:image\/.*;base64,/, "");
-  const imageName = new Date().toISOString();
-  const imagePath = `/uploads/${imageName}.png`;
-
-  fs.writeFile("." + imagePath, imageData, "base64", function (err) {
-    console.log(err);
-  });
-
-  return imagePath;
-};
 
 var app = express();
 
 app.use(cors());
-
-var upload = multer({
-  storage: storage,
-  limits: {
-    fileSize: 1024 * 1024 * 5,
-  },
-  fileFilter: fileFilter,
-});
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -125,11 +89,11 @@ app.post("/restaurants", function (req, res) {
   );
 
   const newRest = new Restaurant(
-    reqBodyRest.id,
+    uniqueId("restaurant-"),
     reqBodyRest.name,
     reqBodyRest.description,
     reqBodyRest.website,
-    `http://localhost:3001${path}`,
+    path,
     newAddress
   );
 
@@ -173,10 +137,7 @@ app.post("/restaurants/:restaurantId/happy-hours", function (req, res) {
   }
 });
 
-app.put("/restaurants/:restaurantId", upload.single("image"), function (
-  req,
-  res
-) {
+app.put("/restaurants/:restaurantId", function (req, res) {
   var restaurantId = req.params.restaurantId;
   const rest = restaurants.find((restaurant) => restaurantId === restaurant.id);
 
@@ -187,16 +148,17 @@ app.put("/restaurants/:restaurantId", upload.single("image"), function (
       rest.setName(req.body.name);
     }
 
+    if (req.body.image) {
+      const path = saveBase64Image(req.body.image);
+      rest.setImage(path);
+    }
+
     if (req.body.description) {
       rest.setDescription(req.body.description);
     }
 
     if (req.body.website) {
       rest.setWebsite(req.body.website);
-    }
-
-    if (req.file) {
-      rest.setImage(req.file);
     }
 
     if (address) {

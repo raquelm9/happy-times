@@ -4,6 +4,8 @@ import { Menu } from "./menu.js";
 import { MenuItem } from "./menu_item.js";
 import { Address } from "./address.js";
 
+import uniqueId from "lodash/uniqueId.js";
+
 export class Restaurant {
   constructor(id, name, description, website, image, address) {
     this.id = id;
@@ -62,7 +64,7 @@ export class Restaurant {
 }
 
 const rest1 = new Restaurant(
-  "1",
+  uniqueId("restaurant-"),
   "Cannibale",
   "Eat, drink, and be groomed later",
   "https://www.cannibale.ca/",
@@ -157,7 +159,7 @@ rest1.registerHappyHour(
 );
 
 const rest2 = new Restaurant(
-  "2",
+  uniqueId("restaurant-"),
   "Anejo",
   "Añejo Mexican Restaurant",
   "https://anejo.ca/",
@@ -206,7 +208,7 @@ rest2.registerHappyHour(
 );
 
 const rest3 = new Restaurant(
-  "3",
+  uniqueId("restaurant-"),
   "Double Zero",
   "It'll be amore at first sight",
   "https://www.doublezeropizza.ca/",

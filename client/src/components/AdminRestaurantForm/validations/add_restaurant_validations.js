@@ -10,7 +10,7 @@ export const AddRestaurantValidationSchema = Yup.object().shape({
   description: Yup.string()
     .min(3, "Description must be 3 characters at minimum")
     .required("Description is required"),
-  image: Yup.mixed().required("An image is required"),
+  image: Yup.mixed(),
   addressUnit: Yup.number()
     .min(1, "Unit must be 1 number at minimum")
     .required("Unit is required"),

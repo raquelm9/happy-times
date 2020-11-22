@@ -51,4 +51,19 @@ export class HttpService {
     });
     return promise;
   };
+
+  editRestaurant = (id, restaurant) => {
+    var promise = new Promise((resolve, reject) => {
+      fetch("http://localhost:3001/restaurants/" + id, {
+        method: "put",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(restaurant),
+      }).then((res) => {
+        resolve(res.json());
+      });
+    });
+    return promise;
+  };
 }

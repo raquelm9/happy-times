@@ -11,8 +11,7 @@ class AdminNewRestaurant extends React.Component {
     const id = urlParams.get("id");
 
     this.id = id;
-
-    this.state = { restaurant: {} };
+    this.state = { restaurant: undefined, isLoading: true };
   }
 
   componentDidMount() {
@@ -20,15 +19,21 @@ class AdminNewRestaurant extends React.Component {
   }
 
   loadData = () => {
-    new HttpService().getRestaurantDetail(this.id).then(
-      (data) => {
-        this.setState({ restaurant: data });
-      },
-      (err) => {}
-    );
+    if (this.id !== null) {
+      new HttpService().getRestaurantDetail(this.id).then(
+        (data) => {
+          this.setState({ restaurant: data, isLoading: false });
+        },
+        (err) => {}
+      );
+    } else {
+      this.setState({ isLoading: false });
+    }
   };
 
   render() {
+    if (this.state.isLoading) return <p>Loading...</p>;
+
     return (
       <>
         <AddRestaurantForm
