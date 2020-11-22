@@ -3,6 +3,7 @@ import { Formik, Form, Field, ErrorMessage } from "formik";
 import { AddRestaurantValidationSchema } from "./validations/add_restaurant_validations";
 import { HttpService } from "../../services/http-service";
 import { base64Encode } from "../../helpers/images";
+import { withRouter } from "react-router-dom";
 import "./AdminRestaurantForm.css";
 
 class AddRestaurantForm extends React.Component {
@@ -73,9 +74,10 @@ class AddRestaurantForm extends React.Component {
         const id = this.props.restaurant ? this.props.restaurant.id : undefined;
         this.updateOrCreateRestaurant(id, restaurant);
       })
-      .finally(() => {
+      .then(() => {
         actions.setSubmitting(false);
-      });
+      })
+      .finally(() => this.props.history.push("/admin/restaurant/happy-hour"));
   }
 
   render() {
@@ -302,4 +304,4 @@ class AddRestaurantForm extends React.Component {
   }
 }
 
-export default AddRestaurantForm;
+export default withRouter(AddRestaurantForm);
