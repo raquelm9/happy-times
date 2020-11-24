@@ -26,11 +26,27 @@ class HappyHourListingComp extends React.Component {
   //       .then(() => this.props.onDelete());
   //   }
 
+  weekDays = () => {
+    const helper = {
+      0: "SUN",
+      1: "MON",
+      2: "TUE",
+      3: "WED",
+      4: "THU",
+      5: "FRI",
+      6: "SAT",
+    };
+    const weekDays = this.props.happyHour.openDays.days.map((day) => (
+      <span key={day}>{helper[day]}</span>
+    ));
+    return weekDays;
+  };
+
   render() {
     return (
       <>
         <div className="restaurant-card">
-          <p>Open Days: {this.props.happyHour.openDays.days}</p>
+          {this.weekDays()}
           <p>Start Time: {this.props.happyHour.startTime}</p>
           <p>End Time: {this.props.happyHour.endTime}</p>
         </div>
