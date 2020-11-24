@@ -1,6 +1,7 @@
 import React from "react";
 import { HttpService } from "../../services/http-service";
 import { withRouter } from "react-router-dom";
+import { ConfirmDelete } from "../ConfirmDelete/ConfirmDelete";
 
 class HappyHourListingComp extends React.Component {
   constructor(props) {
@@ -10,31 +11,53 @@ class HappyHourListingComp extends React.Component {
     const urlParams = new URLSearchParams(queryString);
     const idRestaurant = urlParams.get("id");
 
-    this.idRestaurant = idRestaurant;
+    this.state = { isOpen: false };
 
-    // this.deleteHappyHour = this.deleteHappyHour.bind(this);
+    this.idRestaurant = idRestaurant;
   }
 
-  //   deleteHappyHour(event) {
-  //     //prevents the page to reroute to rest detail
-  //     event.stopPropagation();
+  deleteHappyHour(event) {
+    //prevents the page to reroute to rest detail
+    event.stopPropagation();
 
-  //     const happyHour = this.props.happyHour;
+    const happyHour = this.props.happyHour;
 
-  //     new HttpService()
-  //       .removeHappyHour(this.idRestaurant, happyHour.id)
-  //       .then(() => this.props.onDelete());
-  //   }
+    new HttpService()
+      .removeHappyHour(this.idRestaurant, happyHour.id)
+      .then(() => this.props.onDelete());
+  }
+
+  openModal(event) {
+    //prevents the page to reroute to rest detail
+    event.stopPropagation();
+
+    this.setState({ isOpen: true });
+  }
+
+  closeModal() {
+    this.setState({ isOpen: false });
+  }
+
+  showCanDelete() {
+    return (
+      <div className="deleteButton">
+        <i
+          className="trash alternate icon"
+          onClick={this.openModal.bind(this)}
+        ></i>
+      </div>
+    );
+  }
 
   weekDays = () => {
     const helper = {
-      0: "SUN",
-      1: "MON",
-      2: "TUE",
-      3: "WED",
-      4: "THU",
-      5: "FRI",
-      6: "SAT",
+      0: "SUN ",
+      1: "MON ",
+      2: "TUE ",
+      3: "WED ",
+      4: "THU ",
+      5: "FRI ",
+      6: "SAT ",
     };
     const weekDays = this.props.happyHour.openDays.days.map((day) => (
       <span key={day}>{helper[day]}</span>
@@ -46,10 +69,16 @@ class HappyHourListingComp extends React.Component {
     return (
       <>
         <div className="restaurant-card">
-          {this.weekDays()}
+          <p>Open Days: {this.weekDays()}</p>
           <p>Start Time: {this.props.happyHour.startTime}</p>
           <p>End Time: {this.props.happyHour.endTime}</p>
+          <>{this.showCanDelete()}</>
         </div>
+        <ConfirmDelete
+          isOpen={this.state.isOpen}
+          onCancel={this.closeModal.bind(this)}
+          onConfirm={this.deleteHappyHour.bind(this)}
+        ></ConfirmDelete>
       </>
     );
   }
