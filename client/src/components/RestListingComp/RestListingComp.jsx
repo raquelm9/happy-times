@@ -39,6 +39,22 @@ class RestListingComp extends React.Component {
     return categories.join(" & ");
   }
 
+  categoryIcons() {
+    const category = this.categoryHappyHour();
+
+    if (category === "food") {
+      return <i class="utensils icon"></i>;
+    } else if (category === "drink") {
+      return <i class="glass martini icon"></i>;
+    } else if (category === "drink & food" || category === "food & drink") {
+      return (
+        <>
+          <i class="utensils icon"></i> <i class="glass martini icon"></i>
+        </>
+      );
+    }
+  }
+
   viewHappyHour() {
     const restaurant = this.props.restaurant;
 
@@ -94,7 +110,7 @@ class RestListingComp extends React.Component {
             Happy Hour:<br></br>
             {this.timeHappyHour()}
           </p>
-          <p>Category: {this.categoryHappyHour()}</p>
+          <p>{this.categoryIcons()}</p>
         </>
       );
     }
