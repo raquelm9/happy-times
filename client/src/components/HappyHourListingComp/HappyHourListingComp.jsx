@@ -16,6 +16,19 @@ class HappyHourListingComp extends React.Component {
     this.idRestaurant = idRestaurant;
   }
 
+  viewHappyHourForm() {
+    const data = {
+      restaurantId: this.idRestaurant,
+      happyHourId: this.props.happyHour.id,
+    };
+    const searchParams = new URLSearchParams(data);
+
+    this.props.history.push({
+      pathname: "/admin/restaurant/happy-hour/information",
+      search: searchParams.toString(),
+    });
+  }
+
   deleteHappyHour(event) {
     //prevents the page to reroute to rest detail
     event.stopPropagation();
@@ -68,7 +81,10 @@ class HappyHourListingComp extends React.Component {
   render() {
     return (
       <>
-        <div className="restaurant-card">
+        <div
+          className="restaurant-card"
+          onClick={this.viewHappyHourForm.bind(this)}
+        >
           <p>Open Days: {this.weekDays()}</p>
           <p>Start Time: {this.props.happyHour.startTime}</p>
           <p>End Time: {this.props.happyHour.endTime}</p>

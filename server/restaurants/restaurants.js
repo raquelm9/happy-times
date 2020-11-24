@@ -73,7 +73,7 @@ const rest1 = new Restaurant(
 );
 rest1.registerHappyHour(
   new HappyHour(
-    "1.1",
+    uniqueId("happy-hour-"),
     new OpenDays([
       OpenDays.weekDays.MON,
       OpenDays.weekDays.TUE,
@@ -113,7 +113,7 @@ rest1.registerHappyHour(
 );
 rest1.registerHappyHour(
   new HappyHour(
-    "1.2",
+    uniqueId("happy-hour-"),
     new OpenDays([OpenDays.weekDays.SUN, OpenDays.weekDays.THU]),
     "10:00PM",
     "Close",
@@ -168,7 +168,7 @@ const rest2 = new Restaurant(
 );
 rest2.registerHappyHour(
   new HappyHour(
-    "2.1",
+    uniqueId("happy-hour-"),
     new OpenDays([
       OpenDays.weekDays.MON,
       OpenDays.weekDays.TUE,
@@ -217,7 +217,7 @@ const rest3 = new Restaurant(
 );
 rest3.registerHappyHour(
   new HappyHour(
-    "3.1",
+    uniqueId("happy-hour-"),
     new OpenDays([
       OpenDays.weekDays.MON,
       OpenDays.weekDays.TUE,
