@@ -89,10 +89,13 @@ class RestListingComp extends React.Component {
       );
     } else {
       return (
-        <p>
-          Happy Hour:<br></br>
-          {this.timeHappyHour()}
-        </p>
+        <>
+          <p>
+            Happy Hour:<br></br>
+            {this.timeHappyHour()}
+          </p>
+          <p>Category: {this.categoryHappyHour()}</p>
+        </>
       );
     }
   }
