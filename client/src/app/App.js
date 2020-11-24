@@ -11,6 +11,7 @@ import AdminRestaurants from "../pages/AdminRestaurants";
 import AdminNewRestaurant from "../pages/AdminNewRestaurant.jsx";
 import AdminLogin from "../pages/AdminLogin";
 import AdminRestaurantHappyHours from "../pages/AdminRestaurantHappyHours";
+import AdminNewHappyHour from "../pages/AdminNewHappyHour";
 
 class App extends React.Component {
   constructor(props) {
@@ -40,6 +41,11 @@ class App extends React.Component {
             exact
             path="/admin/restaurant/happy-hour"
             component={AdminRestaurantHappyHours}
+          />
+          <Route
+            exact
+            path="/admin/restaurant/happy-hour/information"
+            component={AdminNewHappyHour}
           />
         </Switch>
       </Router>

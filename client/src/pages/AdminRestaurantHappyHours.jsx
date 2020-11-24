@@ -1,5 +1,8 @@
 import React from "react";
 import { HttpService } from "../services/http-service";
+import PaddedContainerSegment from "../components/PaddedContainerSegment/PaddedContainerSegment";
+import AddHappyHour from "../components/AddHappyHour/AddHappyHour";
+import HappyHourListingComp from "../components/HappyHourListingComp/HappyHourListingComp";
 
 class AdminRestaurantHappyHours extends React.Component {
   constructor(props) {
@@ -31,6 +34,23 @@ class AdminRestaurantHappyHours extends React.Component {
     }
   };
 
+  buildHappyHours = () => {
+    const list = this.state.restaurant.happyHours.map((happyHour) => (
+      <div className="row" key={happyHour.id}>
+        <div className="column">
+          <PaddedContainerSegment>
+            <HappyHourListingComp
+              happyHour={happyHour}
+              onDelete={this.loadData.bind(this)}
+            />
+          </PaddedContainerSegment>
+        </div>
+      </div>
+    ));
+
+    return list;
+  };
+
   render() {
     if (this.state.isLoading) return <p>Loading...</p>;
 
@@ -38,6 +58,10 @@ class AdminRestaurantHappyHours extends React.Component {
       <>
         <h1>Admin Access</h1>
         <h2>{this.state.restaurant.name} Happy Hour</h2>
+        <div className="ui stackable one column padded grid">
+          {this.buildHappyHours()}
+        </div>
+        <AddHappyHour></AddHappyHour>
       </>
     );
   }
