@@ -46,8 +46,6 @@ class AddRestaurantForm extends React.Component {
   updateOrCreateRestaurant(id, restaurant) {
     const service = new HttpService();
 
-    console.log(restaurant);
-
     if (id) {
       return service.editRestaurant(id, restaurant);
     } else if (!id) {
@@ -72,12 +70,17 @@ class AddRestaurantForm extends React.Component {
       }))
       .then((restaurant) => {
         const id = this.props.restaurant ? this.props.restaurant.id : undefined;
-        this.updateOrCreateRestaurant(id, restaurant);
+        return this.updateOrCreateRestaurant(id, restaurant);
       })
-      .then(() => {
+      .then((restaurant) =>
+        this.props.history.push({
+          pathname: "/admin/restaurant/happy-hour",
+          search: "id=" + restaurant.id,
+        })
+      )
+      .finally(() => {
         actions.setSubmitting(false);
-      })
-      .finally(() => this.props.history.push("/admin/restaurant/happy-hour"));
+      });
   }
 
   render() {
