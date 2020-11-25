@@ -22,12 +22,16 @@ class HappyHourMenu extends React.Component {
 
     return (
       <>
-        <div className="menu-category">
-          {this.renderItemsWithCategory("Food", categorizedItems.food)}
-        </div>
-        <div className="menu-category">
-          {this.renderItemsWithCategory("Drinks", categorizedItems.drink)}
-        </div>
+        {categorizedItems.food.length > 0 ? (
+          <div className="menu-category">
+            {this.renderItemsWithCategory("Food", categorizedItems.food)}
+          </div>
+        ) : null}
+        {categorizedItems.drink.length > 0 ? (
+          <div className="menu-category">
+            {this.renderItemsWithCategory("Drinks", categorizedItems.drink)}
+          </div>
+        ) : null}
       </>
     );
   }
