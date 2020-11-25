@@ -7,16 +7,36 @@ import { MenuItem } from "./restaurants/menu_item.js";
 import { Menu } from "./restaurants/menu.js";
 import { OpenDays } from "./restaurants/open_days.js";
 
-import { saveBase64Image } from "./utils/images.js";
-import uniqueId from "lodash/uniqueId.js";
-
 import express from "express";
-import cors from "cors";
 import bodyParser from "body-parser";
+import multer from "multer";
+
+var storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, "./uploads/");
+  },
+  filename: function (req, file, cb) {
+    cb(null, new Date().toISOString() + file.originalname);
+  },
+});
+
+var fileFilter = (req, file, cb) => {
+  if (file.mimetype === "image/jpeg" || file.mimetype === "image/png") {
+    cb(null, true);
+  } else {
+    cb(null, false);
+  }
+};
 
 var app = express();
 
-app.use(cors());
+var upload = multer({
+  storage: storage,
+  limits: {
+    fileSize: 1024 * 1024 * 5,
+  },
+  fileFilter: fileFilter,
+});
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -24,19 +44,6 @@ app.use("/uploads", express.static("uploads"));
 
 app.get("/restaurants", function (req, res) {
   res.send(restaurants);
-});
-
-app.get("/restaurant/:restaurantId", function (req, res) {
-  var restaurantId = req.params.restaurantId;
-  const found = restaurants.find(
-    (restaurant) => restaurant.id === restaurantId
-  );
-
-  if (found) {
-    res.status(200).send(found);
-  } else {
-    res.status(404).send("Restaurant Id not found");
-  }
 });
 
 app.delete("/restaurants/:restaurantId", function (req, res) {
@@ -54,37 +61,42 @@ app.delete("/restaurants/:restaurantId", function (req, res) {
   }
 });
 
-app.delete(
-  "/restaurants/:restaurantId/happy-hours/:happyhourId",
-  function (req, res) {
-    var restaurantId = req.params.restaurantId;
-    var happyHourId = req.params.happyhourId;
+app.delete("/restaurants/:restaurantId/happy-hours/:happyhourId", function (
+  req,
+  res
+) {
+  var restaurantId = req.params.restaurantId;
+  var happyHourId = req.params.happyhourId;
 
-    const rest = restaurants.find(
-      (restaurant) => restaurantId === restaurant.id
-    );
+  const rest = restaurants.find((restaurant) => restaurantId === restaurant.id);
 
-    const hh = rest.happyHours.find(
-      (happyHour) => happyHourId === happyHour.id
-    );
+  const hh = rest.happyHours.find((happyHour) => happyHourId === happyHour.id);
 
-    const index = rest.happyHours.indexOf(hh);
+  const index = rest.happyHours.indexOf(hh);
 
-    if (index > -1) {
-      rest.happyHours.splice(index, 1);
-      res.status(200).send(restaurants);
-    } else {
-      res.status(404).send("Restaurant Id not found");
-    }
+  if (index > -1) {
+    rest.happyHours.splice(index, 1);
+    res.status(200).send(restaurants);
+  } else {
+    res.status(404).send("Restaurant Id not found");
   }
-);
+});
 
 // Restaurant: name, description, website, image, address
-app.post("/restaurants", function (req, res) {
-  const reqBodyRest = req.body;
-  const path = saveBase64Image(reqBodyRest.image);
+app.post("/restaurants", upload.single("image"), function (req, res) {
+  var reqBodyRest = req.body;
+  var newImage = req.file;
 
-  const newAddress = new Address(
+  var newRest = new Restaurant(
+    reqBodyRest.id,
+    reqBodyRest.name,
+    reqBodyRest.description,
+    reqBodyRest.website,
+    newImage.path,
+    newAddress
+  );
+
+  var newAddress = new Address(
     reqBodyRest.address.unit,
     reqBodyRest.address.street,
     reqBodyRest.address.postalCode,
@@ -92,17 +104,8 @@ app.post("/restaurants", function (req, res) {
     reqBodyRest.address.province
   );
 
-  const newRest = new Restaurant(
-    uniqueId("restaurant-"),
-    reqBodyRest.name,
-    reqBodyRest.description,
-    reqBodyRest.website,
-    path,
-    newAddress
-  );
-
   restaurants.push(newRest);
-  res.status(200).send(newRest);
+  res.status(200).send(restaurants);
 });
 
 // Happy Time: open days, start time, end time, menu (name, description, price, category)
@@ -141,20 +144,26 @@ app.post("/restaurants/:restaurantId/happy-hours", function (req, res) {
   }
 });
 
-app.put("/restaurants/:restaurantId", function (req, res) {
+app.put("/restaurants/:restaurantId", upload.single("image"), function (
+  req,
+  res
+) {
   var restaurantId = req.params.restaurantId;
   const rest = restaurants.find((restaurant) => restaurantId === restaurant.id);
 
   if (rest) {
     const address = req.body.address;
 
+    const newAddress = new Address(
+      address.unit,
+      address.street,
+      address.postalCode,
+      address.city,
+      address.province
+    );
+
     if (req.body.name) {
       rest.setName(req.body.name);
-    }
-
-    if (req.body.image) {
-      const path = saveBase64Image(req.body.image);
-      rest.setImage(path);
     }
 
     if (req.body.description) {
@@ -165,14 +174,11 @@ app.put("/restaurants/:restaurantId", function (req, res) {
       rest.setWebsite(req.body.website);
     }
 
-    if (address) {
-      const newAddress = new Address(
-        address.unit,
-        address.street,
-        address.postalCode,
-        address.city,
-        address.province
-      );
+    if (req.file) {
+      rest.setImage(req.file);
+    }
+
+    if (newAddress) {
       rest.setAddress(newAddress);
     }
 
@@ -182,43 +188,41 @@ app.put("/restaurants/:restaurantId", function (req, res) {
   }
 });
 
-app.put(
-  "/restaurants/:restaurantId/happy-hours/:happyhourId",
-  function (req, res) {
-    var restaurantId = req.params.restaurantId;
-    var happyHourId = req.params.happyhourId;
+app.put("/restaurants/:restaurantId/happy-hours/:happyhourId", function (
+  req,
+  res
+) {
+  var restaurantId = req.params.restaurantId;
+  var happyHourId = req.params.happyhourId;
 
-    const rest = restaurants.find(
-      (restaurant) => restaurantId === restaurant.id
-    );
+  const rest = restaurants.find((restaurant) => restaurantId === restaurant.id);
 
-    const happyHourUpdate = rest.happyHours.find(
-      (happyHour) => happyHourId === happyHour.id
-    );
+  const happyHourUpdate = rest.happyHours.find(
+    (happyHour) => happyHourId === happyHour.id
+  );
 
-    if (happyHourUpdate) {
-      const index = rest.happyHours.indexOf(happyHourUpdate);
+  if (happyHourUpdate) {
+    const index = rest.happyHours.indexOf(happyHourUpdate);
 
-      if (req.body.openDays) {
-        rest.happyHours[index].setOpenDays(req.body.openDays);
-      }
-
-      if (req.body.startTime) {
-        rest.happyHours[index].setStartTime(req.body.startTime);
-      }
-
-      if (req.body.endTime) {
-        rest.happyHours[index].setEndTime(req.body.endTime);
-      }
-
-      res.status(200).send(restaurants);
-    } else if (!rest) {
-      res.status(400).send({ error: "Restaurant Id not found" });
-    } else if (!happyHourUpdate) {
-      res.status(400).send({ error: "Happy Hour Id not found" });
+    if (req.body.openDays) {
+      rest.happyHours[index].setOpenDays(req.body.openDays);
     }
+
+    if (req.body.startTime) {
+      rest.happyHours[index].setStartTime(req.body.startTime);
+    }
+
+    if (req.body.endTime) {
+      rest.happyHours[index].setEndTime(req.body.endTime);
+    }
+
+    res.status(200).send(restaurants);
+  } else if (!rest) {
+    res.status(400).send({ error: "Restaurant Id not found" });
+  } else if (!happyHourUpdate) {
+    res.status(400).send({ error: "Happy Hour Id not found" });
   }
-);
+});
 
 app.put(
   "/restaurants/:restaurantId/happy-hours/:happyhourId/:itemId",
@@ -273,6 +277,6 @@ app.put(
   }
 );
 
-app.listen(3001, function () {
-  console.log("First API running on port 3001!");
+app.listen(3000, function () {
+  console.log("First API running on port 3000!");
 });
