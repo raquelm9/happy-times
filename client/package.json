@@ -14,7 +14,8 @@
     "react-hook-form": "^6.11.3",
     "react-router-dom": "^5.2.0",
     "react-scripts": "3.4.4",
-    "whatwg-fetch": "^3.5.0"
+    "whatwg-fetch": "^3.5.0",
+    "yup": "^0.31.0"
   },
   "scripts": {
     "start": "react-scripts start",
