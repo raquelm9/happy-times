@@ -39,6 +39,30 @@ app.get("/restaurant/:restaurantId", function (req, res) {
   }
 });
 
+app.get(
+  "/restaurant/:restaurantId/happy-hour/:happyHourId",
+  function (req, res) {
+    var restaurantId = req.params.restaurantId;
+    var happyHourId = req.params.happyHourId;
+
+    const rest = restaurants.find(
+      (restaurant) => restaurantId === restaurant.id
+    );
+
+    const happyHour = rest.happyHours.find(
+      (happyHour) => happyHourId === happyHour.id
+    );
+
+    if (happyHour) {
+      res.status(200).send(happyHour);
+    } else if (!rest) {
+      res.status(404).send("Restaurant Id not found");
+    } else if (!happyHour) {
+      res.status(404).send("Happy Hour Id not found");
+    }
+  }
+);
+
 app.delete("/restaurants/:restaurantId", function (req, res) {
   var restaurantId = req.params.restaurantId;
 

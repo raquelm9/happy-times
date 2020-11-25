@@ -55,14 +55,19 @@ class AdminRestaurantHappyHours extends React.Component {
     if (this.state.isLoading) return <p>Loading...</p>;
 
     return (
-      <>
-        <h1>Admin Access</h1>
-        <h2>{this.state.restaurant.name} Happy Hour</h2>
+      <div>
+        <div>
+          <h1>Admin Access</h1>
+        </div>
+        <div>
+          <h2>{this.state.restaurant.name} Happy Hour</h2>
+        </div>
+
         <div className="ui stackable one column padded grid">
           {this.buildHappyHours()}
         </div>
         <AddHappyHour></AddHappyHour>
-      </>
+      </div>
     );
   }
 }

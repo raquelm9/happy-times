@@ -19,6 +19,20 @@ export class HttpService {
     return promise;
   };
 
+  getRestaurantHappyHour = (restaurantId, happyHourId) => {
+    var promise = new Promise((resolve, reject) => {
+      fetch(
+        "http://localhost:3001/restaurant/" +
+          restaurantId +
+          "/happy-hour/" +
+          happyHourId
+      ).then((res) => {
+        resolve(res.json());
+      });
+    });
+    return promise;
+  };
+
   removeRestaurant = (id) => {
     var promise = new Promise((resolve, reject) => {
       fetch("http://localhost:3001/restaurants/" + id, {

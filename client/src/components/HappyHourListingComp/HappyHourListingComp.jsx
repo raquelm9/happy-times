@@ -2,6 +2,7 @@ import React from "react";
 import { HttpService } from "../../services/http-service";
 import { withRouter } from "react-router-dom";
 import { ConfirmDelete } from "../ConfirmDelete/ConfirmDelete";
+import AdminNewHappyHour from "../../pages/AdminNewHappyHour";
 
 class HappyHourListingComp extends React.Component {
   constructor(props) {
