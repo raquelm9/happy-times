@@ -1,9 +1,9 @@
 import React from "react";
 import { HttpService } from "../services/http-service";
-import AdminHappyHourForm from "../components/AdminHappyHourForm/AdminHappyHourForm";
+import AdminItemForm from "../components/AdminItemForm/AdminItemForm";
 import AddItem from "../components/AddItem/AddItem";
 
-class AdminNewRestaurant extends React.Component {
+class AdminNewItem extends React.Component {
   constructor(props) {
     super(props);
 
@@ -15,7 +15,7 @@ class AdminNewRestaurant extends React.Component {
     this.restaurantId = restaurantId;
     this.happyHourId = happyHourId;
 
-    this.state = { happyHour: undefined, isLoading: true };
+    this.state = { item: undefined, isLoading: true };
   }
 
   componentDidMount() {
@@ -42,13 +42,10 @@ class AdminNewRestaurant extends React.Component {
 
     return (
       <>
-        <AdminHappyHourForm
-          happyHour={this.state.happyHour}
-        ></AdminHappyHourForm>
-        <AddItem></AddItem>
+        <AdminItemForm happyHour={this.state.happyHour}></AdminItemForm>
       </>
     );
   }
 }
 
-export default AdminNewRestaurant;
+export default AdminNewItem;
