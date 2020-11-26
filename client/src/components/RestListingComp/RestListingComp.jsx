@@ -43,13 +43,14 @@ class RestListingComp extends React.Component {
     const category = this.categoryHappyHour();
 
     if (category === "food") {
-      return <i class="utensils icon"></i>;
+      return <i className="utensils icon"></i>;
     } else if (category === "drink") {
-      return <i class="glass martini icon"></i>;
+      return <i className="glass martini icon"></i>;
     } else if (category === "drink & food" || category === "food & drink") {
       return (
         <>
-          <i class="utensils icon"></i> <i class="glass martini icon"></i>
+          <i className="utensils icon"></i>{" "}
+          <i className="glass martini icon"></i>
         </>
       );
     }

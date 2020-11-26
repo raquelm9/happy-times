@@ -1,8 +1,7 @@
 import React from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import { AddHappyHourValidationSchema } from "./validation/add_happy_hour_validation";
-// import { HttpService } from "../../services/http-service";
-// import { withRouter } from "react-router-dom";
+import AdminItemListing from "../AdminItemListing/AdminItemListing";
 
 class AdminHappyHourForm extends React.Component {
   initialValues(happyHour) {
@@ -13,6 +12,14 @@ class AdminHappyHourForm extends React.Component {
         startTime: happyHour.startTime,
         endTime: happyHour.endTime,
       };
+    }
+  }
+
+  happyHourItems() {
+    if (!this.props.happyHour) {
+      return [];
+    } else {
+      return this.props.happyHour.menu.items;
     }
   }
 
@@ -83,6 +90,11 @@ class AdminHappyHourForm extends React.Component {
                 </Form>
               )}
             </Formik>
+          </div>
+        </div>
+        <div className="row">
+          <div className="col-lg-12">
+            <AdminItemListing items={this.happyHourItems()}></AdminItemListing>
           </div>
         </div>
       </div>

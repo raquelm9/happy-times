@@ -75,6 +75,32 @@ export class HttpService {
     return promise;
   };
 
+  removeItem = (idRestaurant, idHappyHour, idItem) => {
+    var promise = new Promise((resolve, reject) => {
+      fetch(
+        "http://localhost:3001/restaurants/" +
+          idRestaurant +
+          "/happy-hours/" +
+          idHappyHour +
+          "/" +
+          idItem,
+        {
+          method: "delete",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            name: "Hubot",
+            login: "hubot",
+          }),
+        }
+      ).then((res) => {
+        resolve(res.json());
+      });
+    });
+    return promise;
+  };
+
   addRestaurant = (restaurant) => {
     var promise = new Promise((resolve, reject) => {
       fetch("http://localhost:3001/restaurants/", {

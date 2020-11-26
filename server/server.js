@@ -103,6 +103,38 @@ app.delete(
   }
 );
 
+app.delete(
+  "/restaurants/:restaurantId/happy-hours/:happyhourId/:itemId",
+  function (req, res) {
+    var restaurantId = req.params.restaurantId;
+    var happyHourId = req.params.happyhourId;
+    var happyHourItemId = req.params.itemId;
+
+    const rest = restaurants.find(
+      (restaurant) => restaurantId === restaurant.id
+    );
+
+    const happyHr = rest.happyHours.find(
+      (happyHour) => happyHourId === happyHour.id
+    );
+
+    const index1 = rest.happyHours.indexOf(happyHr);
+
+    const happyHourItem = rest.happyHours[index1].menu.items.find(
+      (item) => happyHourItemId === item.id
+    );
+
+    var index2 = rest.happyHours[index1].menu.items.indexOf(happyHourItem);
+
+    if (index2 > -1) {
+      rest.happyHours[index1].menu.items.splice(index2, 1);
+      res.status(200).send(restaurants);
+    } else {
+      res.status(404).send("Restaurant Id not found");
+    }
+  }
+);
+
 // Restaurant: name, description, website, image, address
 app.post("/restaurants", function (req, res) {
   const reqBodyRest = req.body;
