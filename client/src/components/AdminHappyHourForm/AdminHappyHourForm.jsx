@@ -5,6 +5,7 @@ import { Formik, Form, Field, ErrorMessage } from 'formik'
 import { AddHappyHourValidationSchema } from './validation/add_happy_hour_validation'
 import { DaysField } from './DaysField'
 import { HappyHourService } from '../../services/happy_hour_service'
+import swal from 'sweetalert'
 
 class AdminHappyHourForm extends React.Component {
     constructor(props) {
@@ -38,11 +39,17 @@ class AdminHappyHourForm extends React.Component {
         return this.props.happyHour.menu.items
     }
 
+    alertAndCreate(newHappyHour) {
+        swal('Good job!', 'Happy Hour successfully created!', 'success')
+
+        return this.props.onCreate(newHappyHour)
+    }
+
     submitForm(happyHourValues) {
         return HappyHourService.createHappyHour(
             this.restaurantId,
             happyHourValues
-        ).then((newHappyHour) => this.props.onCreate(newHappyHour))
+        ).then((newHappyHour) => this.alertAndCreate(newHappyHour))
     }
 
     render() {

@@ -1,6 +1,7 @@
 import React from 'react'
 import { withRouter } from 'react-router-dom'
 import { AddItemModal } from '../Common/Modals/AddItemModal'
+import swal from 'sweetalert'
 
 class AddItem extends React.Component {
     constructor(props) {
@@ -21,7 +22,7 @@ class AddItem extends React.Component {
 
     addNewItem() {
         if (!this.canAdd()) {
-            alert('Please select the times and day of your happy hour first.')
+            swal('Please create a happy hour first.')
             return
         }
 
