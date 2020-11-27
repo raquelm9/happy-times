@@ -33,6 +33,22 @@ export class HttpService {
     return promise;
   };
 
+  getRestaurantItem = (restaurantId, happyHourId, itemId) => {
+    var promise = new Promise((resolve, reject) => {
+      fetch(
+        "http://localhost:3001/restaurant/" +
+          restaurantId +
+          "/happy-hour/" +
+          happyHourId +
+          "/item/" +
+          itemId
+      ).then((res) => {
+        resolve(res.json());
+      });
+    });
+    return promise;
+  };
+
   removeRestaurant = (id) => {
     var promise = new Promise((resolve, reject) => {
       fetch("http://localhost:3001/restaurants/" + id, {
@@ -116,6 +132,21 @@ export class HttpService {
     return promise;
   };
 
+  // addItem = (restaurantId, happyHourId) => {
+  //   var promise = new Promise((resolve, reject) => {
+  //     fetch("http://localhost:3001/restaurants/", {
+  //       method: "post",
+  //       headers: {
+  //         "Content-Type": "application/json",
+  //       },
+  //       body: JSON.stringify(restaurant),
+  //     }).then((res) => {
+  //       resolve(res.json());
+  //     });
+  //   });
+  //   return promise;
+  // };
+
   editRestaurant = (id, restaurant) => {
     var promise = new Promise((resolve, reject) => {
       fetch("http://localhost:3001/restaurants/" + id, {
@@ -125,6 +156,31 @@ export class HttpService {
         },
         body: JSON.stringify(restaurant),
       }).then((res) => {
+        resolve(res.json());
+      });
+    });
+    return promise;
+  };
+
+  editItem = (restaurantId, happyHourId, itemId, item) => {
+    console.warn(item);
+
+    var promise = new Promise((resolve, reject) => {
+      fetch(
+        "http://localhost:3001/restaurants/" +
+          restaurantId +
+          "/happy-hours/" +
+          happyHourId +
+          "/" +
+          itemId,
+        {
+          method: "put",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(item),
+        }
+      ).then((res) => {
         resolve(res.json());
       });
     });

@@ -1,7 +1,6 @@
 import React from "react";
 import { HttpService } from "../services/http-service";
 import AdminItemForm from "../components/AdminItemForm/AdminItemForm";
-import AddItem from "../components/AddItem/AddItem";
 
 class AdminNewItem extends React.Component {
   constructor(props) {
@@ -11,9 +10,11 @@ class AdminNewItem extends React.Component {
     const urlParams = new URLSearchParams(queryString);
     const restaurantId = urlParams.get("restaurantId");
     const happyHourId = urlParams.get("happyHourId");
+    const itemId = urlParams.get("itemId");
 
     this.restaurantId = restaurantId;
     this.happyHourId = happyHourId;
+    this.itemId = itemId;
 
     this.state = { item: undefined, isLoading: true };
   }
@@ -23,12 +24,16 @@ class AdminNewItem extends React.Component {
   }
 
   loadData = () => {
-    if (this.restaurantId !== null && this.happyHourId !== null) {
+    if (
+      this.restaurantId !== null &&
+      this.happyHourId !== null &&
+      this.itemId !== null
+    ) {
       new HttpService()
-        .getRestaurantHappyHour(this.restaurantId, this.happyHourId)
+        .getRestaurantItem(this.restaurantId, this.happyHourId, this.itemId)
         .then(
           (data) => {
-            this.setState({ happyHour: data, isLoading: false });
+            this.setState({ item: data, isLoading: false });
           },
           (err) => {}
         );
@@ -42,7 +47,7 @@ class AdminNewItem extends React.Component {
 
     return (
       <>
-        <AdminItemForm happyHour={this.state.happyHour}></AdminItemForm>
+        <AdminItemForm item={this.state.item}></AdminItemForm>
       </>
     );
   }

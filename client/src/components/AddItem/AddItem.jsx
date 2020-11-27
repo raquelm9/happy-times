@@ -13,11 +13,17 @@ class AddItem extends React.Component {
     this.happyHourId = happyHourId;
   }
 
-  addNewHappyHour() {
+  addNewItem() {
+    const data = {
+      restaurantId: this.restaurantID,
+      happyHourId: this.happyHourId,
+    };
+
+    const searchParams = new URLSearchParams(data);
+
     this.props.history.push({
       pathname: "/admin/restaurant/happy-hour/item/information",
-      search: "restaurantId=" + this.restaurantID,
-      earch: "happyHourId=" + this.happyHourId,
+      search: searchParams.toString(),
     });
   }
 
@@ -28,7 +34,7 @@ class AddItem extends React.Component {
         <div className="four wide column">
           <i
             className="big plus square outline icon addHappyHour"
-            onClick={this.addNewHappyHour.bind(this)}
+            onClick={this.addNewItem.bind(this)}
           ></i>
         </div>
       </div>

@@ -84,25 +84,31 @@ rest1.registerHappyHour(
     "3:00PM",
     "5:00PM",
     new Menu([
-      new MenuItem("1.1.1", "Alyth Lager", "Dandy Brewing Co", 5, "drink"),
       new MenuItem(
-        "1.1.2",
+        uniqueId("item-"),
+        "Alyth Lager",
+        "Dandy Brewing Co",
+        5,
+        "drink"
+      ),
+      new MenuItem(
+        uniqueId("item-"),
         "Super Fusion Catharina Sour with Pink Guava",
         "The Establishment Brewing Co",
         5,
         "drink"
       ),
-      new MenuItem("1.1.3", "Sundaze", "Tequila + Lager", 7, "drink"),
-      new MenuItem("1.1.4", "The Banger", "Whisky + IPA", 7, "drink"),
+      new MenuItem(uniqueId("item-"), "Sundaze", "Tequila + Lager", 7, "drink"),
+      new MenuItem(uniqueId("item-"), "The Banger", "Whisky + IPA", 7, "drink"),
       new MenuItem(
-        "1.1.5",
+        uniqueId("item-"),
         "Manhatten",
         "Rye, sweet vermouth, Angostura bitters",
         9,
         "drink"
       ),
       new MenuItem(
-        "1.1.6",
+        uniqueId("item-"),
         "Old Fashioned",
         "Evan Williams, demarara, Angostura bitters",
         9,
@@ -119,36 +125,42 @@ rest1.registerHappyHour(
     "Close",
     new Menu([
       new MenuItem(
-        "1.1.7",
+        uniqueId("item-"),
         "Super Saturation NEPA",
         "Cabin Brewing Co",
         5,
         "drink"
       ),
       new MenuItem(
-        "1.1.8",
+        uniqueId("item-"),
         "Tokyo Drift IPA",
         "Last Best Brewing Co",
         5,
         "drink"
       ),
       new MenuItem(
-        "1.1.9",
+        uniqueId("item-"),
         "Shiki Cheeky",
         "Japanese Whisky + Sake",
         7,
         "drink"
       ),
-      new MenuItem("1.1.10", "Super Duper Fusion", "Aperol + Sour", 7, "drink"),
       new MenuItem(
-        "1.1.11",
+        uniqueId("item-"),
+        "Super Duper Fusion",
+        "Aperol + Sour",
+        7,
+        "drink"
+      ),
+      new MenuItem(
+        uniqueId("item-"),
         "Daiquiri",
         "Bacardi White Rum, lime, gomme syrup",
         9,
         "drink"
       ),
       new MenuItem(
-        "1.1.12",
+        uniqueId("item-"),
         "El Diablo",
         "Tequila, cassis, lime, ginger ale",
         9,
@@ -182,22 +194,22 @@ rest2.registerHappyHour(
     "5:00PM",
     new Menu([
       new MenuItem(
-        "2.1.1",
+        uniqueId("item-"),
         "Margarita",
         "Variations of the Cocktail",
         6,
         "drink"
       ),
-      new MenuItem("2.1.2", "Beers", "Mex Cervezas", 6, "drink"),
+      new MenuItem(uniqueId("item-"), "Beers", "Mex Cervezas", 6, "drink"),
       new MenuItem(
-        "2.1.3",
+        uniqueId("item-"),
         "Tacos",
         "Variations of the Tacos",
         "1/2 price",
         "food"
       ),
       new MenuItem(
-        "2.1.4",
+        uniqueId("item-"),
         "Tequila",
         "Variations of Tequila",
         "1/2 price",
@@ -230,17 +242,29 @@ rest3.registerHappyHour(
     "2:00PM",
     "5:00PM",
     new Menu([
-      new MenuItem("3.1.1", "Pizza", "Variations of Pizzas", 12, "food"),
       new MenuItem(
-        "3.1.2",
+        uniqueId("item-"),
+        "Pizza",
+        "Variations of Pizzas",
+        12,
+        "food"
+      ),
+      new MenuItem(
+        uniqueId("item-"),
         "Glass of wine",
         "Red, white or rose",
         "1/2 price",
         "drink"
       ),
-      new MenuItem("2.1.3", "Beer", "Craft beer", "1/2 price", "drink"),
       new MenuItem(
-        "2.1.4",
+        uniqueId("item-"),
+        "Beer",
+        "Craft beer",
+        "1/2 price",
+        "drink"
+      ),
+      new MenuItem(
+        uniqueId("item-"),
         "Bubbles",
         "Variations of bubbles",
         "1/2 price",
