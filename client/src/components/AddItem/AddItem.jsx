@@ -1,45 +1,52 @@
-import { withRouter } from "react-router-dom";
-import React from "react";
+import React from 'react'
+import { withRouter } from 'react-router-dom'
+import { AddItemModal } from '../Common/Modals/AddItemModal'
 
 class AddItem extends React.Component {
-  constructor(props) {
-    super(props);
-    const queryString = this.props.location.search;
-    const urlParams = new URLSearchParams(queryString);
-    const restaurantId = urlParams.get("restaurantId");
-    const happyHourId = urlParams.get("happyHourId");
+    constructor(props) {
+        super(props)
 
-    this.restaurantID = restaurantId;
-    this.happyHourId = happyHourId;
-  }
+        this.state = {
+            modalOpened: false,
+        }
+    }
 
-  addNewItem() {
-    const data = {
-      restaurantId: this.restaurantID,
-      happyHourId: this.happyHourId,
-    };
+    canAdd() {
+        return Boolean(this.props.happyHourId)
+    }
 
-    const searchParams = new URLSearchParams(data);
+    closeAddItemModal() {
+        this.setState({ modalOpened: false })
+    }
 
-    this.props.history.push({
-      pathname: "/admin/restaurant/happy-hour/item/information",
-      search: searchParams.toString(),
-    });
-  }
+    addNewItem() {
+        if (!this.canAdd()) {
+            alert('Please select the times and day of your happy hour first.')
+            return
+        }
 
-  render() {
-    return (
-      <div className="ui grid">
-        <div className="twelve wide column"></div>
-        <div className="four wide column">
-          <i
-            className="big plus square outline icon addHappyHour"
-            onClick={this.addNewItem.bind(this)}
-          ></i>
-        </div>
-      </div>
-    );
-  }
+        this.setState({ modalOpened: true })
+    }
+
+    render() {
+        return (
+            <>
+                <div className="ui grid">
+                    <div className="twelve wide column"></div>
+                    <div className="four wide column">
+                        <i
+                            className="big plus square outline icon addHappyHour"
+                            onClick={this.addNewItem.bind(this)}
+                        ></i>
+                    </div>
+                </div>
+                <AddItemModal
+                    isOpen={this.state.modalOpened}
+                    onHide={this.closeAddItemModal.bind(this)}
+                />
+            </>
+        )
+    }
 }
 
-export default withRouter(AddItem);
+export default withRouter(AddItem)

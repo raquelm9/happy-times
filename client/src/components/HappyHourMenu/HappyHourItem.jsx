@@ -4,6 +4,7 @@ import PaddedContainerSegment from '../PaddedContainerSegment/PaddedContainerSeg
 import { ConfirmDelete } from '../ConfirmDelete/ConfirmDelete'
 import { HttpService } from '../../services/http-service'
 import { withRouter } from 'react-router-dom'
+import { AddItemModal } from '../Common/Modals/AddItemModal'
 
 class HappyHourItem extends React.Component {
     constructor(props) {
@@ -16,18 +17,25 @@ class HappyHourItem extends React.Component {
         this.restaurantId = restaurantId
         this.happyHourId = happyHourId
 
-        this.state = { isOpen: false }
+        this.state = { confirmingDelete: false, updatingItem: false }
     }
 
-    openModal(event) {
+    openConfirmDeleteModal(event) {
         //prevents the page to reroute to rest detail
         event.stopPropagation()
-
-        this.setState({ isOpen: true })
+        this.setState({ confirmingDelete: true })
     }
 
-    closeModal() {
-        this.setState({ isOpen: false })
+    closeDeleteModal() {
+        this.setState({ confirmingDelete: false })
+    }
+
+    openUpdateItemModal() {
+        this.setState({ updatingItem: true })
+    }
+
+    closeUpdatingModal() {
+        this.setState({ updatingItem: false })
     }
 
     showCanDelete() {
@@ -35,24 +43,10 @@ class HappyHourItem extends React.Component {
             <div className="deleteButton">
                 <i
                     className="trash alternate icon"
-                    onClick={this.openModal.bind(this)}
+                    onClick={this.openConfirmDeleteModal.bind(this)}
                 ></i>
             </div>
         )
-    }
-
-    viewItemForm() {
-        const data = {
-            restaurantId: this.restaurantId,
-            happyHourId: this.happyHourId,
-            itemId: this.props.item.id,
-        }
-        const searchParams = new URLSearchParams(data)
-
-        this.props.history.push({
-            pathname: '/admin/restaurant/happy-hour/item/information',
-            search: searchParams.toString(),
-        })
     }
 
     renderItem() {
@@ -75,7 +69,7 @@ class HappyHourItem extends React.Component {
 
         new HttpService()
             .removeItem(restaurantId, happyHourId, itemId)
-            .then(() => this.setState({ isOpen: false }))
+            .then(() => this.setState({ confirmingDelete: false }))
             .then(() => this.props.onDelete())
     }
 
@@ -84,14 +78,14 @@ class HappyHourItem extends React.Component {
             return (
                 <>
                     <PaddedContainerSegment
-                        onClick={this.viewItemForm.bind(this)}
+                        onClick={this.openUpdateItemModal.bind(this)}
                     >
                         <div className="menu-item">{this.renderItem()}</div>
                         <div>{this.showCanDelete()}</div>
                     </PaddedContainerSegment>
                     <ConfirmDelete
-                        isOpen={this.state.isOpen}
-                        onCancel={this.closeModal.bind(this)}
+                        isOpen={this.state.confirmingDelete}
+                        onCancel={this.closeDeleteModal.bind(this)}
                         onConfirm={this.deleteItem.bind(this)}
                     ></ConfirmDelete>
                 </>
@@ -102,7 +96,16 @@ class HappyHourItem extends React.Component {
     }
 
     render() {
-        return <>{this.itemContainer()}</>
+        return (
+            <>
+                {this.itemContainer()}
+                <AddItemModal
+                    isOpen={this.state.updatingItem}
+                    onHide={this.closeUpdatingModal.bind(this)}
+                    item={this.props.item}
+                />
+            </>
+        )
     }
 }
 

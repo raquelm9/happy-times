@@ -1,7 +1,7 @@
 import React from 'react'
 import { withRouter } from 'react-router-dom'
 import { Formik, Form, Field, ErrorMessage } from 'formik'
-import { AddItemValidationSchema } from './validations/add_item_validations'
+import { AddItemValidationSchema } from './add_item_validations'
 import { HttpService } from '../../services/http-service'
 
 class AddItemForm extends React.Component {
@@ -19,7 +19,13 @@ class AddItemForm extends React.Component {
 
     initialValues(item) {
         if (!item) {
-            return {}
+            return {
+                id: '',
+                name: '',
+                description: '',
+                price: '',
+                category: '',
+            }
         }
 
         return {
@@ -74,11 +80,6 @@ class AddItemForm extends React.Component {
     render() {
         return (
             <div className="container">
-                <div className="row mb-5">
-                    <div className="col-lg-12 text-center">
-                        <h1 className="mt-5">Item Detail Information</h1>
-                    </div>
-                </div>
                 <div className="row">
                     <div className="col-lg-12">
                         <Formik

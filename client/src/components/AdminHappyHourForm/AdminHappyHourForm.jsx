@@ -42,7 +42,7 @@ class AdminHappyHourForm extends React.Component {
         return HappyHourService.createHappyHour(
             this.restaurantId,
             happyHourValues
-        )
+        ).then((newHappyHour) => this.props.onCreate(newHappyHour))
     }
 
     render() {

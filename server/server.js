@@ -213,7 +213,7 @@ app.post("/restaurants/:restaurantId/happy-hours", function (req, res) {
 
   if (rest) {
     rest.registerHappyHour(newHappyHour);
-    res.status(200).send(restaurants);
+    res.status(200).send(newHappyHour);
   } else {
     res.status(400).send({ error: "Restaurant Id not found" });
   }
