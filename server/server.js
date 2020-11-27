@@ -201,13 +201,12 @@ app.post("/restaurants/:restaurantId/happy-hours", function (req, res) {
 
   var newOpenDays = new OpenDays(reqBodyHappyHour.openDays);
 
-  var newMenu = new Menu(items);
-
   var newHappyHour = new HappyHour(
+    uniqueId(),
     newOpenDays,
     reqBodyHappyHour.startTime,
     reqBodyHappyHour.endTime,
-    newMenu
+    new Menu()
   );
 
   const rest = restaurants.find((restaurant) => restaurant.id === restaurantId);
