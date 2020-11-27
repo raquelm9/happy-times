@@ -14,6 +14,7 @@ class AdminHappyHourForm extends React.Component {
         const queryString = this.props.location.search
         const urlParams = new URLSearchParams(queryString)
         this.restaurantId = urlParams.get('restaurantId')
+        this.happyHourId = urlParams.get('happyHourId')
     }
 
     initialValues(happyHour) {
@@ -45,11 +46,25 @@ class AdminHappyHourForm extends React.Component {
         return this.props.onCreate(newHappyHour)
     }
 
+    alertAndEdit(newHappyHour) {
+        swal('Good job!', 'Happy Hour successfully edited!', 'success')
+
+        return this.props.onCreate(newHappyHour)
+    }
+
     submitForm(happyHourValues) {
-        return HappyHourService.createHappyHour(
+        if (!this.happyHourId) {
+            return HappyHourService.createHappyHour(
+                this.restaurantId,
+                happyHourValues
+            ).then((newHappyHour) => this.alertAndCreate(newHappyHour))
+        }
+
+        return HappyHourService.editHappyHour(
             this.restaurantId,
+            this.happyHourId,
             happyHourValues
-        ).then((newHappyHour) => this.alertAndCreate(newHappyHour))
+        ).then((newHappyHour) => this.alertAndEdit(newHappyHour))
     }
 
     render() {

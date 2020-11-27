@@ -212,6 +212,7 @@ app.post("/restaurants/:restaurantId/happy-hours", function (req, res) {
   const rest = restaurants.find((restaurant) => restaurant.id === restaurantId);
 
   if (rest) {
+    console.log(newHappyHour);
     rest.registerHappyHour(newHappyHour);
     res.status(200).send(newHappyHour);
   } else {
@@ -317,7 +318,7 @@ app.put(
       const index = rest.happyHours.indexOf(happyHourUpdate);
 
       if (req.body.openDays) {
-        rest.happyHours[index].setOpenDays(req.body.openDays);
+        rest.happyHours[index].setOpenDays(new OpenDays(req.body.openDays));
       }
 
       if (req.body.startTime) {
@@ -328,7 +329,9 @@ app.put(
         rest.happyHours[index].setEndTime(req.body.endTime);
       }
 
-      res.status(200).send(restaurants);
+      console.log(happyHourUpdate);
+
+      res.status(200).send(happyHourUpdate);
     } else if (!rest) {
       res.status(400).send({ error: "Restaurant Id not found" });
     } else if (!happyHourUpdate) {
