@@ -23,10 +23,9 @@ class AddItem extends React.Component {
     addNewItem() {
         if (!this.canAdd()) {
             swal('Please create a happy hour first.')
-            return
         }
 
-        this.setState({ modalOpened: true })
+        return this.setState({ modalOpened: true })
     }
 
     render() {

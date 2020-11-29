@@ -70,7 +70,7 @@ class HappyHourItem extends React.Component {
         new HttpService()
             .removeItem(restaurantId, happyHourId, itemId)
             .then(() => this.setState({ confirmingDelete: false }))
-            .then(() => this.props.onDelete())
+            .finally(() => this.props.onDelete())
     }
 
     itemContainer() {

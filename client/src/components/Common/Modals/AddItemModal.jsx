@@ -5,8 +5,6 @@ import AdminItemForm from '../../AddItem/AdminItemForm'
 export class AddItemModal extends React.Component {
     constructor(props) {
         super(props)
-
-        this.state = { item: undefined }
     }
 
     render() {
@@ -17,10 +15,10 @@ export class AddItemModal extends React.Component {
                 </Modal.Header>
                 <Modal.Body>
                     <AdminItemForm
+                        onHide={this.props.onHide}
                         happyHourId={this.props.happyHourId}
                         item={this.props.item}
-                        onItemUpdated={this.props.ondh}
-                        adjItem={this.props.onAdded}
+                        onAdded={this.props.onAdded}
                     />
                 </Modal.Body>
             </Modal>

@@ -13,8 +13,12 @@ class AddItemForm extends React.Component {
         const restaurantId = urlParams.get('restaurantId')
         const happyHourId = urlParams.get('happyHourId')
 
+        this.state = {
+            itemId: this.props.item ? this.props.item.id : undefined,
+        }
+
         this.restaurantId = restaurantId
-        this.happyHourId = props.happyHourId || happyHourId
+        this.happyHourId = this.props.happyHourId || happyHourId
     }
 
     initialValues(item) {
@@ -37,13 +41,27 @@ class AddItemForm extends React.Component {
         }
     }
 
-    updateOrCreateItem(restaurantId, happyHourId, itemId, item) {
+    updateOrCreateItem(restaurantId, happyHourId, item) {
+        const { itemId } = this.state
+
+        console.log(itemId)
+
         const service = new HttpService()
 
         if (itemId) {
-            return service.editItem(restaurantId, happyHourId, itemId, item)
+            return service
+                .editItem(restaurantId, happyHourId, itemId, item)
+                .then((updatedListItems) => {
+                    this.props.onAdded(updatedListItems)
+                    this.props.onHide()
+                })
         } else if (!itemId) {
-            return service.addItem(restaurantId, happyHourId, item)
+            return service
+                .addItem(restaurantId, happyHourId, item)
+                .then((updatedListItems) => {
+                    this.props.onAdded(updatedListItems)
+                    this.onHide()
+                })
         }
     }
 
@@ -64,7 +82,6 @@ class AddItemForm extends React.Component {
         return this.updateOrCreateItem(
             this.restaurantId,
             this.happyHourId,
-            id,
             item
         )
             .then(() =>
@@ -73,7 +90,7 @@ class AddItemForm extends React.Component {
                 )
             )
             .finally(() => {
-                actions.setSubmitting(false)
+                this.props.onHide()
             })
     }
 

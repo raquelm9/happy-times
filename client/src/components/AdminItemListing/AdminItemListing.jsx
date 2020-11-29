@@ -21,10 +21,8 @@ class AdminItemListing extends React.Component {
     }
 
     loadHappyHour() {
-        const { happyHourId } = this.state
-
         return new HttpService()
-            .getRestaurantHappyHour(this.restaurantId, happyHourId)
+            .getRestaurantHappyHour(this.restaurantId, this.props.happyHourId)
             .then((updatedHappyHour) =>
                 this.setState({
                     happyHourItems: updatedHappyHour.menu.items,
