@@ -42,8 +42,10 @@ class AddItem extends React.Component {
                     </div>
                 </div>
                 <AddItemModal
+                    happyHourId={this.props.happyHourId}
                     isOpen={this.state.modalOpened}
                     onHide={this.closeAddItemModal.bind(this)}
+                    onAdded={this.props.onAdded}
                 />
             </>
         )

@@ -1,10 +1,12 @@
 import React from 'react'
 import { Modal, Button } from 'react-bootstrap'
-import AddItemForm from '../../AddItem/AdminItemForm'
+import AdminItemForm from '../../AddItem/AdminItemForm'
 
 export class AddItemModal extends React.Component {
     constructor(props) {
         super(props)
+
+        this.state = { item: undefined }
     }
 
     render() {
@@ -14,7 +16,12 @@ export class AddItemModal extends React.Component {
                     <Modal.Title>Add Menu Item</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    <AddItemForm item={this.props.item} />
+                    <AdminItemForm
+                        happyHourId={this.props.happyHourId}
+                        item={this.props.item}
+                        onItemUpdated={this.props.ondh}
+                        adjItem={this.props.onAdded}
+                    />
                 </Modal.Body>
             </Modal>
         )

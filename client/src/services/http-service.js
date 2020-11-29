@@ -132,20 +132,24 @@ export class HttpService {
         return promise
     }
 
-    // addItem = (restaurantId, happyHourId) => {
-    //   var promise = new Promise((resolve, reject) => {
-    //     fetch("http://localhost:3001/restaurants/", {
-    //       method: "post",
-    //       headers: {
-    //         "Content-Type": "application/json",
-    //       },
-    //       body: JSON.stringify(restaurant),
-    //     }).then((res) => {
-    //       resolve(res.json());
-    //     });
-    //   });
-    //   return promise;
-    // };
+    addItem = (restaurantId, happyHourId, item) => {
+        console.log(item)
+        var promise = new Promise((resolve, reject) => {
+            fetch(
+                `http://localhost:3001/restaurants/${restaurantId}/happy-hours/${happyHourId}/item/`,
+                {
+                    method: 'post',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(item),
+                }
+            ).then((res) => {
+                resolve(res.json())
+            })
+        })
+        return promise
+    }
 
     editRestaurant = (id, restaurant) => {
         var promise = new Promise((resolve, reject) => {

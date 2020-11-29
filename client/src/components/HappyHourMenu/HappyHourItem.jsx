@@ -103,6 +103,7 @@ class HappyHourItem extends React.Component {
                     isOpen={this.state.updatingItem}
                     onHide={this.closeUpdatingModal.bind(this)}
                     item={this.props.item}
+                    adjItem={this.props.adjItem}
                 />
             </>
         )

@@ -1,7 +1,6 @@
 import React from 'react'
 import { HttpService } from '../services/http-service'
 import AdminHappyHourForm from '../components/AdminHappyHourForm/AdminHappyHourForm'
-import AddItem from '../components/AddItem/AddItem'
 
 class AdminNewRestaurant extends React.Component {
     constructor(props) {
@@ -15,7 +14,7 @@ class AdminNewRestaurant extends React.Component {
         this.restaurantId = restaurantId
         this.happyHourId = happyHourId
 
-        this.state = { happyHour: undefined, isLoading: true }
+        this.state = { isLoading: true }
     }
 
     componentDidMount() {
@@ -46,7 +45,6 @@ class AdminNewRestaurant extends React.Component {
                     happyHour={this.state.happyHour}
                     onCreate={(happyHour) => this.setState({ happyHour })}
                 ></AdminHappyHourForm>
-                <AddItem happyHourId={this.state.happyHour?.id} />
             </>
         )
     }

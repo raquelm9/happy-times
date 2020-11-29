@@ -14,7 +14,7 @@ class AddItemForm extends React.Component {
         const happyHourId = urlParams.get('happyHourId')
 
         this.restaurantId = restaurantId
-        this.happyHourId = happyHourId
+        this.happyHourId = props.happyHourId || happyHourId
     }
 
     initialValues(item) {
@@ -43,7 +43,7 @@ class AddItemForm extends React.Component {
         if (itemId) {
             return service.editItem(restaurantId, happyHourId, itemId, item)
         } else if (!itemId) {
-            return service.addItem(restaurantId, happyHourId)
+            return service.addItem(restaurantId, happyHourId, item)
         }
     }
 

@@ -14,18 +14,23 @@ class AdminHappyHourForm extends React.Component {
         const queryString = this.props.location.search
         const urlParams = new URLSearchParams(queryString)
         this.restaurantId = urlParams.get('restaurantId')
-        this.happyHourId = urlParams.get('happyHourId')
+
+        this.state = {
+            happyHourId: urlParams.get('happyHourId'),
+        }
     }
 
     initialValues(happyHour) {
         if (!happyHour) {
             return {
+                id: '',
                 startTime: '',
                 endTime: '',
                 openDays: [],
             }
         }
         return {
+            id: happyHour.id,
             startTime: happyHour.startTime,
             endTime: happyHour.endTime,
             openDays: happyHour.openDays.days.map((day) => `${day}`),
@@ -53,16 +58,21 @@ class AdminHappyHourForm extends React.Component {
     }
 
     submitForm(happyHourValues) {
-        if (!this.happyHourId) {
+        const { happyHourId } = this.state
+
+        if (!happyHourId) {
             return HappyHourService.createHappyHour(
                 this.restaurantId,
                 happyHourValues
-            ).then((newHappyHour) => this.alertAndCreate(newHappyHour))
+            ).then((newHappyHour) => {
+                this.setState({ happyHourId: newHappyHour.id })
+                this.alertAndCreate(newHappyHour)
+            })
         }
 
         return HappyHourService.editHappyHour(
             this.restaurantId,
-            this.happyHourId,
+            happyHourId,
             happyHourValues
         ).then((newHappyHour) => this.alertAndEdit(newHappyHour))
     }
@@ -149,6 +159,7 @@ class AdminHappyHourForm extends React.Component {
                 <div className="row">
                     <div className="col-lg-12">
                         <AdminItemListing
+                            happyHourId={this.state.happyHourId}
                             items={this.happyHourItems()}
                         ></AdminItemListing>
                     </div>
