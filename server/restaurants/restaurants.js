@@ -65,7 +65,7 @@ export class Restaurant {
 
 const rest1 = new Restaurant(
   uniqueId("restaurant-"),
-  "Cannibale",
+  "Cannibale Bar & Barbershop",
   "Eat, drink, and be groomed later",
   "https://www.cannibale.ca/",
   "http://localhost:3001/uploads/2020-11-13T17:18:19.211Zfinals-0001.jpg",

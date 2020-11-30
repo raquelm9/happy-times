@@ -133,7 +133,6 @@ export class HttpService {
     }
 
     addItem = (restaurantId, happyHourId, item) => {
-        console.log(item)
         var promise = new Promise((resolve, reject) => {
             fetch(
                 `http://localhost:3001/restaurants/${restaurantId}/happy-hours/${happyHourId}/item/`,

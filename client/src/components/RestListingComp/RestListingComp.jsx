@@ -126,7 +126,7 @@ class RestListingComp extends React.Component {
                     className="restaurant-card"
                     onClick={this.viewHappyHour.bind(this)}
                 >
-                    <p>Restaurant Name: {restaurant.name}</p>
+                    <p className="restListingCompName">{restaurant.name}</p>
                     <p>Address: {addressLabel(restaurant)}</p>
                     <>{this.showCanDelete()}</>
                 </div>

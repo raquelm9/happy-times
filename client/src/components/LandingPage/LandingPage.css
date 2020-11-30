@@ -1,0 +1,38 @@
+.landing5-image {
+    height: 100vh;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+}
+
+.landing5-content {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 40px;
+    color: white;
+}
+
+h1,
+h2 {
+    font-family: 'Ribeye';
+    font-size: 20px;
+}
+
+@media (min-width: 650px) {
+    .landing5-image {
+        background-position: center center;
+    }
+
+    .landing5-content {
+        align-items: center;
+        justify-content: flex-start;
+    }
+
+    h1,
+    h2 {
+        font-size: 40px;
+    }
+}

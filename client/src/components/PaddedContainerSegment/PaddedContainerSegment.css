@@ -1,0 +1,6 @@
+div.ui.raised.very.padded.container.segment.changeStyle {
+    opacity: 0.7;
+    color: white;
+    background-color: black;
+    font-weight: 900;
+}
