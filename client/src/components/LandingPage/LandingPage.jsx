@@ -25,8 +25,8 @@ const LandingPage = () => {
             style={{ backgroundImage: `url(${imageUrl})` }}
         >
             <div className="landing5-content">
-                <p>Hey Calgary!</p>
-                <p>Welcome to Happy Times!</p>
+                <h1>Hey Calgary!</h1>
+                <h2>Welcome to Happy Times!</h2>
             </div>
         </div>
     )

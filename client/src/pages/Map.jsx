@@ -236,13 +236,6 @@ export default function App() {
 
     return (
         <div>
-            <h1>
-                Happy Time {''}
-                <span role="img" aria-label="logo">
-                    Logo{' '}
-                </span>{' '}
-            </h1>
-
             <Search panTo={panTo} />
             <Locate panTo={panTo} />
 
