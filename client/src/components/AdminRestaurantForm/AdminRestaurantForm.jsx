@@ -101,7 +101,7 @@ class AddRestaurantForm extends React.Component {
             <div className="container">
                 <div className="row mb-5">
                     <div className="col-lg-12 text-center">
-                        <h1 className="mt-5">Restaurant Detail Information</h1>
+                        <h1>Restaurant Detail Information</h1>
                     </div>
                 </div>
                 <div className="row">
@@ -180,6 +180,7 @@ class AddRestaurantForm extends React.Component {
 
                                     <div className="form-group">
                                         <label htmlFor="image">Image</label>
+                                        <br></br>
                                         <input
                                             type="file"
                                             name="image"
@@ -205,7 +206,8 @@ class AddRestaurantForm extends React.Component {
                                     ) : null}
 
                                     <br></br>
-                                    <h2>Address:</h2>
+                                    <br></br>
+                                    <h3>Address:</h3>
                                     <br></br>
 
                                     <div className="row">

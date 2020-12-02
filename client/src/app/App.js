@@ -12,7 +12,6 @@ import AdminNewRestaurant from '../pages/AdminNewRestaurant.jsx'
 import AdminLogin from '../pages/AdminLogin'
 import AdminRestaurantHappyHours from '../pages/AdminRestaurantHappyHours'
 import AdminNewHappyHour from '../pages/AdminNewHappyHour'
-import AdminNewItem from '../pages/AdminNewItem'
 
 class App extends React.Component {
     constructor(props) {

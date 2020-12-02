@@ -7,7 +7,10 @@ class Grid extends React.Component {
         return (
             <div
                 className="ui stackable one column grid"
-                style={{ marginLeft: '5px', marginRight: '5px' }}
+                style={{
+                    marginLeft: '5px',
+                    marginRight: '5px',
+                }}
             >
                 <div className="column" style={{ textAlign: 'center' }}>
                     <PaddedContainerSegment>

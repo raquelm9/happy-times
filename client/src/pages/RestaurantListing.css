@@ -1,14 +1,11 @@
-.restaurantListingTitle {
-    font-size: 40px;
-    text-align: center;
-    padding-bottom: 30px;
-    padding-top: 50px;
-    color: white;
+.restaurantListingImage {
+    padding: 40px;
 }
 
-.restaurantListingImage {
-    background-size: 1000px 1700px;
-    padding-top: 50px;
-    background-position: center;
-    background-repeat: 'no-repeat';
+h1.restaurants-title {
+    font-family: 'Ribeye';
+    font-size: 40px;
+    text-align: center;
+    color: white;
+    padding: 40px;
 }

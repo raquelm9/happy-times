@@ -1,0 +1,7 @@
+.restaurant-card:hover {
+    cursor: pointer;
+}
+
+.restListingCompName {
+    font-size: 20px;
+}

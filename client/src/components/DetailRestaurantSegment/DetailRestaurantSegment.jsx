@@ -8,7 +8,10 @@ class DetailRestaurantSegment extends React.Component {
     render() {
         return (
             <>
-                <p className="ui header restaurantName">
+                <p
+                    className="ui header restaurantName"
+                    style={{ color: 'white' }}
+                >
                     {this.props.restaurant.name}
                 </p>
                 <p className="address">
@@ -21,7 +24,7 @@ class DetailRestaurantSegment extends React.Component {
                     </a>
                 </p>
 
-                <p>Description: {this.props.restaurant.description}</p>
+                <p> {this.props.restaurant.description}</p>
                 <br></br>
                 <p>
                     <a
@@ -37,7 +40,10 @@ class DetailRestaurantSegment extends React.Component {
                 </p>
 
                 <div className="collapse" id="collapseExample">
-                    <div className="card card-body">
+                    <div
+                        className="card card-body"
+                        style={{ backgroundColor: '#121212' }}
+                    >
                         <div className="column">
                             <PaddedContainerSegment>
                                 <HappyHourMenu

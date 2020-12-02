@@ -2,25 +2,21 @@ import React from 'react'
 import { withRouter } from 'react-router-dom'
 import { todaysHappyHour } from '../../helpers/happy_hour'
 import { addressLabel } from '../../helpers/address'
-import { HttpService } from '../../services/http-service'
-import { ConfirmDelete } from '../ConfirmDelete/ConfirmDelete'
 
 import './RestListingComp.css'
 
 class RestListingComp extends React.Component {
     constructor(props) {
         super(props)
-        this.deleteRest = this.deleteRest.bind(this)
-        this.state = { isOpen: false }
     }
 
     timeHappyHour() {
         const happyHour = todaysHappyHour(this.props.restaurant)
 
         if (!happyHour) {
-            return 'No Happy Hours Today'
+            return ' No Happy Hours Today'
         } else {
-            return happyHour.startTime + ' - ' + happyHour.endTime
+            return ' ' + happyHour.startTime + ' - ' + ' ' + happyHour.endTime
         }
     }
 
@@ -59,62 +55,22 @@ class RestListingComp extends React.Component {
     viewHappyHour() {
         const restaurant = this.props.restaurant
 
-        if (this.props.canDelete) {
-            this.props.history.push({
-                pathname: '/admin/restaurant/information',
-                search: 'id=' + restaurant.id,
-            })
-        } else {
-            this.props.history.push({
-                pathname: '/restaurant/happy-hour',
-                search: 'id=' + restaurant.id,
-            })
-        }
+        this.props.history.push({
+            pathname: '/restaurant/happy-hour',
+            search: 'id=' + restaurant.id,
+        })
     }
 
-    deleteRest(event) {
-        //prevents the page to reroute to rest detail
-        event.stopPropagation()
-
-        const restaurant = this.props.restaurant
-
-        new HttpService()
-            .removeRestaurant(restaurant.id)
-            .then(() => this.props.onDelete())
-    }
-
-    openModal(event) {
-        //prevents the page to reroute to rest detail
-        event.stopPropagation()
-
-        this.setState({ isOpen: true })
-    }
-
-    closeModal() {
-        this.setState({ isOpen: false })
-    }
-
-    showCanDelete() {
-        if (this.props.canDelete) {
-            return (
-                <div className="deleteButton">
-                    <i
-                        className="trash alternate icon"
-                        onClick={this.openModal.bind(this)}
-                    ></i>
-                </div>
-            )
-        } else {
-            return (
-                <>
-                    <p>
-                        Happy Hour:<br></br>
-                        {this.timeHappyHour()}
-                    </p>
-                    <p>{this.categoryIcons()}</p>
-                </>
-            )
-        }
+    showhappyHour() {
+        return (
+            <>
+                <p className="project-happy-hour">
+                    Happy Hour:
+                    {this.timeHappyHour()}
+                </p>
+                <p className="project-category">{this.categoryIcons()}</p>
+            </>
+        )
     }
 
     render() {
@@ -122,19 +78,32 @@ class RestListingComp extends React.Component {
 
         return (
             <>
-                <div
-                    className="restaurant-card"
-                    onClick={this.viewHappyHour.bind(this)}
-                >
-                    <p className="restListingCompName">{restaurant.name}</p>
-                    <p>Address: {addressLabel(restaurant)}</p>
-                    <>{this.showCanDelete()}</>
+                <div className="row">
+                    <div className="col"></div>
+                    <div
+                        className="project-card-blueprint col-sm-10 col-md-6 col-lg-5"
+                        onClick={this.viewHappyHour.bind(this)}
+                    >
+                        <div className="row">
+                            <div
+                                className="project-image col-lg-5 col-md-12"
+                                style={{
+                                    backgroundImage: `url(${restaurant.image})`,
+                                }}
+                            ></div>
+                            <div className="project-name-description col-lg-7 col-md-12">
+                                <p className="projects-title">
+                                    {restaurant.name}
+                                </p>
+                                <p className="project-description">
+                                    Address: {addressLabel(restaurant)}
+                                </p>
+                                <>{this.showhappyHour()}</>
+                            </div>
+                        </div>
+                    </div>
+                    <div className="col"></div>
                 </div>
-                <ConfirmDelete
-                    isOpen={this.state.isOpen}
-                    onCancel={this.closeModal.bind(this)}
-                    onConfirm={this.deleteRest.bind(this)}
-                ></ConfirmDelete>
             </>
         )
     }
