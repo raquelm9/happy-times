@@ -30,7 +30,18 @@ class RestaurantsListing extends React.Component {
     render() {
         return (
             <>
-                <section
+                <div
+                    style={{
+                        backgroundColor: '#121212',
+                    }}
+                >
+                    <ul class="nav justify-content-end">
+                        <li className="nav-item">
+                            <i className="map icon restaurant-listing"></i>
+                        </li>
+                    </ul>
+                </div>
+                <div
                     className="row"
                     style={{
                         backgroundColor: '#121212',
@@ -46,7 +57,7 @@ class RestaurantsListing extends React.Component {
                             </div>
                         </div>
                     </div>
-                </section>
+                </div>
             </>
         )
     }

@@ -41,3 +41,15 @@ code {
 .sideBar {
     margin-top: 0rem;
 }
+
+i.restaurant-listing {
+    color: white;
+    display: block;
+    float: left;
+    margin-right: 30px;
+    font-size: 40px;
+}
+
+ul.nav.justify-content-end {
+    padding-bottom: 25px;
+}
