@@ -3,6 +3,7 @@ import { HttpService } from '../services/http-service'
 import AdminRestListingComp from '../components/AdminRestListingComp/AdminRestListingComp'
 import PaddedContainerSegment from '../components/PaddedContainerSegment/PaddedContainerSegment'
 import AddRestaurant from '../components/AddRestaurant/AddRestaurant'
+import './AdminRestaurants.css'
 
 class AdminRestaurants extends React.Component {
     constructor(props) {
@@ -44,7 +45,8 @@ class AdminRestaurants extends React.Component {
     render() {
         return (
             <div>
-                <h1>Restaurants</h1>
+                <p className="admin-access">Admin Access</p>
+                <p className="admin-restaurants-title">Restaurants</p>
                 <div className="ui stackable one column padded grid">
                     {this.buildRestaurants()}
                 </div>

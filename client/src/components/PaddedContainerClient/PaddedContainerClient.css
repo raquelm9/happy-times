@@ -4,8 +4,3 @@ div.ui.raised.very.padded.container.segment.changeStyle {
     background-color: black;
     font-weight: 900;
 }
-
-div.ui.raised.very.padded.container.segment.item-container {
-    width: 600px;
-    height: 150px;
-}

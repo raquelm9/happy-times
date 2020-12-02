@@ -4,6 +4,7 @@ import HappyHourItem from '../../components/HappyHourMenu/HappyHourItem'
 import { HttpService } from '../../services/http-service'
 import { withRouter } from 'react-router-dom'
 import AddItem from '../AddItem/AddItem'
+import '../../pages/AdminRestaurants.css'
 
 class AdminItemListing extends React.Component {
     constructor(props) {
@@ -81,6 +82,9 @@ class AdminItemListing extends React.Component {
     render() {
         return (
             <>
+                <p className="admin-restaurants-title">
+                    Menu Items<br></br>
+                </p>
                 {this.renderItems()}
                 <AddItem
                     onAdded={this.loadHappyHour.bind(this)}

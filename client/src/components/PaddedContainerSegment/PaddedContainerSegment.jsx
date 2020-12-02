@@ -14,16 +14,31 @@ class PaddedContainerSegment extends React.Component {
         }
     }
 
+    styleOfContainer() {
+        if (!this.props.itemContainer) {
+            return (
+                <>
+                    <div className="ui raised very padded container segment">
+                        {this.props.children}
+                    </div>
+                </>
+            )
+        } else {
+            return (
+                <>
+                    <div
+                        className="ui raised very padded container segment item-container"
+                        onClick={this.handleClick.bind(this)}
+                    >
+                        {this.props.children}
+                    </div>
+                </>
+            )
+        }
+    }
+
     render() {
-        return (
-            <div
-                className="ui raised very padded container segment"
-                style={{ backgroundImage: `url(${WoodImage})`, color: 'white' }}
-                onClick={this.handleClick.bind(this)}
-            >
-                {this.props.children}
-            </div>
-        )
+        return <>{this.styleOfContainer()}</>
     }
 }
 

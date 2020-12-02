@@ -2,6 +2,7 @@ import React from 'react'
 import OneImage from '../components/OneImage/OneImage'
 import Grid from '../components/Grid/Grid'
 import { HttpService } from '../services/http-service'
+import './RestaurantDetail.css'
 
 class RestaurantDetail extends React.Component {
     constructor(props) {
@@ -32,16 +33,12 @@ class RestaurantDetail extends React.Component {
     render() {
         return (
             <>
-                <section
-                    style={{
-                        backgroundColor: '#121212',
-                    }}
-                >
+                <div className="restaurant-detail-background-color">
                     <div className="">
                         <OneImage image={this.state.restaurant.image} />
                         <Grid restaurant={this.state.restaurant} />
                     </div>
-                </section>
+                </div>
             </>
         )
     }

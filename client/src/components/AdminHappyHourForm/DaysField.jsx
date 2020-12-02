@@ -1,5 +1,6 @@
 import React, { Fragment } from 'react'
 import { Field } from 'formik'
+import './DaysField.css'
 
 export class DaysField extends React.Component {
     constructor(props) {
@@ -19,10 +20,17 @@ export class DaysField extends React.Component {
     render() {
         return (
             <>
-                <div id="checkbox-group">Week Days</div>
+                <div className="checkbox-group" id="checkbox-group">
+                    Week Days
+                </div>
                 <div role="group" aria-labelledby="checkbox-group">
                     {Object.entries(this.weekDays).map((entry) => (
-                        <label key={entry[0]}>
+                        <label
+                            style={{
+                                paddingRight: '10px',
+                            }}
+                            key={entry[0]}
+                        >
                             <Field
                                 type="checkbox"
                                 name={this.props.name}

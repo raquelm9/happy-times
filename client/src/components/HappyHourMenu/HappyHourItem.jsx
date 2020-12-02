@@ -78,6 +78,7 @@ class HappyHourItem extends React.Component {
             return (
                 <>
                     <PaddedContainerSegment
+                        itemContainer={true}
                         onClick={this.openUpdateItemModal.bind(this)}
                     >
                         <div className="menu-item">{this.renderItem()}</div>

@@ -1,6 +1,6 @@
 import React from 'react'
 import DetailRestaurantSegment from '../DetailRestaurantSegment/DetailRestaurantSegment'
-import PaddedContainerSegment from '../PaddedContainerSegment/PaddedContainerSegment'
+import PaddedContainerClient from '../PaddedContainerClient/PaddedContainerClient'
 
 class Grid extends React.Component {
     render() {
@@ -13,11 +13,11 @@ class Grid extends React.Component {
                 }}
             >
                 <div className="column" style={{ textAlign: 'center' }}>
-                    <PaddedContainerSegment>
+                    <PaddedContainerClient>
                         <DetailRestaurantSegment
                             restaurant={this.props.restaurant}
                         />
-                    </PaddedContainerSegment>
+                    </PaddedContainerClient>
                 </div>
             </div>
         )
