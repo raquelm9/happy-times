@@ -1,142 +1,143 @@
-import React from "react";
-import { withRouter } from "react-router-dom";
-import { todaysHappyHour } from "../../helpers/happy_hour";
-import { addressLabel } from "../../helpers/address";
-import { HttpService } from "../../services/http-service";
-import { ConfirmDelete } from "../ConfirmDelete/ConfirmDelete";
+import React from 'react'
+import { withRouter } from 'react-router-dom'
+import { todaysHappyHour } from '../../helpers/happy_hour'
+import { addressLabel } from '../../helpers/address'
+import { HttpService } from '../../services/http-service'
+import { ConfirmDelete } from '../ConfirmDelete/ConfirmDelete'
 
-import "./RestListingComp.css";
+import './RestListingComp.css'
 
 class RestListingComp extends React.Component {
-  constructor(props) {
-    super(props);
-    this.deleteRest = this.deleteRest.bind(this);
-    this.state = { isOpen: false };
-  }
-
-  timeHappyHour() {
-    const happyHour = todaysHappyHour(this.props.restaurant);
-
-    if (!happyHour) {
-      return "No Happy Hour For Today";
-    } else {
-      return happyHour.startTime + " - " + happyHour.endTime;
+    constructor(props) {
+        super(props)
+        this.deleteRest = this.deleteRest.bind(this)
+        this.state = { isOpen: false }
     }
-  }
 
-  categoryHappyHour() {
-    const happyHour = todaysHappyHour(this.props.restaurant);
-    const categories = [];
+    timeHappyHour() {
+        const happyHour = todaysHappyHour(this.props.restaurant)
 
-    if (!happyHour) return "";
-
-    happyHour.menu.items.forEach((item) => {
-      if (!categories.includes(item.category)) {
-        categories.push(item.category);
-      }
-    });
-
-    return categories.join(" & ");
-  }
-
-  categoryIcons() {
-    const category = this.categoryHappyHour();
-
-    if (category === "food") {
-      return <i class="utensils icon"></i>;
-    } else if (category === "drink") {
-      return <i class="glass martini icon"></i>;
-    } else if (category === "drink & food" || category === "food & drink") {
-      return (
-        <>
-          <i class="utensils icon"></i> <i class="glass martini icon"></i>
-        </>
-      );
+        if (!happyHour) {
+            return 'No Happy Hours Today'
+        } else {
+            return happyHour.startTime + ' - ' + happyHour.endTime
+        }
     }
-  }
 
-  viewHappyHour() {
-    const restaurant = this.props.restaurant;
+    categoryHappyHour() {
+        const happyHour = todaysHappyHour(this.props.restaurant)
+        const categories = []
 
-    if (this.props.canDelete) {
-      this.props.history.push({
-        pathname: "/admin/restaurant/information",
-        search: "id=" + restaurant.id,
-      });
-    } else {
-      this.props.history.push({
-        pathname: "/restaurant/happy-hour",
-        search: "id=" + restaurant.id,
-      });
+        if (!happyHour) return ''
+
+        happyHour.menu.items.forEach((item) => {
+            if (!categories.includes(item.category)) {
+                categories.push(item.category)
+            }
+        })
+
+        return categories.join(' & ')
     }
-  }
 
-  deleteRest(event) {
-    //prevents the page to reroute to rest detail
-    event.stopPropagation();
+    categoryIcons() {
+        const category = this.categoryHappyHour()
 
-    const restaurant = this.props.restaurant;
-
-    new HttpService()
-      .removeRestaurant(restaurant.id)
-      .then(() => this.props.onDelete());
-  }
-
-  openModal(event) {
-    //prevents the page to reroute to rest detail
-    event.stopPropagation();
-
-    this.setState({ isOpen: true });
-  }
-
-  closeModal() {
-    this.setState({ isOpen: false });
-  }
-
-  showCanDelete() {
-    if (this.props.canDelete) {
-      return (
-        <div className="deleteButton">
-          <i
-            className="trash alternate icon"
-            onClick={this.openModal.bind(this)}
-          ></i>
-        </div>
-      );
-    } else {
-      return (
-        <>
-          <p>
-            Happy Hour:<br></br>
-            {this.timeHappyHour()}
-          </p>
-          <p>{this.categoryIcons()}</p>
-        </>
-      );
+        if (category === 'food') {
+            return <i className="utensils icon"></i>
+        } else if (category === 'drink') {
+            return <i className="glass martini icon"></i>
+        } else if (category === 'drink & food' || category === 'food & drink') {
+            return (
+                <>
+                    <i className="utensils icon"></i>{' '}
+                    <i className="glass martini icon"></i>
+                </>
+            )
+        }
     }
-  }
 
-  render() {
-    const restaurant = this.props.restaurant;
+    viewHappyHour() {
+        const restaurant = this.props.restaurant
 
-    return (
-      <>
-        <div
-          className="restaurant-card"
-          onClick={this.viewHappyHour.bind(this)}
-        >
-          <p>Restaurant Name: {restaurant.name}</p>
-          <p>Address: {addressLabel(restaurant)}</p>
-          <>{this.showCanDelete()}</>
-        </div>
-        <ConfirmDelete
-          isOpen={this.state.isOpen}
-          onCancel={this.closeModal.bind(this)}
-          onConfirm={this.deleteRest.bind(this)}
-        ></ConfirmDelete>
-      </>
-    );
-  }
+        if (this.props.canDelete) {
+            this.props.history.push({
+                pathname: '/admin/restaurant/information',
+                search: 'id=' + restaurant.id,
+            })
+        } else {
+            this.props.history.push({
+                pathname: '/restaurant/happy-hour',
+                search: 'id=' + restaurant.id,
+            })
+        }
+    }
+
+    deleteRest(event) {
+        //prevents the page to reroute to rest detail
+        event.stopPropagation()
+
+        const restaurant = this.props.restaurant
+
+        new HttpService()
+            .removeRestaurant(restaurant.id)
+            .then(() => this.props.onDelete())
+    }
+
+    openModal(event) {
+        //prevents the page to reroute to rest detail
+        event.stopPropagation()
+
+        this.setState({ isOpen: true })
+    }
+
+    closeModal() {
+        this.setState({ isOpen: false })
+    }
+
+    showCanDelete() {
+        if (this.props.canDelete) {
+            return (
+                <div className="deleteButton">
+                    <i
+                        className="trash alternate icon"
+                        onClick={this.openModal.bind(this)}
+                    ></i>
+                </div>
+            )
+        } else {
+            return (
+                <>
+                    <p>
+                        Happy Hour:<br></br>
+                        {this.timeHappyHour()}
+                    </p>
+                    <p>{this.categoryIcons()}</p>
+                </>
+            )
+        }
+    }
+
+    render() {
+        const restaurant = this.props.restaurant
+
+        return (
+            <>
+                <div
+                    className="restaurant-card"
+                    onClick={this.viewHappyHour.bind(this)}
+                >
+                    <p className="restListingCompName">{restaurant.name}</p>
+                    <p>Address: {addressLabel(restaurant)}</p>
+                    <>{this.showCanDelete()}</>
+                </div>
+                <ConfirmDelete
+                    isOpen={this.state.isOpen}
+                    onCancel={this.closeModal.bind(this)}
+                    onConfirm={this.deleteRest.bind(this)}
+                ></ConfirmDelete>
+            </>
+        )
+    }
 }
 
-export default withRouter(RestListingComp);
+export default withRouter(RestListingComp)

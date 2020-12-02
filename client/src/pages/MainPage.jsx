@@ -1,13 +1,17 @@
-import React from 'react';
+import React from 'react'
+import { withRouter } from 'react-router-dom'
+import LandingPage from '../components/LandingPage/LandingPage'
 
+const MainPage = (props) => {
+    // setTimeout(() => {
+    //     props.history.push('./restaurants')
+    // }, 2000)
 
-
-const MainPage = () => {
     return (
-        <div>
-        <h1>Welcome to Happy Times App!</h1>
-        </div>
-    );
-};
+        <>
+            <LandingPage></LandingPage>
+        </>
+    )
+}
 
-export default MainPage;
+export default withRouter(MainPage)

@@ -13,7 +13,7 @@ export class ConfirmDelete extends React.Component {
           <Modal.Title>Delete Message</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <div class="alert alert-danger" role="alert">
+          <div className="alert alert-danger" role="alert">
             Are you sure you want to permanently delete this record?
           </div>
         </Modal.Body>

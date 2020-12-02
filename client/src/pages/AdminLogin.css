@@ -1,0 +1,10 @@
+.adminLoginTitle {
+    position: relative;
+    padding: 40px 0;
+    text-align: center;
+}
+
+.adminLoginForm {
+    width: 650px;
+    margin: auto;
+}
