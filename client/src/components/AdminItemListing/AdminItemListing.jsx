@@ -17,8 +17,6 @@ class AdminItemListing extends React.Component {
 
         this.restaurantId = restaurantId
 
-        // this.happyHourId = this.props.happyHourId
-
         this.state = {
             happyHourItems: props.items,
         }

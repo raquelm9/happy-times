@@ -73,6 +73,18 @@ class AdminHappyHourForm extends React.Component {
             ).then((newHappyHour) => {
                 this.setState({ happyHourId: newHappyHour.id })
                 this.alertAndCreate(newHappyHour)
+
+                const data = {
+                    restaurantId: this.restaurantId,
+                    happyHourId: this.state.happyHourId,
+                }
+
+                const searchParams = new URLSearchParams(data)
+
+                this.props.history.push({
+                    pathname: '/admin/restaurant/happy-hour/information',
+                    search: searchParams.toString(),
+                })
             })
         }
 
