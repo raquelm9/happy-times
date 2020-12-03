@@ -17,6 +17,8 @@ class AddItemForm extends React.Component {
             itemId: this.props.item ? this.props.item.id : undefined,
         }
 
+        console.log(this.props.onAdded)
+
         this.restaurantId = restaurantId
         this.happyHourId = this.props.happyHourId || happyHourId
     }
@@ -43,7 +45,7 @@ class AddItemForm extends React.Component {
 
     goToHH(event) {
         event.preventDefault()
-        this.props.history.goBack()
+        this.props.onHide()
     }
 
     updateOrCreateItem(restaurantId, happyHourId, item) {
@@ -56,7 +58,7 @@ class AddItemForm extends React.Component {
                 .editItem(restaurantId, happyHourId, itemId, item)
                 .then((updatedListItems) => {
                     this.props.onAdded(updatedListItems)
-                    this.props.onHide()
+                    this.onHide()
                 })
         } else if (!itemId) {
             return service

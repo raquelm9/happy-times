@@ -75,6 +75,7 @@ class AdminItemListing extends React.Component {
                         onDelete={this.loadHappyHour.bind(this)}
                         adjItem={this.loadHappyHour.bind(this)}
                         happyHourId={this.props.happyHourId}
+                        onAdded={this.loadHappyHour.bind(this)}
                     />
                 ))}
             </>

@@ -327,15 +327,11 @@ app.put(
 );
 
 app.put(
-  "/restaurants/:restaurantId/happy-hours/:happyhourId/:itemId",
+  "/restaurants/:restaurantId/happy-hours/:happyHourId/:itemId",
   function (req, res) {
     var restaurantId = req.params.restaurantId;
-    var happyhourId = req.params.happyhourId;
+    var happyHourId = req.params.happyHourId;
     var happyHourItemId = req.params.itemId;
-
-    console.log(restaurantId);
-    console.log(happyHourId);
-    console.log(happyHourItemId);
 
     const rest = restaurants.find(
       (restaurant) => restaurantId === restaurant.id
@@ -353,6 +349,7 @@ app.put(
 
     if (happyHourItem) {
       var index2 = rest.happyHours[index1].menu.items.indexOf(happyHourItem);
+
       if (req.body.name) {
         rest.happyHours[index1].menu.items[index2].setName(req.body.name);
       }
@@ -374,6 +371,7 @@ app.put(
       }
 
       const updatedListItems = rest.happyHours[index1].menu.items;
+
       res.status(200).send(updatedListItems);
     } else if (!rest) {
       res.status(400).send({ error: "Restaurant Id not found" });
