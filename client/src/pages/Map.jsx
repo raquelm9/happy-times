@@ -237,7 +237,6 @@ export default function App() {
     return (
         <div>
             <Search panTo={panTo} />
-            <Locate panTo={panTo} />
 
             <GoogleMap
                 mapContainerStyle={mapContainerStyle}
@@ -293,8 +292,8 @@ export default function App() {
 //Locate Function
 function Locate({ panTo }) {
     return (
-        <button
-            className="locate"
+        <i
+            className="location arrow icon"
             onClick={() => {
                 navigator.geolocation.getCurrentPosition(
                     (position) => {
@@ -307,9 +306,7 @@ function Locate({ panTo }) {
                     options
                 )
             }}
-        >
-            <img src={compass} alt="Locate me" />
-        </button>
+        ></i>
     )
 }
 
@@ -337,7 +334,12 @@ function Search({ panTo }) {
             >
                 <ul class="nav justify-content-end">
                     <li className="nav-item">
-                        <i className="list alternate icon restaurant-listing"></i>
+                        <i className="nav-link location arrow icon restaurant-listing">
+                            <Locate panTo={panTo} />
+                        </i>
+                    </li>
+                    <li className="nav-item">
+                        <i className="nav-link list alternate icon restaurant-listing"></i>
                     </li>
                 </ul>
             </div>

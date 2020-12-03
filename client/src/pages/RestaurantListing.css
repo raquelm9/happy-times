@@ -17,3 +17,7 @@ i.restaurant-listing {
     margin-right: 30px;
     font-size: 40px;
 }
+
+i.restaurant-listing:hover {
+    cursor: pointer;
+}

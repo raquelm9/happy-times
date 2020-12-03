@@ -1,6 +1,7 @@
 import React from 'react'
 import { HttpService } from '../services/http-service'
 import RestListingComp from '../components/RestListingComp/RestListingComp'
+import { withRouter } from 'react-router-dom'
 import './RestaurantListing.css'
 
 class RestaurantsListing extends React.Component {
@@ -23,6 +24,10 @@ class RestaurantsListing extends React.Component {
         )
     }
 
+    goToMap() {
+        this.props.history.push('/map/')
+    }
+
     buildRestaurantsCard = (restaurant) => {
         return <RestListingComp key={restaurant.id} restaurant={restaurant} />
     }
@@ -37,7 +42,10 @@ class RestaurantsListing extends React.Component {
                 >
                     <ul class="nav justify-content-end">
                         <li className="nav-item">
-                            <i className="map icon restaurant-listing"></i>
+                            <i
+                                className="map icon restaurant-listing"
+                                onClick={this.goToMap.bind(this)}
+                            ></i>
                         </li>
                     </ul>
                 </div>
@@ -63,4 +71,4 @@ class RestaurantsListing extends React.Component {
     }
 }
 
-export default RestaurantsListing
+export default withRouter(RestaurantsListing)

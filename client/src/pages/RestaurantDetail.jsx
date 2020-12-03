@@ -2,7 +2,9 @@ import React from 'react'
 import OneImage from '../components/OneImage/OneImage'
 import Grid from '../components/Grid/Grid'
 import { HttpService } from '../services/http-service'
+import { withRouter } from 'react-router-dom'
 import './RestaurantDetail.css'
+import './RestaurantListing.css'
 
 class RestaurantDetail extends React.Component {
     constructor(props) {
@@ -29,12 +31,41 @@ class RestaurantDetail extends React.Component {
             (err) => {}
         )
     }
+    goToMap() {
+        this.props.history.push('/map/')
+    }
+    goToList() {
+        this.props.history.push('/restaurants/')
+    }
 
     render() {
         return (
             <>
                 <div className="restaurant-detail-background-color">
-                    <div className="">
+                    <div
+                        style={{
+                            backgroundColor: '#121212',
+                        }}
+                    >
+                        <ul class="nav justify-content-end">
+                            <li
+                                className="nav-item"
+                                style={{
+                                    marginTop: '5px',
+                                }}
+                            >
+                                <i
+                                    className="map icon restaurant-listing"
+                                    onClick={this.goToMap.bind(this)}
+                                ></i>
+                            </li>
+                            <li className="nav-item">
+                                <i
+                                    className="nav-link list alternate icon restaurant-listing"
+                                    onClick={this.goToList.bind(this)}
+                                ></i>
+                            </li>
+                        </ul>
                         <OneImage image={this.state.restaurant.image} />
                         <Grid restaurant={this.state.restaurant} />
                     </div>
@@ -44,4 +75,4 @@ class RestaurantDetail extends React.Component {
     }
 }
 
-export default RestaurantDetail
+export default withRouter(RestaurantDetail)
