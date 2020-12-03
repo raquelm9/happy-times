@@ -55,6 +55,10 @@ class AddRestaurantForm extends React.Component {
         }
     }
 
+    goToAdminList() {
+        this.props.history.push('/admin/restaurants')
+    }
+
     updateOrCreateRestaurant(id, restaurant) {
         const service = new HttpService()
 
@@ -107,7 +111,12 @@ class AddRestaurantForm extends React.Component {
                     </p>
 
                     <div className="row">
-                        <div className="col-lg-12">
+                        <div
+                            className="col-lg-12"
+                            style={{
+                                backgroundColor: '#F3F3F3',
+                            }}
+                        >
                             <Formik
                                 initialValues={this.initialValues(
                                     this.props.restaurant
@@ -336,15 +345,29 @@ class AddRestaurantForm extends React.Component {
                                             </div>
                                         </div>
 
-                                        <button
-                                            type="submit"
-                                            className="btn btn-primary btn-block"
-                                            disabled={isSubmitting}
-                                        >
-                                            {isSubmitting
-                                                ? 'Please wait...'
-                                                : 'Submit'}
-                                        </button>
+                                        <div className="row">
+                                            <div className="col-12">
+                                                <button
+                                                    type="submit"
+                                                    className="btn btn-secondary btn-lg"
+                                                    onClick={this.goToAdminList.bind(
+                                                        this
+                                                    )}
+                                                >
+                                                    Cancel
+                                                </button>
+
+                                                <button
+                                                    type="submit"
+                                                    className="btn btn-primary btn-lg"
+                                                    disabled={isSubmitting}
+                                                >
+                                                    {isSubmitting
+                                                        ? 'Please wait...'
+                                                        : 'Submit'}
+                                                </button>
+                                            </div>
+                                        </div>
                                     </Form>
                                 )}
                             </Formik>

@@ -3,6 +3,7 @@ import { HttpService } from '../services/http-service'
 import PaddedContainerSegment from '../components/PaddedContainerSegment/PaddedContainerSegment'
 import AddHappyHour from '../components/AddHappyHour/AddHappyHour'
 import HappyHourListingComp from '../components/HappyHourListingComp/HappyHourListingComp'
+import { withRouter } from 'react-router-dom'
 import '../pages/AdminRestaurants.css'
 
 class AdminRestaurantHappyHours extends React.Component {
@@ -20,6 +21,10 @@ class AdminRestaurantHappyHours extends React.Component {
 
     componentDidMount() {
         this.loadData()
+    }
+
+    mainAdminPage() {
+        this.props.history.push('/admin/restaurants')
     }
 
     loadData = () => {
@@ -70,10 +75,22 @@ class AdminRestaurantHappyHours extends React.Component {
                 <div className="ui stackable one column padded grid">
                     {this.buildHappyHours()}
                 </div>
-                <AddHappyHour></AddHappyHour>
+                <div className="row">
+                    <div className="col-lg-8"></div>
+                    <div className="col-lg-4">
+                        <button
+                            type="button"
+                            class="btn btn-secondary"
+                            onClick={this.mainAdminPage.bind(this)}
+                        >
+                            Main Admin Page
+                        </button>
+                        <AddHappyHour></AddHappyHour>
+                    </div>
+                </div>
             </div>
         )
     }
 }
 
-export default AdminRestaurantHappyHours
+export default withRouter(AdminRestaurantHappyHours)

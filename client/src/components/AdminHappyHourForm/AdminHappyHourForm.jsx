@@ -38,6 +38,11 @@ class AdminHappyHourForm extends React.Component {
         }
     }
 
+    goToHH(event) {
+        event.preventDefault()
+        this.props.history.goBack()
+    }
+
     happyHourItems() {
         if (!this.props.happyHour) {
             return []
@@ -85,10 +90,14 @@ class AdminHappyHourForm extends React.Component {
                 <div className="container">
                     <p className="admin-restaurants-title">
                         Happy Hour Detail<br></br>
-                        {this.restau}
                     </p>
                     <div className="row">
-                        <div className="col-lg-12">
+                        <div
+                            className="col-lg-12"
+                            style={{
+                                backgroundColor: '#F3F3F3',
+                            }}
+                        >
                             <Formik
                                 initialValues={this.initialValues(
                                     this.props.happyHour
@@ -144,15 +153,28 @@ class AdminHappyHourForm extends React.Component {
                                             />
                                         </div>
 
-                                        <button
-                                            type="submit"
-                                            className="btn btn-primary btn-block"
-                                            disabled={isSubmitting}
-                                        >
-                                            {isSubmitting
-                                                ? 'Please wait...'
-                                                : 'Submit'}
-                                        </button>
+                                        <div className="row">
+                                            <div className="col-12">
+                                                <button
+                                                    className="btn btn-secondary btn-lg"
+                                                    onClick={this.goToHH.bind(
+                                                        this
+                                                    )}
+                                                >
+                                                    Cancel
+                                                </button>
+
+                                                <button
+                                                    type="submit"
+                                                    className="btn btn-primary btn-lg"
+                                                    disabled={isSubmitting}
+                                                >
+                                                    {isSubmitting
+                                                        ? 'Please wait...'
+                                                        : 'Submit'}
+                                                </button>
+                                            </div>
+                                        </div>
                                     </Form>
                                 )}
                             </Formik>
