@@ -17,6 +17,8 @@ class AdminItemListing extends React.Component {
 
         this.restaurantId = restaurantId
 
+        // this.happyHourId = this.props.happyHourId
+
         this.state = {
             happyHourItems: props.items,
         }
@@ -74,6 +76,7 @@ class AdminItemListing extends React.Component {
                         admin={true}
                         onDelete={this.loadHappyHour.bind(this)}
                         adjItem={this.loadHappyHour.bind(this)}
+                        happyHourId={this.props.happyHourId}
                     />
                 ))}
             </>

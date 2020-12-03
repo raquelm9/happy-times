@@ -332,7 +332,7 @@ function Search({ panTo }) {
                     backgroundColor: '#121212',
                 }}
             >
-                <ul class="nav justify-content-end">
+                <ul className="nav justify-content-end">
                     <li className="nav-item">
                         <i className="nav-link location arrow icon restaurant-listing">
                             <Locate panTo={panTo} />

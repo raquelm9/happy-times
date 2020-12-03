@@ -40,7 +40,7 @@ class RestaurantsListing extends React.Component {
                         backgroundColor: '#121212',
                     }}
                 >
-                    <ul class="nav justify-content-end">
+                    <ul className="nav justify-content-end">
                         <li className="nav-item">
                             <i
                                 className="map icon restaurant-listing"

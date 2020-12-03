@@ -61,6 +61,7 @@ class HappyHourItem extends React.Component {
 
     deleteItem(event) {
         //prevents the page to reroute to rest detail
+
         event.stopPropagation()
 
         const restaurantId = this.restaurantId

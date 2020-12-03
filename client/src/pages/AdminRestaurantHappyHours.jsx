@@ -80,7 +80,7 @@ class AdminRestaurantHappyHours extends React.Component {
                     <div className="col-lg-4">
                         <button
                             type="button"
-                            class="btn btn-secondary"
+                            className="btn btn-secondary"
                             onClick={this.mainAdminPage.bind(this)}
                         >
                             Main Admin Page

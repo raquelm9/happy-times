@@ -47,7 +47,7 @@ class RestaurantDetail extends React.Component {
                             backgroundColor: '#121212',
                         }}
                     >
-                        <ul class="nav justify-content-end">
+                        <ul className="nav justify-content-end">
                             <li
                                 className="nav-item"
                                 style={{

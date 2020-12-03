@@ -44,8 +44,6 @@ class AddItemForm extends React.Component {
     updateOrCreateItem(restaurantId, happyHourId, item) {
         const { itemId } = this.state
 
-        console.log(itemId)
-
         const service = new HttpService()
 
         if (itemId) {
