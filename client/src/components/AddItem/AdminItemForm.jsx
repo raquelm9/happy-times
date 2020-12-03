@@ -41,10 +41,13 @@ class AddItemForm extends React.Component {
         }
     }
 
+    goToHH(event) {
+        event.preventDefault()
+        this.props.history.goBack()
+    }
+
     updateOrCreateItem(restaurantId, happyHourId, item) {
         const { itemId } = this.state
-
-        console.log(itemId)
 
         const service = new HttpService()
 
@@ -193,15 +196,26 @@ class AddItemForm extends React.Component {
                                         />
                                     </div>
 
-                                    <button
-                                        type="submit"
-                                        className="btn btn-primary btn-block"
-                                        disabled={isSubmitting}
-                                    >
-                                        {isSubmitting
-                                            ? 'Please wait...'
-                                            : 'Submit'}
-                                    </button>
+                                    <div className="row">
+                                        <div className="col-12">
+                                            <button
+                                                className="btn btn-secondary btn-lg"
+                                                onClick={this.goToHH.bind(this)}
+                                            >
+                                                Cancel
+                                            </button>
+
+                                            <button
+                                                type="submit"
+                                                className="btn btn-primary btn-lg"
+                                                disabled={isSubmitting}
+                                            >
+                                                {isSubmitting
+                                                    ? 'Please wait...'
+                                                    : 'Submit'}
+                                            </button>
+                                        </div>
+                                    </div>
                                 </Form>
                             )}
                         </Formik>

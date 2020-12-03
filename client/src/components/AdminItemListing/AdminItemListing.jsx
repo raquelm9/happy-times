@@ -4,6 +4,8 @@ import HappyHourItem from '../../components/HappyHourMenu/HappyHourItem'
 import { HttpService } from '../../services/http-service'
 import { withRouter } from 'react-router-dom'
 import AddItem from '../AddItem/AddItem'
+import '../../pages/AdminRestaurants.css'
+import './AdminItemListing.css'
 
 class AdminItemListing extends React.Component {
     constructor(props) {
@@ -64,7 +66,7 @@ class AdminItemListing extends React.Component {
     renderItemsWithCategory(categoryName, items) {
         return (
             <>
-                <h4>{categoryName}</h4>
+                <h4 className="title-category">{categoryName}</h4>
                 {items.map((item) => (
                     <HappyHourItem
                         item={item}
@@ -72,6 +74,7 @@ class AdminItemListing extends React.Component {
                         admin={true}
                         onDelete={this.loadHappyHour.bind(this)}
                         adjItem={this.loadHappyHour.bind(this)}
+                        happyHourId={this.props.happyHourId}
                     />
                 ))}
             </>
@@ -81,6 +84,11 @@ class AdminItemListing extends React.Component {
     render() {
         return (
             <>
+                <br></br>
+                <hr></hr>
+                <p className="admin-restaurants-title">
+                    Menu Items<br></br>
+                </p>
                 {this.renderItems()}
                 <AddItem
                     onAdded={this.loadHappyHour.bind(this)}

@@ -5,6 +5,7 @@ import { HttpService } from '../../services/http-service'
 import { base64Encode } from '../../helpers/images'
 import { withRouter } from 'react-router-dom'
 import './AdminRestaurantForm.css'
+import '../../pages/AdminRestaurants.css'
 
 class AddRestaurantForm extends React.Component {
     initialValues(restaurant) {
@@ -54,6 +55,10 @@ class AddRestaurantForm extends React.Component {
         }
     }
 
+    goToAdminList() {
+        this.props.history.push('/admin/restaurants')
+    }
+
     updateOrCreateRestaurant(id, restaurant) {
         const service = new HttpService()
 
@@ -98,250 +103,278 @@ class AddRestaurantForm extends React.Component {
 
     render() {
         return (
-            <div className="container">
-                <div className="row mb-5">
-                    <div className="col-lg-12 text-center">
-                        <h1 className="mt-5">Restaurant Detail Information</h1>
-                    </div>
-                </div>
-                <div className="row">
-                    <div className="col-lg-12">
-                        <Formik
-                            initialValues={this.initialValues(
-                                this.props.restaurant
-                            )}
-                            validationSchema={AddRestaurantValidationSchema}
-                            onSubmit={this.submitForm.bind(this)}
+            <>
+                <p className="admin-access">Admin Access</p>
+                <div className="container">
+                    <p className="admin-restaurants-title">
+                        Restaurant Detail Information
+                    </p>
+
+                    <div className="row">
+                        <div
+                            className="col-lg-12"
+                            style={{
+                                backgroundColor: '#F3F3F3',
+                            }}
                         >
-                            {({
-                                touched,
-                                errors,
-                                isSubmitting,
-                                setFieldValue,
-                            }) => (
-                                <Form>
-                                    <div className="form-group">
-                                        <label htmlFor="name">Name</label>
-                                        <Field
-                                            name="name"
-                                            placeholder="Enter name"
-                                            className={`form-control ${
-                                                touched.name && errors.name
-                                                    ? 'is-invalid'
-                                                    : ''
-                                            }`}
-                                        />
-                                        <ErrorMessage
-                                            component="div"
-                                            name="name"
-                                            className="invalid-feedback"
-                                        />
-                                    </div>
+                            <Formik
+                                initialValues={this.initialValues(
+                                    this.props.restaurant
+                                )}
+                                validationSchema={AddRestaurantValidationSchema}
+                                onSubmit={this.submitForm.bind(this)}
+                            >
+                                {({
+                                    touched,
+                                    errors,
+                                    isSubmitting,
+                                    setFieldValue,
+                                }) => (
+                                    <Form>
+                                        <div className="form-group">
+                                            <label htmlFor="name">Name</label>
+                                            <Field
+                                                name="name"
+                                                placeholder="Enter name"
+                                                className={`form-control ${
+                                                    touched.name && errors.name
+                                                        ? 'is-invalid'
+                                                        : ''
+                                                }`}
+                                            />
+                                            <ErrorMessage
+                                                component="div"
+                                                name="name"
+                                                className="invalid-feedback"
+                                            />
+                                        </div>
 
-                                    <div className="form-group">
-                                        <label htmlFor="website">Website</label>
-                                        <Field
-                                            name="website"
-                                            placeholder="Enter website"
-                                            className={`form-control ${
-                                                touched.website &&
-                                                errors.website
-                                                    ? 'is-invalid'
-                                                    : ''
-                                            }`}
-                                        />
-                                        <ErrorMessage
-                                            component="div"
-                                            name="website"
-                                            className="invalid-feedback"
-                                        />
-                                    </div>
+                                        <div className="form-group">
+                                            <label htmlFor="website">
+                                                Website
+                                            </label>
+                                            <Field
+                                                name="website"
+                                                placeholder="Enter website"
+                                                className={`form-control ${
+                                                    touched.website &&
+                                                    errors.website
+                                                        ? 'is-invalid'
+                                                        : ''
+                                                }`}
+                                            />
+                                            <ErrorMessage
+                                                component="div"
+                                                name="website"
+                                                className="invalid-feedback"
+                                            />
+                                        </div>
 
-                                    <div className="form-group">
-                                        <label htmlFor="description">
-                                            Description
-                                        </label>
-                                        <Field
-                                            name="description"
-                                            placeholder="Enter description"
-                                            className={`form-control ${
-                                                touched.description &&
-                                                errors.description
-                                                    ? 'is-invalid'
-                                                    : ''
-                                            }`}
-                                        />
-                                        <ErrorMessage
-                                            component="div"
-                                            name="description"
-                                            className="invalid-feedback"
-                                        />
-                                    </div>
+                                        <div className="form-group">
+                                            <label htmlFor="description">
+                                                Description
+                                            </label>
+                                            <Field
+                                                name="description"
+                                                placeholder="Enter description"
+                                                className={`form-control ${
+                                                    touched.description &&
+                                                    errors.description
+                                                        ? 'is-invalid'
+                                                        : ''
+                                                }`}
+                                            />
+                                            <ErrorMessage
+                                                component="div"
+                                                name="description"
+                                                className="invalid-feedback"
+                                            />
+                                        </div>
 
-                                    <div className="form-group">
-                                        <label htmlFor="image">Image</label>
-                                        <input
-                                            type="file"
-                                            name="image"
-                                            onChange={(event) => {
-                                                setFieldValue(
-                                                    'image',
-                                                    event.currentTarget.files[0]
-                                                )
-                                            }}
-                                        />
-                                        <ErrorMessage
-                                            component="div"
-                                            name="image"
-                                            className="invalid-feedback"
-                                        />
-                                    </div>
+                                        <div className="form-group">
+                                            <label htmlFor="image">Image</label>
+                                            <br></br>
+                                            <input
+                                                type="file"
+                                                name="image"
+                                                onChange={(event) => {
+                                                    setFieldValue(
+                                                        'image',
+                                                        event.currentTarget
+                                                            .files[0]
+                                                    )
+                                                }}
+                                            />
+                                            <ErrorMessage
+                                                component="div"
+                                                name="image"
+                                                className="invalid-feedback"
+                                            />
+                                        </div>
 
-                                    {this.props.restaurant ? (
-                                        <img
-                                            className="adminImage"
-                                            src={this.props.restaurant.image}
-                                        />
-                                    ) : null}
+                                        {this.props.restaurant ? (
+                                            <img
+                                                className="adminImage"
+                                                src={
+                                                    this.props.restaurant.image
+                                                }
+                                            />
+                                        ) : null}
 
-                                    <br></br>
-                                    <h2>Address:</h2>
-                                    <br></br>
+                                        <br></br>
+                                        <br></br>
+                                        <h3>Address:</h3>
+                                        <br></br>
 
-                                    <div className="row">
-                                        <div className="col-lg-4">
-                                            <div className="form-group">
-                                                <label htmlFor="addressUnit">
-                                                    Unit
-                                                </label>
-                                                <Field
-                                                    name="addressUnit"
-                                                    placeholder="Enter Unit"
-                                                    className={`form-control ${
-                                                        touched.addressUnit &&
-                                                        errors.addressUnit
-                                                            ? 'is-invalid'
-                                                            : ''
-                                                    }`}
-                                                />
-                                                <ErrorMessage
-                                                    component="div"
-                                                    name="addressUnit"
-                                                    className="invalid-feedback"
-                                                />
+                                        <div className="row">
+                                            <div className="col-lg-4">
+                                                <div className="form-group">
+                                                    <label htmlFor="addressUnit">
+                                                        Unit
+                                                    </label>
+                                                    <Field
+                                                        name="addressUnit"
+                                                        placeholder="Enter Unit"
+                                                        className={`form-control ${
+                                                            touched.addressUnit &&
+                                                            errors.addressUnit
+                                                                ? 'is-invalid'
+                                                                : ''
+                                                        }`}
+                                                    />
+                                                    <ErrorMessage
+                                                        component="div"
+                                                        name="addressUnit"
+                                                        className="invalid-feedback"
+                                                    />
+                                                </div>
+                                            </div>
+
+                                            <div className="col-lg-4">
+                                                <div className="form-group">
+                                                    <label htmlFor="addressStreet">
+                                                        Street
+                                                    </label>
+                                                    <Field
+                                                        name="addressStreet"
+                                                        placeholder="Enter Street"
+                                                        className={`form-control ${
+                                                            touched.addressStreet &&
+                                                            errors.addressStreet
+                                                                ? 'is-invalid'
+                                                                : ''
+                                                        }`}
+                                                    />
+                                                    <ErrorMessage
+                                                        component="div"
+                                                        name="addressStreet"
+                                                        className="invalid-feedback"
+                                                    />
+                                                </div>
+                                            </div>
+
+                                            <div className="col-lg-4">
+                                                <div className="form-group">
+                                                    <label htmlFor="addressPostalcode">
+                                                        Postal Code
+                                                    </label>
+                                                    <Field
+                                                        name="addressPostalcode"
+                                                        placeholder="Enter Postal Code"
+                                                        className={`form-control ${
+                                                            touched.addressPostalcode &&
+                                                            errors.addressPostalcode
+                                                                ? 'is-invalid'
+                                                                : ''
+                                                        }`}
+                                                    />
+                                                    <ErrorMessage
+                                                        component="div"
+                                                        name="addressPostalcode"
+                                                        className="invalid-feedback"
+                                                    />
+                                                </div>
                                             </div>
                                         </div>
 
-                                        <div className="col-lg-4">
-                                            <div className="form-group">
-                                                <label htmlFor="addressStreet">
-                                                    Street
-                                                </label>
-                                                <Field
-                                                    name="addressStreet"
-                                                    placeholder="Enter Street"
-                                                    className={`form-control ${
-                                                        touched.addressStreet &&
-                                                        errors.addressStreet
-                                                            ? 'is-invalid'
-                                                            : ''
-                                                    }`}
-                                                />
-                                                <ErrorMessage
-                                                    component="div"
-                                                    name="addressStreet"
-                                                    className="invalid-feedback"
-                                                />
+                                        <div className="row">
+                                            <div className="col-lg-6">
+                                                <div className="form-group">
+                                                    <label htmlFor="addressCity">
+                                                        City
+                                                    </label>
+                                                    <Field
+                                                        name="addressCity"
+                                                        placeholder="Enter City"
+                                                        className={`form-control ${
+                                                            touched.addressCity &&
+                                                            errors.addressCity
+                                                                ? 'is-invalid'
+                                                                : ''
+                                                        }`}
+                                                    />
+                                                    <ErrorMessage
+                                                        component="div"
+                                                        name="addressCity"
+                                                        className="invalid-feedback"
+                                                    />
+                                                </div>
+                                            </div>
+
+                                            <div className="col-lg-6">
+                                                <div className="form-group">
+                                                    <label htmlFor="addressProvince">
+                                                        Province
+                                                    </label>
+                                                    <Field
+                                                        name="addressProvince"
+                                                        placeholder="Enter Province"
+                                                        className={`form-control ${
+                                                            touched.addressProvince &&
+                                                            errors.addressProvince
+                                                                ? 'is-invalid'
+                                                                : ''
+                                                        }`}
+                                                    />
+                                                    <ErrorMessage
+                                                        component="div"
+                                                        name="addressProvince"
+                                                        className="invalid-feedback"
+                                                    />
+                                                </div>
                                             </div>
                                         </div>
 
-                                        <div className="col-lg-4">
-                                            <div className="form-group">
-                                                <label htmlFor="addressPostalcode">
-                                                    Postal Code
-                                                </label>
-                                                <Field
-                                                    name="addressPostalcode"
-                                                    placeholder="Enter Postal Code"
-                                                    className={`form-control ${
-                                                        touched.addressPostalcode &&
-                                                        errors.addressPostalcode
-                                                            ? 'is-invalid'
-                                                            : ''
-                                                    }`}
-                                                />
-                                                <ErrorMessage
-                                                    component="div"
-                                                    name="addressPostalcode"
-                                                    className="invalid-feedback"
-                                                />
+                                        <div className="row">
+                                            <div className="col-12">
+                                                <button
+                                                    type="submit"
+                                                    className="btn btn-secondary btn-lg"
+                                                    onClick={this.goToAdminList.bind(
+                                                        this
+                                                    )}
+                                                >
+                                                    Cancel
+                                                </button>
+
+                                                <button
+                                                    type="submit"
+                                                    className="btn btn-primary btn-lg"
+                                                    disabled={isSubmitting}
+                                                >
+                                                    {isSubmitting
+                                                        ? 'Please wait...'
+                                                        : 'Submit'}
+                                                </button>
                                             </div>
                                         </div>
-                                    </div>
-
-                                    <div className="row">
-                                        <div className="col-lg-6">
-                                            <div className="form-group">
-                                                <label htmlFor="addressCity">
-                                                    City
-                                                </label>
-                                                <Field
-                                                    name="addressCity"
-                                                    placeholder="Enter City"
-                                                    className={`form-control ${
-                                                        touched.addressCity &&
-                                                        errors.addressCity
-                                                            ? 'is-invalid'
-                                                            : ''
-                                                    }`}
-                                                />
-                                                <ErrorMessage
-                                                    component="div"
-                                                    name="addressCity"
-                                                    className="invalid-feedback"
-                                                />
-                                            </div>
-                                        </div>
-
-                                        <div className="col-lg-6">
-                                            <div className="form-group">
-                                                <label htmlFor="addressProvince">
-                                                    Province
-                                                </label>
-                                                <Field
-                                                    name="addressProvince"
-                                                    placeholder="Enter Province"
-                                                    className={`form-control ${
-                                                        touched.addressProvince &&
-                                                        errors.addressProvince
-                                                            ? 'is-invalid'
-                                                            : ''
-                                                    }`}
-                                                />
-                                                <ErrorMessage
-                                                    component="div"
-                                                    name="addressProvince"
-                                                    className="invalid-feedback"
-                                                />
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <button
-                                        type="submit"
-                                        className="btn btn-primary btn-block"
-                                        disabled={isSubmitting}
-                                    >
-                                        {isSubmitting
-                                            ? 'Please wait...'
-                                            : 'Submit'}
-                                    </button>
-                                </Form>
-                            )}
-                        </Formik>
+                                    </Form>
+                                )}
+                            </Formik>
+                        </div>
                     </div>
                 </div>
-            </div>
+            </>
         )
     }
 }

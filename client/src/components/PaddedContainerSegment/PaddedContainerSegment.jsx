@@ -1,5 +1,6 @@
 import React from 'react'
 import './PaddedContainerSegment.css'
+import WoodImage from '../../assets/wood.jpg'
 
 class PaddedContainerSegment extends React.Component {
     constructor(props) {
@@ -13,23 +14,31 @@ class PaddedContainerSegment extends React.Component {
         }
     }
 
-    showNewStyle() {
-        if (this.props.changeStyle) {
-            return 'ui raised very padded container segment changeStyle'
+    styleOfContainer() {
+        if (!this.props.itemContainer) {
+            return (
+                <>
+                    <div className="ui raised very padded container segment">
+                        {this.props.children}
+                    </div>
+                </>
+            )
+        } else {
+            return (
+                <>
+                    <div
+                        className="ui raised very padded container segment item-container"
+                        onClick={this.handleClick.bind(this)}
+                    >
+                        {this.props.children}
+                    </div>
+                </>
+            )
         }
-
-        return 'ui raised very padded container segment'
     }
 
     render() {
-        return (
-            <div
-                className={this.showNewStyle()}
-                onClick={this.handleClick.bind(this)}
-            >
-                {this.props.children}
-            </div>
-        )
+        return <>{this.styleOfContainer()}</>
     }
 }
 

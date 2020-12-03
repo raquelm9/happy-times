@@ -68,7 +68,7 @@ const rest1 = new Restaurant(
   "Cannibale Bar & Barbershop",
   "Eat, drink, and be groomed later",
   "https://www.cannibale.ca/",
-  "http://localhost:3001/uploads/2020-11-13T17:18:19.211Zfinals-0001.jpg",
+  "http://localhost:3001/uploads/2020-12-02T01:41:00.087Z.png",
   new Address(813, "1 AVE NE", "T2E 0C2", "Calgary", "AB")
 );
 rest1.registerHappyHour(
@@ -175,7 +175,7 @@ const rest2 = new Restaurant(
   "Anejo",
   "Añejo Mexican Restaurant",
   "https://anejo.ca/",
-  "http://localhost:3001/uploads/2020-11-13T18:13:09.094Ztequila.jpg",
+  "http://localhost:3001/uploads/2020-12-02T01:49:40.237Z.png",
   new Address(2116, "4 St SE", "T2S 1W7", "Calgary", "AB")
 );
 rest2.registerHappyHour(
@@ -224,7 +224,7 @@ const rest3 = new Restaurant(
   "Double Zero",
   "It'll be amore at first sight",
   "https://www.doublezeropizza.ca/",
-  "http://localhost:3001/uploads/2020-11-13T18:14:18.758ZDOUBLEZERO-7539.jpg",
+  "http://localhost:3001/uploads/2020-12-02T01:46:36.926Z.png",
   new Address(1133, "6455 Macleod Trail SW", "T2H 0K8", "Calgary", "AB")
 );
 rest3.registerHappyHour(

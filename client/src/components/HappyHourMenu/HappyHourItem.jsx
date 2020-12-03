@@ -61,6 +61,7 @@ class HappyHourItem extends React.Component {
 
     deleteItem(event) {
         //prevents the page to reroute to rest detail
+
         event.stopPropagation()
 
         const restaurantId = this.restaurantId
@@ -78,6 +79,7 @@ class HappyHourItem extends React.Component {
             return (
                 <>
                     <PaddedContainerSegment
+                        itemContainer={true}
                         onClick={this.openUpdateItemModal.bind(this)}
                     >
                         <div className="menu-item">{this.renderItem()}</div>

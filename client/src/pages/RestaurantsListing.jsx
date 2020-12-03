@@ -1,10 +1,8 @@
 import React from 'react'
 import { HttpService } from '../services/http-service'
 import RestListingComp from '../components/RestListingComp/RestListingComp'
-import PaddedContainerSegment from '../components/PaddedContainerSegment/PaddedContainerSegment'
-import AddRestaurant from '../components/AddRestaurant/AddRestaurant'
+import { withRouter } from 'react-router-dom'
 import './RestaurantListing.css'
-import restaurantListingImage from '../assets/lights.jpg'
 
 class RestaurantsListing extends React.Component {
     constructor(props) {
@@ -26,44 +24,51 @@ class RestaurantsListing extends React.Component {
         )
     }
 
-    buildRestaurants = () => {
-        const list = this.state.restaurants.map((restaurant) => (
-            <div className="row" key={restaurant.id}>
-                <div className="column">
-                    <PaddedContainerSegment changeStyle={true}>
-                        <RestListingComp
-                            restaurant={restaurant}
-                            onDelete={this.loadData.bind(this)}
-                            canDelete={this.props.canDelete}
-                        />
-                    </PaddedContainerSegment>
-                </div>
-            </div>
-        ))
-
-        return list
+    goToMap() {
+        this.props.history.push('/map/')
     }
 
-    showAddRestaurant() {
-        if (this.props.canDelete) {
-            return <AddRestaurant></AddRestaurant>
-        }
+    buildRestaurantsCard = (restaurant) => {
+        return <RestListingComp key={restaurant.id} restaurant={restaurant} />
     }
 
     render() {
         return (
-            <div
-                className="restaurantListingImage"
-                style={{ backgroundImage: `url(${restaurantListingImage})` }}
-            >
-                <p className="restaurantListingTitle">Restaurant Listing</p>
-                <div className="ui stackable one column padded grid">
-                    {this.buildRestaurants()}
+            <>
+                <div
+                    style={{
+                        backgroundColor: '#121212',
+                    }}
+                >
+                    <ul className="nav justify-content-end">
+                        <li className="nav-item">
+                            <i
+                                className="map icon restaurant-listing"
+                                onClick={this.goToMap.bind(this)}
+                            ></i>
+                        </li>
+                    </ul>
                 </div>
-                {this.showAddRestaurant()}
-            </div>
+                <div
+                    className="row"
+                    style={{
+                        backgroundColor: '#121212',
+                    }}
+                >
+                    <div className="col-12">
+                        <h1 className="restaurants-title">Restaurants</h1>
+                        <div className="row">
+                            <div className="col-12">
+                                {this.state.restaurants.map(
+                                    this.buildRestaurantsCard
+                                )}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </>
         )
     }
 }
 
-export default RestaurantsListing
+export default withRouter(RestaurantsListing)

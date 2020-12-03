@@ -1,7 +1,59 @@
-.restaurant-card:hover {
+.project-card-blueprint:hover {
     cursor: pointer;
 }
 
 .restListingCompName {
     font-size: 20px;
+}
+
+.project-card-blueprint {
+    box-shadow: -11.31px 11.31px 25px 0px rgba(138, 131, 124, 0.23);
+    margin-bottom: 50px;
+    border-radius: 100px;
+}
+
+div.project-name-description {
+    background-color: #1f1b24;
+    color: white;
+}
+
+.project-name-description {
+    background-color: white;
+    border-radius: 5px;
+    height: 350px;
+    width: 100%;
+    padding: 0;
+}
+
+p.projects-title {
+    text-align: center;
+    margin: 50px 0;
+    font-size: 17px;
+    font-weight: 700;
+}
+
+p.project-happy-hour {
+    font-size: 14px;
+    padding: 0 10px;
+    text-align: center;
+}
+
+.project-description {
+    font-size: 14px;
+    padding: 0 10px;
+    text-align: center;
+}
+
+p.project-category {
+    padding: 40px 10px;
+    text-align: center;
+}
+
+.project-image {
+    background-size: cover;
+    background-position: center;
+    height: 350px;
+    width: 100%;
+    padding: 0;
+    border-radius: 5px;
 }

@@ -237,7 +237,6 @@ export default function App() {
     return (
         <div>
             <Search panTo={panTo} />
-            <Locate panTo={panTo} />
 
             <GoogleMap
                 mapContainerStyle={mapContainerStyle}
@@ -293,8 +292,8 @@ export default function App() {
 //Locate Function
 function Locate({ panTo }) {
     return (
-        <button
-            className="locate"
+        <i
+            className="location arrow icon"
             onClick={() => {
                 navigator.geolocation.getCurrentPosition(
                     (position) => {
@@ -307,9 +306,7 @@ function Locate({ panTo }) {
                     options
                 )
             }}
-        >
-            <img src={compass} alt="Locate me" />
-        </button>
+        ></i>
     )
 }
 
@@ -329,38 +326,59 @@ function Search({ panTo }) {
     })
 
     return (
-        <div className="search">
-            <Combobox
-                onSelect={async (address) => {
-                    setValue(address, false)
-                    clearSuggestions()
-                    try {
-                        const results = await getGeocode({ address })
-                        const { lat, lng } = await getLatLng(results[0])
-                        panTo({ lat, lng })
-                    } catch (error) {
-                        console.log('error')
-                    }
-                    console.log(address)
+        <>
+            <div
+                style={{
+                    backgroundColor: '#121212',
                 }}
             >
-                <ComboboxInput
-                    value={value}
-                    onChange={(e) => {
-                        setValue(e.target.value)
+                <ul className="nav justify-content-end">
+                    <li className="nav-item">
+                        <i className="nav-link location arrow icon restaurant-listing">
+                            <Locate panTo={panTo} />
+                        </i>
+                    </li>
+                    <li className="nav-item">
+                        <i className="nav-link list alternate icon restaurant-listing"></i>
+                    </li>
+                </ul>
+            </div>
+            <div className="search">
+                <Combobox
+                    onSelect={async (address) => {
+                        setValue(address, false)
+                        clearSuggestions()
+                        try {
+                            const results = await getGeocode({ address })
+                            const { lat, lng } = await getLatLng(results[0])
+                            panTo({ lat, lng })
+                        } catch (error) {
+                            console.log('error')
+                        }
+                        console.log(address)
                     }}
-                    disable={!ready}
-                    placeholder="Look for more Happy Times"
-                />
-                <ComboboxPopover>
-                    <ComboboxList>
-                        {status === 'OK' &&
-                            data.map(({ id, description }) => (
-                                <ComboboxOption key={id} value={description} />
-                            ))}
-                    </ComboboxList>
-                </ComboboxPopover>
-            </Combobox>
-        </div>
+                >
+                    <ComboboxInput
+                        value={value}
+                        onChange={(e) => {
+                            setValue(e.target.value)
+                        }}
+                        disable={!ready}
+                        placeholder="Look for more Happy Times"
+                    />
+                    <ComboboxPopover>
+                        <ComboboxList>
+                            {status === 'OK' &&
+                                data.map(({ id, description }) => (
+                                    <ComboboxOption
+                                        key={id}
+                                        value={description}
+                                    />
+                                ))}
+                        </ComboboxList>
+                    </ComboboxPopover>
+                </Combobox>
+            </div>
+        </>
     )
 }
