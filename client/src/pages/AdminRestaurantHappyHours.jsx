@@ -77,13 +77,13 @@ class AdminRestaurantHappyHours extends React.Component {
                 </div>
                 <div className="row">
                     <div className="col-lg-8"></div>
-                    <div className="col-lg-4">
+                    <div className="col-lg-4 buttom-admin-happy-hour">
                         <button
                             type="button"
-                            className="btn btn-secondary"
+                            className="btn btn-secondary back-to-restaurants"
                             onClick={this.mainAdminPage.bind(this)}
                         >
-                            Main Admin Page
+                            Restaurants
                         </button>
                         <AddHappyHour></AddHappyHour>
                     </div>

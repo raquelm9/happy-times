@@ -7,3 +7,11 @@ p.admin-restaurants-title {
 p.admin-access {
     font-size: 20px;
 }
+
+button.back-to-restaurants {
+    margin-right: 30px;
+}
+
+div.buttom-admin-happy-hour {
+    margin-top: 30px;
+}
