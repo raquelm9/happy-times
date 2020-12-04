@@ -5,7 +5,7 @@ import LandingPage from '../components/LandingPage/LandingPage'
 const MainPage = (props) => {
     setTimeout(() => {
         props.history.push('./restaurants')
-    }, 3000)
+    }, 5000)
 
     return (
         <>
