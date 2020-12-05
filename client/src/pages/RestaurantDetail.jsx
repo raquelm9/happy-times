@@ -5,6 +5,7 @@ import { HttpService } from '../services/http-service'
 import { withRouter } from 'react-router-dom'
 import './RestaurantDetail.css'
 import './RestaurantListing.css'
+import Diamond from '../assets/wood.jpg'
 
 class RestaurantDetail extends React.Component {
     constructor(props) {

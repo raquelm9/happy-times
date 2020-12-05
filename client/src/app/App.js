@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Route, Switch, Link } from 'react-router-dom'
 import 'bootstrap/dist/css/bootstrap.min.css'
 
 //Pages
-import MainPage from '../pages/MainPage'
+import MainPage from '../pages/MainPage/MainPage'
 import RestaurantDetail from '../pages/RestaurantDetail'
 import RestaurantsListing from '../pages/RestaurantsListing'
 import Map from '../pages/Map'
