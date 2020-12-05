@@ -18,6 +18,17 @@ export class Restaurant {
     this.happyHours = [];
   }
 
+  static from(document) {
+    return new Restaurant(
+      document.id,
+      document.name,
+      document.description,
+      document.website,
+      document.image,
+      Address.from(document.address)
+    );
+  }
+
   registerHappyHour(happyHour) {
     this.happyHours.push(happyHour);
   }

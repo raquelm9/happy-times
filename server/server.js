@@ -1,11 +1,11 @@
-import { restaurants } from "./restaurants/restaurants.js";
+import { restaurants } from "./src/restaurants/restaurants.js";
 
-import { Restaurant } from "./restaurants/restaurants.js";
-import { Address } from "./restaurants/address.js";
-import { HappyHour } from "./restaurants/happy_hours.js";
-import { MenuItem } from "./restaurants/menu_item.js";
-import { Menu } from "./restaurants/menu.js";
-import { OpenDays } from "./restaurants/open_days.js";
+import { Restaurant } from "./src/restaurants/restaurants.js";
+import { Address } from "./src/restaurants/address.js";
+import { HappyHour } from "./src/restaurants/happy_hours.js";
+import { MenuItem } from "./src/restaurants/menu_item.js";
+import { Menu } from "./src/restaurants/menu.js";
+import { OpenDays } from "./src/restaurants/open_days.js";
 
 import { saveBase64Image } from "./utils/images.js";
 import uniqueId from "lodash/uniqueId.js";
@@ -14,16 +14,27 @@ import express from "express";
 import cors from "cors";
 import bodyParser from "body-parser";
 
+import { bootstrapDB } from "./bootstrap/bootstrap_db.js";
+import {
+  createRestaurant,
+  findAllRestaurants,
+} from "./src/restaurants/restaurant_schema.js";
+
+const SERVER_PORT = 3001;
+const APP_NAME = "happy-times";
+
 var app = express();
 
 app.use(cors());
-
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use("/uploads", express.static("uploads"));
 
 app.get("/restaurants", function (req, res) {
-  res.send(restaurants);
+  findAllRestaurants().then((rests) => {
+    // res.send(restaurants);
+    res.status(200).send(rests);
+  });
 });
 
 app.get("/restaurant/:restaurantId", function (req, res) {
@@ -182,7 +193,7 @@ app.post("/restaurants", function (req, res) {
   );
 
   const newRest = new Restaurant(
-    uniqueId("restaurant-"),
+    undefined,
     reqBodyRest.name,
     reqBodyRest.description,
     reqBodyRest.website,
@@ -190,8 +201,10 @@ app.post("/restaurants", function (req, res) {
     newAddress
   );
 
-  restaurants.push(newRest);
-  res.status(200).send(newRest);
+  createRestaurant(newRest).then((savedRestaurant) => {
+    restaurants.push(savedRestaurant);
+    res.status(200).send(savedRestaurant);
+  });
 });
 
 // Happy Time: open days, start time, end time, menu (name, description, price, category)
@@ -383,6 +396,9 @@ app.put(
   }
 );
 
-app.listen(3001, function () {
-  console.log("First API running on port 3001!");
+app.listen(SERVER_PORT, function () {
+  bootstrapDB(APP_NAME);
+  console.log(`--- Connected to databse ${APP_NAME} ---`);
+
+  console.log(` --- Server running on port ${SERVER_PORT}! --`);
 });

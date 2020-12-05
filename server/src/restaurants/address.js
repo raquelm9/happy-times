@@ -7,6 +7,16 @@ export class Address {
     this.setProvince(province);
   }
 
+  static from(doc) {
+    return new Address(
+      doc.unit,
+      doc.street,
+      doc.postalCode,
+      doc.city,
+      doc.province
+    );
+  }
+
   setUnit(unit) {
     if (!unit) {
       throw "Address requires unit";
