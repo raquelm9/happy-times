@@ -1,5 +1,3 @@
-import { restaurants } from "./src/restaurants/restaurants.js";
-
 import { Restaurant } from "./src/restaurants/restaurants.js";
 import { Address } from "./src/restaurants/address.js";
 import { HappyHour } from "./src/restaurants/happy_hours.js";
@@ -7,7 +5,6 @@ import { MenuItem } from "./src/restaurants/menu_item.js";
 import { Menu } from "./src/restaurants/menu.js";
 
 import { saveBase64Image } from "./utils/images.js";
-import uniqueId from "lodash/uniqueId.js";
 
 import express from "express";
 import cors from "cors";
@@ -16,9 +13,11 @@ import bodyParser from "body-parser";
 import { bootstrapDB } from "./bootstrap/bootstrap_db.js";
 import {
   createRestaurant,
+  deleteRestaurant,
   findAllRestaurants,
   findRestaurantById,
   updateRestaurant,
+  deleteItem,
 } from "./src/restaurants/restaurant_schema.js";
 
 const SERVER_PORT = 3001;
@@ -33,7 +32,6 @@ app.use("/uploads", express.static("uploads"));
 
 app.get("/restaurants", function (req, res) {
   findAllRestaurants().then((rests) => {
-    // res.send(restaurants);
     res.status(200).send(rests);
   });
 });
@@ -55,21 +53,19 @@ app.get(
     var restaurantId = req.params.restaurantId;
     var happyHourId = req.params.happyHourId;
 
-    const rest = restaurants.find(
-      (restaurant) => restaurantId === restaurant.id
-    );
+    findRestaurantById(restaurantId).then((restaurant) => {
+      if (restaurant) {
+        const happyHour = restaurant.happyHourForId(happyHourId);
 
-    const happyHour = rest.happyHours.find(
-      (happyHour) => happyHourId === happyHour.id
-    );
-
-    if (happyHour) {
-      res.status(200).send(happyHour);
-    } else if (!rest) {
-      res.status(404).send("Restaurant Id not found");
-    } else if (!happyHour) {
-      res.status(404).send("Happy Hour Id not found");
-    }
+        if (happyHour) {
+          res.status(200).send(happyHour);
+        } else if (!restaurant) {
+          res.status(404).send("Restaurant Id not found");
+        } else if (!happyHour) {
+          res.status(404).send("Happy Hour Id not found");
+        }
+      }
+    });
   }
 );
 
@@ -80,45 +76,34 @@ app.get(
     var happyHourId = req.params.happyHourId;
     var itemId = req.params.itemId;
 
-    const rest = restaurants.find(
-      (restaurant) => restaurantId === restaurant.id
-    );
+    findRestaurantById(restaurantId).then((restaurant) => {
+      if (restaurant) {
+        const happyHour = restaurant.happyHourForId(happyHourId);
 
-    const happyHour = rest.happyHours.find(
-      (happyHour) => happyHourId === happyHour.id
-    );
+        if (happyHour) {
+          const item = happyHour.menu.findMenuItemForId(itemId);
 
-    const index1 = rest.happyHours.indexOf(happyHour);
-
-    const item = rest.happyHours[index1].menu.items.find(
-      (item) => itemId === item.id
-    );
-
-    if (item) {
-      res.status(200).send(item);
-    } else if (!rest) {
-      res.status(404).send("Restaurant Id not found");
-    } else if (!happyHour) {
-      res.status(404).send("Happy Hour Id not found");
-    } else if (!item) {
-      res.status(404).send("Item Id not found");
-    }
+          if (item) {
+            res.status(200).send(item);
+          } else if (!item) {
+            res.status(404).send("Item not found");
+          }
+        } else if (!happyHour) {
+          res.status(404).send("Happy Hour Id not found");
+        }
+      } else if (!restaurant) {
+        res.status(404).send("Restaurant Id not found");
+      }
+    });
   }
 );
 
 app.delete("/restaurants/:restaurantId", function (req, res) {
   var restaurantId = req.params.restaurantId;
 
-  const rest = restaurants.find((restaurant) => restaurantId === restaurant.id);
-
-  const index = restaurants.indexOf(rest);
-
-  if (index > -1) {
-    restaurants.splice(index, 1);
-    res.status(200).send(restaurants);
-  } else {
-    res.status(404).send("Restaurant Id not found");
-  }
+  deleteRestaurant(restaurantId)
+    .then(() => findAllRestaurants())
+    .then((allRestaurants) => res.status(200).send(allRestaurants));
 });
 
 app.delete(
@@ -127,22 +112,9 @@ app.delete(
     var restaurantId = req.params.restaurantId;
     var happyHourId = req.params.happyhourId;
 
-    const rest = restaurants.find(
-      (restaurant) => restaurantId === restaurant.id
-    );
-
-    const hh = rest.happyHours.find(
-      (happyHour) => happyHourId === happyHour.id
-    );
-
-    const index = rest.happyHours.indexOf(hh);
-
-    if (index > -1) {
-      rest.happyHours.splice(index, 1);
-      res.status(200).send(restaurants);
-    } else {
-      res.status(404).send("Restaurant Id not found");
-    }
+    deleteHappyHour(restaurantId, happyHourId)
+      .then(() => findAllRestaurants())
+      .then((allRestaurants) => res.status(200).send(allRestaurants));
   }
 );
 
@@ -150,31 +122,11 @@ app.delete(
   "/restaurants/:restaurantId/happy-hours/:happyhourId/:itemId",
   function (req, res) {
     var restaurantId = req.params.restaurantId;
-    var happyHourId = req.params.happyhourId;
     var happyHourItemId = req.params.itemId;
 
-    const rest = restaurants.find(
-      (restaurant) => restaurantId === restaurant.id
-    );
-
-    const happyHr = rest.happyHours.find(
-      (happyHour) => happyHourId === happyHour.id
-    );
-
-    const index1 = rest.happyHours.indexOf(happyHr);
-
-    const happyHourItem = rest.happyHours[index1].menu.items.find(
-      (item) => happyHourItemId === item.id
-    );
-
-    var index2 = rest.happyHours[index1].menu.items.indexOf(happyHourItem);
-
-    if (index2 > -1) {
-      rest.happyHours[index1].menu.items.splice(index2, 1);
-      res.status(200).send(restaurants);
-    } else {
-      res.status(404).send("Restaurant Id not found");
-    }
+    deleteItem(restaurantId, happyHourItemId)
+      .then(() => findAllRestaurants())
+      .then((allRestaurants) => res.status(200).send(allRestaurants));
   }
 );
 
@@ -223,7 +175,8 @@ app.post("/restaurants/:restaurantId/happy-hours", function (req, res) {
     if (restaurant) {
       restaurant.registerHappyHour(newHappyHour);
       return updateRestaurant(restaurant).then((updatedRestaurant) => {
-        res.status(200).send(updatedRestaurant.happyHours[0]);
+        var index = updatedRestaurant.happyHours.length - 1;
+        res.status(200).send(updatedRestaurant.happyHours[index]);
       });
     } else {
       res.status(404).send("Restaurant Id not found");
@@ -236,26 +189,33 @@ app.post(
   function (req, res) {
     var restaurantId = req.params.restaurantId;
     var happyHourId = req.params.happyHourId;
-
-    const rest = restaurants.find(
-      (restaurant) => restaurantId === restaurant.id
-    );
-    const happyHr = rest.happyHours.find(
-      (happyHour) => happyHourId === happyHour.id
-    );
-    const index1 = rest.happyHours.indexOf(happyHr);
+    var reqBodyItem = req.body;
 
     const newItem = new MenuItem(
-      uniqueId("item-"),
-      req.body.name,
-      req.body.description,
-      req.body.price,
-      req.body.category
+      undefined,
+      reqBodyItem.name,
+      reqBodyItem.description,
+      reqBodyItem.price,
+      reqBodyItem.category
     );
 
-    rest.happyHours[index1].menu.registerItem(newItem);
-    const updatedListItems = rest.happyHours[index1].menu.items;
-    res.status(200).send(updatedListItems);
+    findRestaurantById(restaurantId).then((restaurant) => {
+      if (restaurant) {
+        const happyHour = restaurant.happyHourForId(happyHourId);
+
+        if (happyHour) {
+          happyHour.menu.registerItem(newItem);
+          return updateRestaurant(restaurant).then((updated) => {
+            const updateHappyHour = updated.happyHourForId(happyHourId);
+            res.status(200).send(updateHappyHour.menu.lastItem());
+          });
+        } else {
+          res.status(404).send("Happy Hour Id not found");
+        }
+      } else {
+        res.status(404).send("Restaurant Id not found");
+      }
+    });
   }
 );
 
@@ -309,35 +269,34 @@ app.put(
     var restaurantId = req.params.restaurantId;
     var happyHourId = req.params.happyhourId;
 
-    const rest = restaurants.find(
-      (restaurant) => restaurantId === restaurant.id
-    );
+    findRestaurantById(restaurantId).then((rest) => {
+      if (!rest) {
+        res.status(404).send({ error: "Restaurant Id not found" });
+      }
 
-    const happyHourUpdate = rest.happyHours.find(
-      (happyHour) => happyHourId === happyHour.id
-    );
+      const happyHourUpdate = rest.happyHourForId(happyHourId);
 
-    if (happyHourUpdate) {
-      const index = rest.happyHours.indexOf(happyHourUpdate);
+      if (!happyHourUpdate) {
+        res.status(404).send({ error: "HappyHour Id not found" });
+      }
 
       if (req.body.openDays) {
-        rest.happyHours[index].setOpenDays(req.body.openDays);
+        happyHourUpdate.setOpenDays(req.body.openDays);
       }
 
       if (req.body.startTime) {
-        rest.happyHours[index].setStartTime(req.body.startTime);
+        happyHourUpdate.setStartTime(req.body.startTime);
       }
 
       if (req.body.endTime) {
-        rest.happyHours[index].setEndTime(req.body.endTime);
+        happyHourUpdate.setEndTime(req.body.endTime);
       }
 
-      res.status(200).send(happyHourUpdate);
-    } else if (!rest) {
-      res.status(400).send({ error: "Restaurant Id not found" });
-    } else if (!happyHourUpdate) {
-      res.status(400).send({ error: "Happy Hour Id not found" });
-    }
+      return updateRestaurant(rest).then((updated) => {
+        const updatedHappyHour = updated.happyHourForId(happyHourId);
+        res.status(200).send(updatedHappyHour);
+      });
+    });
   }
 );
 
@@ -348,53 +307,44 @@ app.put(
     var happyHourId = req.params.happyHourId;
     var happyHourItemId = req.params.itemId;
 
-    const rest = restaurants.find(
-      (restaurant) => restaurantId === restaurant.id
-    );
+    findRestaurantById(restaurantId).then((rest) => {
+      if (!rest) {
+        return res.status(404).send({ error: "Restaurant Id not found" });
+      }
 
-    const happyHr = rest.happyHours.find(
-      (happyHour) => happyHourId === happyHour.id
-    );
+      const happyHr = rest.happyHourForId(happyHourId);
 
-    const index1 = rest.happyHours.indexOf(happyHr);
+      if (!happyHr) {
+        return res.status(404).send({ error: "Happy Hour Id not found" });
+      }
 
-    const happyHourItem = rest.happyHours[index1].menu.items.find(
-      (item) => happyHourItemId === item.id
-    );
+      const item = happyHr.menu.findMenuItemForId(happyHourItemId);
 
-    if (happyHourItem) {
-      var index2 = rest.happyHours[index1].menu.items.indexOf(happyHourItem);
+      if (!item) {
+        return res.status(404).send({ error: "Item Id not found" });
+      }
 
       if (req.body.name) {
-        rest.happyHours[index1].menu.items[index2].setName(req.body.name);
+        item.setName(req.body.name);
       }
 
       if (req.body.description) {
-        rest.happyHours[index1].menu.items[index2].setDescription(
-          req.body.description
-        );
+        item.setDescription(req.body.description);
       }
 
       if (req.body.price) {
-        rest.happyHours[index1].menu.items[index2].setPrice(req.body.price);
+        item.setPrice(req.body.price);
       }
 
       if (req.body.category) {
-        rest.happyHours[index1].menu.items[index2].setCategory(
-          req.body.category
-        );
+        item.setCategory(req.body.category);
       }
 
-      const updatedListItems = rest.happyHours[index1].menu.items;
-
-      res.status(200).send(updatedListItems);
-    } else if (!rest) {
-      res.status(400).send({ error: "Restaurant Id not found" });
-    } else if (!happyHr) {
-      res.status(400).send({ error: "Happy Hour Id not found" });
-    } else if (!HappyHourItem) {
-      res.status(400).send({ error: "Item Id not found" });
-    }
+      return updateRestaurant(rest).then((updated) => {
+        const updatedHappyHour = updated.happyHourForId(happyHourId);
+        res.status(200).send(updatedHappyHour.menu.allItems());
+      });
+    });
   }
 );
 

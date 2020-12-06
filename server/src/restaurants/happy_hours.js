@@ -3,6 +3,7 @@ import { Menu } from "./menu.js";
 export class HappyHour {
   constructor(id, openDays, startTime, endTime, menu) {
     this.id = id;
+    this._id = id;
     this.setOpenDays(openDays);
     this.setStartTime(startTime);
     this.setEndTime(endTime);
@@ -11,7 +12,7 @@ export class HappyHour {
 
   static from(document) {
     return new HappyHour(
-      document.id,
+      (document._id || document.id).toString(),
       document.openDays,
       document.startTime,
       document.endTime,

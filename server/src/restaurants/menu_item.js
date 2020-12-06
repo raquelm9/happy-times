@@ -1,6 +1,7 @@
 export class MenuItem {
   constructor(id, name, description, price, category) {
     this.id = id;
+    this._id = id;
     this.setName(name);
     this.setDescription(description);
     this.setPrice(price);
@@ -9,7 +10,7 @@ export class MenuItem {
 
   static from(document) {
     return new MenuItem(
-      document.id,
+      (document._id || document.id).toString(),
       document.name,
       document.description,
       document.price,
