@@ -74,7 +74,7 @@ class HappyHourListingComp extends React.Component {
             5: 'FRI ',
             6: 'SAT ',
         }
-        const weekDays = this.props.happyHour.openDays.days.map((day) => (
+        const weekDays = this.props.happyHour.openDays.map((day) => (
             <span key={day}>{helper[day]}</span>
         ))
         return weekDays

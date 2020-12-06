@@ -13,7 +13,7 @@ export function todaysHappyHour(restaurant) {
     for (var i = 0; i < happyHours.length; i++) {
         var currentHappyHour = happyHours[i]
 
-        var happyHourDays = currentHappyHour.openDays.days
+        var happyHourDays = currentHappyHour.openDays
 
         for (var j = 0; j < happyHourDays.length; j++) {
             var happyHourDay = happyHourDays[j]

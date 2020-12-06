@@ -34,7 +34,7 @@ class AdminHappyHourForm extends React.Component {
             id: happyHour.id,
             startTime: happyHour.startTime,
             endTime: happyHour.endTime,
-            openDays: happyHour.openDays.days.map((day) => `${day}`),
+            openDays: happyHour.openDays.map((day) => `${day}`),
         }
     }
 

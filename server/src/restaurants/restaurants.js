@@ -1,10 +1,19 @@
 import { HappyHour } from "./happy_hours.js";
-import { OpenDays } from "./open_days.js";
 import { Menu } from "./menu.js";
 import { MenuItem } from "./menu_item.js";
 import { Address } from "./address.js";
 
 import uniqueId from "lodash/uniqueId.js";
+
+const weekDays = {
+  SUN: 0,
+  MON: 1,
+  TUE: 2,
+  WED: 3,
+  THU: 4,
+  FRI: 5,
+  SAT: 6,
+};
 
 export class Restaurant {
   constructor(id, name, description, website, image, address) {
@@ -19,7 +28,7 @@ export class Restaurant {
   }
 
   static from(document) {
-    return new Restaurant(
+    const restaurant = new Restaurant(
       document.id,
       document.name,
       document.description,
@@ -27,6 +36,10 @@ export class Restaurant {
       document.image,
       Address.from(document.address)
     );
+
+    // Populate restaurant happy hours
+    restaurant.happyHours = document.happyHours.map((hh) => HappyHour.from(hh));
+    return restaurant;
   }
 
   registerHappyHour(happyHour) {
@@ -85,13 +98,7 @@ const rest1 = new Restaurant(
 rest1.registerHappyHour(
   new HappyHour(
     uniqueId("happy-hour-"),
-    new OpenDays([
-      OpenDays.weekDays.MON,
-      OpenDays.weekDays.TUE,
-      OpenDays.weekDays.WED,
-      OpenDays.weekDays.FRI,
-      OpenDays.weekDays.SAT,
-    ]),
+    [weekDays.MON, weekDays.TUE, weekDays.WED, weekDays.FRI, weekDays.SAT],
     "3:00PM",
     "5:00PM",
     new Menu([
@@ -131,7 +138,7 @@ rest1.registerHappyHour(
 rest1.registerHappyHour(
   new HappyHour(
     uniqueId("happy-hour-"),
-    new OpenDays([OpenDays.weekDays.SUN, OpenDays.weekDays.THU]),
+    [weekDays.SUN, weekDays.THU],
     "10:00PM",
     "Close",
     new Menu([
@@ -192,15 +199,15 @@ const rest2 = new Restaurant(
 rest2.registerHappyHour(
   new HappyHour(
     uniqueId("happy-hour-"),
-    new OpenDays([
-      OpenDays.weekDays.MON,
-      OpenDays.weekDays.TUE,
-      OpenDays.weekDays.WED,
-      OpenDays.weekDays.THU,
-      OpenDays.weekDays.FRI,
-      OpenDays.weekDays.SAT,
-      OpenDays.weekDays.SUN,
-    ]),
+    [
+      weekDays.MON,
+      weekDays.TUE,
+      weekDays.WED,
+      weekDays.THU,
+      weekDays.FRI,
+      weekDays.SAT,
+      weekDays.SUN,
+    ],
     "3:00PM",
     "5:00PM",
     new Menu([
@@ -241,15 +248,15 @@ const rest3 = new Restaurant(
 rest3.registerHappyHour(
   new HappyHour(
     uniqueId("happy-hour-"),
-    new OpenDays([
-      OpenDays.weekDays.MON,
-      OpenDays.weekDays.TUE,
-      OpenDays.weekDays.WED,
-      OpenDays.weekDays.THU,
-      OpenDays.weekDays.FRI,
-      OpenDays.weekDays.SAT,
-      OpenDays.weekDays.SUN,
-    ]),
+    [
+      weekDays.MON,
+      weekDays.TUE,
+      weekDays.WED,
+      weekDays.THU,
+      weekDays.FRI,
+      weekDays.SAT,
+      weekDays.SUN,
+    ],
     "2:00PM",
     "5:00PM",
     new Menu([

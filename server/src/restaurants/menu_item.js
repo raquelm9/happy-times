@@ -7,6 +7,16 @@ export class MenuItem {
     this.setCategory(category);
   }
 
+  static from(document) {
+    return new MenuItem(
+      document.id,
+      document.name,
+      document.description,
+      document.price,
+      document.category
+    );
+  }
+
   setName(name) {
     if (!name) {
       throw "Menu item requires name";
