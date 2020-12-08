@@ -33,17 +33,17 @@ class MainPage extends React.Component {
                             <button
                                 onClick={this.goToListing.bind(this)}
                                 type="button"
-                                className="btn btn-dark main-page-button"
+                                className="btn btn-dark btn-lg main-page-button"
                             >
                                 Enter The Happy World
                             </button>
                         </div>
                     </div>
 
-                    <nav className="slides-navigation">
+                    {/* <nav className="slides-navigation">
                         <a className="next"></a>
                         <a className="prev"></a>
-                    </nav>
+                    </nav> */}
                 </div>
             </>
         )

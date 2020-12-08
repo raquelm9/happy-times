@@ -1,3 +1,9 @@
+@font-face {
+    font-family: 'BadScript';
+    src: local('BadScript'),
+        url('../../assets/fonts/BadScript-Regular.ttf') format('truetype');
+}
+
 .project-card-blueprint:hover {
     cursor: pointer;
 }
@@ -13,7 +19,7 @@
 }
 
 div.project-name-description {
-    background-color: white;
+    background-color: #ece7db;
     color: black;
 }
 
@@ -28,8 +34,9 @@ div.project-name-description {
 p.projects-title {
     text-align: center;
     margin: 50px 0;
-    font-size: 17px;
+    font-size: 25px;
     font-weight: 700;
+    font-family: 'BadScript';
 }
 
 p.project-happy-hour {

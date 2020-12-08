@@ -5,6 +5,7 @@ import {
     itemsByCategory,
 } from '../../helpers/happy_hour'
 import HappyHourItem from './HappyHourItem'
+import './HappyHourItem.css'
 
 class HappyHourMenu extends React.Component {
     constructor(props) {
@@ -56,10 +57,13 @@ class HappyHourMenu extends React.Component {
     render() {
         return (
             <>
-                <h2 className="ui header centered" style={{ color: 'white' }}>
+                <h2
+                    className="ui header centered special-font-menu"
+                    style={{ color: 'black' }}
+                >
                     Happy Hour Menu
                 </h2>
-                <h3 className="ui header centered" style={{ color: 'white' }}>
+                <h3 className="ui header centered" style={{ color: 'black' }}>
                     {timeHappyHour(this.props.restaurant)}
                 </h3>
                 {this.renderItems()}

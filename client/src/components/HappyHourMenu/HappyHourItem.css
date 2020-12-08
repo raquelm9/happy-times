@@ -1,3 +1,14 @@
+@font-face {
+    font-family: 'BadScript';
+    src: local('BadScript'),
+        url('../../assets/fonts/BadScript-Regular.ttf') format('truetype');
+}
+
 .menu-item {
-  padding: 10px;
+    padding: 10px;
+}
+
+h2.ui.header.centered.special-font-menu {
+    font-family: 'BadScript';
+    font-size: 30px;
 }
