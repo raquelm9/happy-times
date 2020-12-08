@@ -22,4 +22,6 @@ export const AddRestaurantValidationSchema = Yup.object().shape({
         .required('Postal Code is required'),
     addressCity: Yup.string().required('City is required'),
     addressProvince: Yup.string().required('Province is required'),
+    addressLatitude: Yup.number().required('Latitude is required'),
+    addressLongitude: Yup.number().required('Longitude is required'),
 })

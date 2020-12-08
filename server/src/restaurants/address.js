@@ -1,10 +1,13 @@
+import { Coordinates } from "./coordinates.js";
+
 export class Address {
-  constructor(unit, street, postalCode, city, province) {
+  constructor(unit, street, postalCode, city, province, coordinates) {
     this.setUnit(unit);
     this.setStreet(street);
     this.setPostalCode(postalCode);
     this.setCity(city);
     this.setProvince(province);
+    this.setCoordinates(coordinates);
   }
 
   static from(doc) {
@@ -13,7 +16,8 @@ export class Address {
       doc.street,
       doc.postalCode,
       doc.city,
-      doc.province
+      doc.province,
+      Coordinates.from(doc.coordinates)
     );
   }
 
@@ -56,6 +60,14 @@ export class Address {
       throw "Address requires province";
     } else {
       this.province = province;
+    }
+  }
+
+  setCoordinates(coordinates) {
+    if (!coordinates) {
+      throw "Address requires coordinates";
+    } else {
+      this.coordinates = coordinates;
     }
   }
 }

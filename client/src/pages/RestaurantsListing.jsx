@@ -34,12 +34,8 @@ class RestaurantsListing extends React.Component {
 
     render() {
         return (
-            <>
-                <div
-                    style={{
-                        backgroundColor: '#121212',
-                    }}
-                >
+            <div className="restaurant-listing-container">
+                <div>
                     <ul className="nav justify-content-end">
                         <li className="nav-item">
                             <i
@@ -49,12 +45,7 @@ class RestaurantsListing extends React.Component {
                         </li>
                     </ul>
                 </div>
-                <div
-                    className="row"
-                    style={{
-                        backgroundColor: '#121212',
-                    }}
-                >
+                <div className="row">
                     <div className="col-12">
                         <h1 className="restaurants-title">Restaurants</h1>
                         <div className="row">
@@ -66,7 +57,7 @@ class RestaurantsListing extends React.Component {
                         </div>
                     </div>
                 </div>
-            </>
+            </div>
         )
     }
 }

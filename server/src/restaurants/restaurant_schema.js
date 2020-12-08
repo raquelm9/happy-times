@@ -17,6 +17,7 @@ export const RestaurantSchema = new Schema(
       postalCode: String,
       city: String,
       province: String,
+      coordinates: { latitude: Number, longitude: Number },
     },
     happyHours: [HappyHourSchema],
   },

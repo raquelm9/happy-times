@@ -21,6 +21,8 @@ class AddRestaurantForm extends React.Component {
                 addressPostalcode: '',
                 addressCity: '',
                 addressProvince: '',
+                addressLatitude: '',
+                addressLongitude: '',
             }
         } else {
             return {
@@ -34,6 +36,8 @@ class AddRestaurantForm extends React.Component {
                 addressPostalcode: restaurant.address.postalCode,
                 addressCity: restaurant.address.city,
                 addressProvince: restaurant.address.province,
+                addressLatitude: restaurant.address.coordinates.latitude,
+                addressLongitude: restaurant.address.coordinates.longitude,
             }
         }
     }
@@ -82,6 +86,10 @@ class AddRestaurantForm extends React.Component {
                     postalCode: values.addressPostalcode,
                     city: values.addressCity,
                     province: values.addressProvince,
+                    coordinates: {
+                        latitude: values.addressLatitude,
+                        longitude: values.addressLongitude,
+                    },
                 },
             }))
             .then((restaurant) => {
@@ -339,6 +347,54 @@ class AddRestaurantForm extends React.Component {
                                                     <ErrorMessage
                                                         component="div"
                                                         name="addressProvince"
+                                                        className="invalid-feedback"
+                                                    />
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div className="row">
+                                            <div className="col-lg-6">
+                                                <div className="form-group">
+                                                    <label htmlFor="addressLatitude">
+                                                        Latitude
+                                                    </label>
+                                                    <Field
+                                                        name="addressLatitude"
+                                                        placeholder="Enter Latitude"
+                                                        className={`form-control ${
+                                                            touched.addressLatitude &&
+                                                            errors.addressLatitude
+                                                                ? 'is-invalid'
+                                                                : ''
+                                                        }`}
+                                                    />
+                                                    <ErrorMessage
+                                                        component="div"
+                                                        name="addressLatitude"
+                                                        className="invalid-feedback"
+                                                    />
+                                                </div>
+                                            </div>
+
+                                            <div className="col-lg-6">
+                                                <div className="form-group">
+                                                    <label htmlFor="addressLongitude">
+                                                        Longitude
+                                                    </label>
+                                                    <Field
+                                                        name="addressLongitude"
+                                                        placeholder="Enter Longitude"
+                                                        className={`form-control ${
+                                                            touched.addressLongitude &&
+                                                            errors.addressLongitude
+                                                                ? 'is-invalid'
+                                                                : ''
+                                                        }`}
+                                                    />
+                                                    <ErrorMessage
+                                                        component="div"
+                                                        name="addressLongitude"
                                                         className="invalid-feedback"
                                                     />
                                                 </div>
