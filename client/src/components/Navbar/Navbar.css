@@ -1,0 +1,9 @@
+.navbar-details {
+    background-color: #121212;
+    padding: 20px;
+}
+
+a.nav-link {
+    color: white;
+    font-weight: 500;
+}

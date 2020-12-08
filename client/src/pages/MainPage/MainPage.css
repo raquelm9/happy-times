@@ -10,6 +10,13 @@
     z-index: 100 !important;
 }
 
+button.main-page-button {
+    position: absolute;
+    left: 870px;
+    top: 150px;
+    opacity: 0.9;
+}
+
 .slides-navigation .prev,
 .slides-navigation .next {
     width: 47px;

@@ -2,33 +2,52 @@ import React from 'react'
 import { withRouter } from 'react-router-dom'
 import './MainPage.css'
 
-const MainPage = (props) => {
-    return (
-        <>
-            <div id="slides">
-                <div className="overlay"></div>
+class MainPage extends React.Component {
+    constructor(props) {
+        super(props)
+    }
 
-                <div className="slides-container">
-                    <img src={require('../../assets/img10.jpg')} />
-                    <img src={require('../../assets/img11.jpg')} />
-                    <img src={require('../../assets/img6.jpg')} />
-                    <img src={require('../../assets/img5.jpg')} />
-                </div>
+    goToListing() {
+        this.props.history.push('/restaurants')
+    }
 
-                <div className="titleMessage">
-                    <div className="heading">
-                        <p className="main">HAPPY TIMES</p>
-                        <p className="sub typed"></p>
+    render() {
+        return (
+            <>
+                <div id="slides">
+                    <div className="overlay"></div>
+
+                    <div className="slides-container">
+                        <img src={require('../../assets/img10.jpg')} />
+                        <img src={require('../../assets/img11.jpg')} />
+                        <img src={require('../../assets/img6.jpg')} />
+                        <img src={require('../../assets/img5.jpg')} />
                     </div>
-                </div>
 
-                <nav className="slides-navigation">
-                    <a className="next"></a>
-                    <a className="prev"></a>
-                </nav>
-            </div>
-        </>
-    )
+                    <div className="titleMessage">
+                        <div className="heading">
+                            <p className="main">HAPPY TIMES</p>
+                            <p className="sub typed"></p>
+                        </div>
+                        <div>
+                            <button
+                                onClick={this.goToListing.bind(this)}
+                                type="button"
+                                className="btn btn-dark main-page-button"
+                            >
+                                Enter The Happy World
+                            </button>
+                        </div>
+                    </div>
+
+                    <nav className="slides-navigation">
+                        <a className="next"></a>
+                        <a className="prev"></a>
+                    </nav>
+                </div>
+            </>
+        )
+    }
 }
 
 export default withRouter(MainPage)

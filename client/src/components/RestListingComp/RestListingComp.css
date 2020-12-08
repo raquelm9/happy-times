@@ -13,12 +13,12 @@
 }
 
 div.project-name-description {
-    background-color: #1f1b24;
-    color: white;
+    background-color: white;
+    color: black;
 }
 
 .project-name-description {
-    background-color: white;
+    background-color: black;
     border-radius: 5px;
     height: 350px;
     width: 100%;
@@ -45,7 +45,7 @@ p.project-happy-hour {
 }
 
 p.project-category {
-    padding: 40px 10px;
+    padding: 20px 10px;
     text-align: center;
 }
 
@@ -56,4 +56,9 @@ p.project-category {
     width: 100%;
     padding: 0;
     border-radius: 5px;
+}
+
+button.detail-restaurant-button {
+    display: block;
+    margin: auto;
 }

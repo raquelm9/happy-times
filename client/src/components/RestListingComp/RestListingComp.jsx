@@ -78,20 +78,22 @@ class RestListingComp extends React.Component {
 
         return (
             <>
-                <div className="row">
+                <div
+                    className="row"
+                    style={{
+                        backgroundColor: '#121212',
+                    }}
+                >
                     <div className="col"></div>
-                    <div
-                        className="project-card-blueprint col-sm-10 col-md-6 col-lg-5"
-                        onClick={this.viewHappyHour.bind(this)}
-                    >
+                    <div className="project-card-blueprint col-sm-10 col-md-6 col-lg-6">
                         <div className="row">
                             <div
-                                className="project-image col-lg-5 col-md-12"
+                                className="project-image col-lg-6 col-md-12"
                                 style={{
                                     backgroundImage: `url(${restaurant.image})`,
                                 }}
                             ></div>
-                            <div className="project-name-description col-lg-7 col-md-12">
+                            <div className="project-name-description col-lg-6 col-md-12">
                                 <p className="projects-title">
                                     {restaurant.name}
                                 </p>
@@ -99,6 +101,12 @@ class RestListingComp extends React.Component {
                                     Address: {addressLabel(restaurant)}
                                 </p>
                                 <>{this.showhappyHour()}</>
+                                <button
+                                    className="btn btn-dark detail-restaurant-button"
+                                    onClick={this.viewHappyHour.bind(this)}
+                                >
+                                    Know More
+                                </button>
                             </div>
                         </div>
                     </div>
