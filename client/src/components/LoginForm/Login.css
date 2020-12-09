@@ -1,14 +1,14 @@
 body,
 html,
 #root,
-.app,
-.container {
+.appL,
+.containerL {
   width: 100%;
 
   height: 100%;
 }
 
-.container {
+.containerL {
   font-size: 28px;
 
   color: #fff;

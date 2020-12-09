@@ -1,32 +1,26 @@
-import React,{useEffect, useRef} from 'react';
-import lottie from 'lottie-web';
-import "./App.css";
+import React, { useEffect, useRef } from 'react'
+import lottie from 'lottie-web'
+import './Login.css'
 
+function BeerAnimation() {
+  const container = useRef(null)
 
-function BeerAnimation (){
+  useEffect(() => {
+    lottie.loadAnimation({
+      container: container.current,
+      renderer: 'svg',
+      loop: true,
+      autoplay: true,
 
-const container = useRef(null)
+      animationData: require('./30697-loading-beer-animation.json'),
+    })
+  }, [])
 
-
-useEffect(() => {
-  lottie.loadAnimation({
-    container: container.current,
-    renderer: 'svg',
-    loop:true,
-    autoplay:true,
-    
-    animationData: require('./30697-loading-beer-animation.json')
-    
-  })
-}, [])
-
-  return(
+  return (
     <div className="BeerAnimation">
-      
-<div className='container' ref={container}>
-</div>
+      <div className="containerL" ref={container}></div>
     </div>
   )
 }
 
-export default BeerAnimation;
+export default BeerAnimation
