@@ -21,7 +21,7 @@
   color: white;
 }
 
-span {
+#span {
   position: absolute;
   background-color: #eea55d;
   transition: transform 1s ease;
