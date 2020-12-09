@@ -2,7 +2,7 @@
   position: relative;
 }
 
-input {
+.inputL {
   width: 6.5em;
   color: white;
   font-size: inherit;
@@ -13,11 +13,11 @@ input {
   transition: background-color 0.3s ease-in-out;
 }
 
-input:focus {
+.inputL:focus {
   outline: none;
 }
 
-input::placeholder {
+.inputL::placeholder {
   color: white;
 }
 
@@ -48,7 +48,7 @@ span {
   transform-origin: bottom right;
 }
 
-input:focus ~ .bottom {
+.inputL:focus ~ .bottom {
   transform-origin: bottom left;
   transform: scaleX(1);
 }
@@ -58,7 +58,7 @@ input:focus ~ .bottom {
   transform-origin: top right;
 }
 
-input:focus ~ .right {
+.inputL:focus ~ .right {
   transform-origin: bottom right;
   transform: scaleY(1);
 }
@@ -68,7 +68,7 @@ input:focus ~ .right {
   transform-origin: top left;
 }
 
-input:focus ~ .top {
+.inputL:focus ~ .top {
   transform-origin: top right;
   transform: scaleX(1);
 }
@@ -78,13 +78,13 @@ input:focus ~ .top {
   transform-origin: bottom left;
 }
 
-input:focus ~ .left {
+.inputL:focus ~ .left {
   transform-origin: top left;
   transform: scaleY(1);
 }
 
 /* Submit Button */
-button {
+#button {
   z-index: 1;
   position: relative;
   font-size: inherit;
@@ -98,8 +98,8 @@ button {
   transition: color 0.4s ease-in-out;
 }
 
-button::before {
-  content: "";
+#button::before {
+  content: '';
   z-index: -1;
   position: absolute;
   bottom: 100%;
@@ -113,13 +113,13 @@ button::before {
   transition: transform 0.45s ease-in-out;
 }
 
-button:hover {
+#button:hover {
   cursor: pointer;
   color: #161616;
   border-radius: 12px;
   transition: 2s ease-out;
 }
 
-button:hover::before {
+#button:hover::before {
   transform: translate3d(300%, 50%, 0) scale3d(15, 15, 15);
 }
