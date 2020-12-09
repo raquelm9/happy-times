@@ -1,20 +1,20 @@
 import React from 'react'
 import './Input.css'
 class SubmitButton extends React.Component {
-  render() {
-    return (
-      <div className="submitButton">
-        <button
-          id="button"
-          className="btn"
-          disabled={this.props.disabled}
-          onClick={() => this.props.onClick()}
-        >
-          {this.props.text}
-        </button>
-      </div>
-    )
-  }
+    render() {
+        return (
+            <div className="submitButton">
+                <button
+                    id="button-login"
+                    className="btn"
+                    disabled={this.props.disabled}
+                    onClick={() => this.props.onClick()}
+                >
+                    {this.props.text}
+                </button>
+            </div>
+        )
+    }
 }
 
 export default SubmitButton
