@@ -5,7 +5,7 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 //Pages
 import MainPage from '../pages/MainPage/MainPage'
 import AboutMe from '../pages/AboutMe/AboutMe'
-import ClientLogin from '../pages/LoginForm/Login'
+import ClientLogin from '../components/LoginForm/Login'
 import RestaurantDetail from '../pages/RestaurantDetail'
 import RestaurantsListing from '../pages/RestaurantsListing'
 import Map from '../pages/Map'
