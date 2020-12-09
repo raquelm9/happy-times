@@ -2,8 +2,8 @@ import React from 'react'
 import InputField from './InputField'
 import SubmitButton from './SubmitButton'
 import UserStore from './Stores/UserStore'
-import BeerAnimation from './BeerAnimation'
 import './LoginForm.css'
+import { withRouter } from 'react-router-dom'
 
 class LoginForm extends React.Component {
     constructor(props) {
@@ -15,11 +15,16 @@ class LoginForm extends React.Component {
         }
     }
 
+    goToRestaurants() {
+        this.props.history.push('/restaurants')
+    }
+
     setInputValue(property, val) {
         val = val.trim()
         if (val.length > 12) {
             return
         }
+
         this.setState({
             [property]: val,
         })
@@ -92,9 +97,14 @@ class LoginForm extends React.Component {
                     disable={this.state.buttonDisable}
                     onClick={() => this.doLogin()}
                 />
+                <SubmitButton
+                    text="Enter as a Guest"
+                    disable={this.state.buttonDisable}
+                    onClick={() => this.goToRestaurants()}
+                />
             </div>
         )
     }
 }
 
-export default LoginForm
+export default withRouter(LoginForm)
