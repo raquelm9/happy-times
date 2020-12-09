@@ -5,6 +5,10 @@ import PaddedContainerClient from '../PaddedContainerClient/PaddedContainerClien
 import './DetailRestaurantSegment.css'
 
 class DetailRestaurantSegment extends React.Component {
+    constructor(props) {
+        super(props)
+    }
+
     render() {
         return (
             <>

@@ -37,6 +37,7 @@ class RestaurantDetail extends React.Component {
         return (
             <div id="restaurant-detail">
                 <Navbar></Navbar>
+
                 <div className="restaurant-detail-background-color" />
                 <div className="inner">
                     <OneImage image={this.state.restaurant.image} />

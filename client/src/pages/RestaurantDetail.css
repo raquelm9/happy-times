@@ -5,14 +5,14 @@
 #restaurant-detail .restaurant-detail-background-color {
     background-color: #121212;
     position: fixed;
-    top: 0;
+    top: 0px;
     bottom: 0;
     width: 100%;
     z-index: -1;
 }
 
 #restaurant-detail .inner {
-    max-width: 50%;
+    max-width: 55%;
     margin: 0 auto;
 }
 
