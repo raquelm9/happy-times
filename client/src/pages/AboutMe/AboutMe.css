@@ -1,0 +1,55 @@
+@font-face {
+    font-family: 'BadScript';
+    src: local('BadScript'),
+        url('../../assets/fonts/BadScript-Regular.ttf') format('truetype');
+}
+
+#about {
+    height: 100%;
+}
+
+#about .titleMessage .heading p {
+    text-shadow: 0px 2px 5px rgba(0, 0, 0, 0.4);
+    font-weight: 300;
+    letter-spacing: 2px;
+}
+
+p.first,
+p.second {
+    color: #fff;
+    text-shadow: 0px 2px 5px rgba(0, 0, 0, 0.4);
+    letter-spacing: 2px;
+    font-size: 30px;
+}
+
+.titleMessage .heading .main {
+    font-size: 50px;
+}
+
+.heading p.second {
+    font-weight: 400;
+}
+
+#about p.third {
+    line-height: 30px;
+    font-size: 16px;
+    font-weight: 400;
+}
+
+.container-image-background {
+    height: 100%;
+    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+        url('../../assets/happy-time2.jpg');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+
+    padding-right: 40px;
+    padding-left: 40px;
+    padding-bottom: 40px;
+    background-color: #121212;
+}
+
+#about .container.background-story {
+    max-width: 40%;
+}

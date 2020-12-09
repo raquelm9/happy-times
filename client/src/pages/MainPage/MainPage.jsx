@@ -39,11 +39,6 @@ class MainPage extends React.Component {
                             </button>
                         </div>
                     </div>
-
-                    {/* <nav className="slides-navigation">
-                        <a className="next"></a>
-                        <a className="prev"></a>
-                    </nav> */}
                 </div>
             </>
         )

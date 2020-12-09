@@ -35,19 +35,14 @@ class RestaurantDetail extends React.Component {
 
     render() {
         return (
-            <>
+            <div id="restaurant-detail">
                 <Navbar></Navbar>
-                <div className="restaurant-detail-background-color">
-                    <div
-                        style={{
-                            backgroundColor: '#121212',
-                        }}
-                    >
-                        <OneImage image={this.state.restaurant.image} />
-                        <Grid restaurant={this.state.restaurant} />
-                    </div>
+                <div className="restaurant-detail-background-color" />
+                <div className="inner">
+                    <OneImage image={this.state.restaurant.image} />
+                    <Grid restaurant={this.state.restaurant} />
                 </div>
-            </>
+            </div>
         )
     }
 }

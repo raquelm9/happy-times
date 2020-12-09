@@ -5,13 +5,7 @@ import PaddedContainerClient from '../PaddedContainerClient/PaddedContainerClien
 class Grid extends React.Component {
     render() {
         return (
-            <div
-                className="ui stackable one column grid"
-                style={{
-                    marginLeft: '5px',
-                    marginRight: '5px',
-                }}
-            >
+            <div className="ui stackable one column grid">
                 <div className="column" style={{ textAlign: 'center' }}>
                     <PaddedContainerClient>
                         <DetailRestaurantSegment

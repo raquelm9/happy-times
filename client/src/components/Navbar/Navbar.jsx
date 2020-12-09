@@ -19,6 +19,10 @@ class Navbar extends React.Component {
         this.props.history.push('/about-me')
     }
 
+    goToLogin() {
+        this.props.history.push('/login')
+    }
+
     render() {
         return (
             <>
@@ -48,7 +52,10 @@ class Navbar extends React.Component {
                         </a>
                     </li>
                     <li className="nav-item">
-                        <a className="nav-link" href="#">
+                        <a
+                            className="nav-link"
+                            onClick={this.goToLogin.bind(this)}
+                        >
                             Login
                         </a>
                     </li>
