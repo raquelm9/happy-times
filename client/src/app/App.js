@@ -4,6 +4,8 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 
 //Pages
 import MainPage from '../pages/MainPage/MainPage'
+import AboutMe from '../pages/AboutMe/AboutMe'
+import ClientLogin from '../pages/LoginForm/Login'
 import RestaurantDetail from '../pages/RestaurantDetail'
 import RestaurantsListing from '../pages/RestaurantsListing'
 import Map from '../pages/Map'
@@ -28,6 +30,8 @@ class App extends React.Component {
                         path="/restaurants"
                         component={RestaurantsListing}
                     />
+                    <Route exact path="/login" component={ClientLogin} />
+                    <Route exact path="/about-me" component={AboutMe} />
                     <Route
                         exact
                         path="/restaurant/happy-hour"
@@ -55,11 +59,6 @@ class App extends React.Component {
                         path="/admin/restaurant/happy-hour/information"
                         component={AdminNewHappyHour}
                     />
-                    {/* <Route
-            exact
-            path="/admin/restaurant/happy-hour/item/information"
-            component={AdminNewItem}
-          /> */}
                 </Switch>
             </Router>
         )

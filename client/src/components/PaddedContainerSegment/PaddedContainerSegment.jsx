@@ -1,6 +1,5 @@
 import React from 'react'
 import './PaddedContainerSegment.css'
-import WoodImage from '../../assets/wood.jpg'
 
 class PaddedContainerSegment extends React.Component {
     constructor(props) {

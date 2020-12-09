@@ -1,5 +1,5 @@
 import React from 'react'
-import '../OneImage/OneImage.css'
+import './OneImage.css'
 
 class OneImage extends React.Component {
     constructor(props) {
@@ -26,12 +26,14 @@ class OneImage extends React.Component {
             )
         } else {
             return (
-                <img
-                    className="ui fluid centered rounded image"
-                    id="photo"
-                    src={this.props.image}
-                    onError={this.handleDisplayError.bind(this)}
-                />
+                <div className="one-image">
+                    <img
+                        className="ui fluid centered rounded image"
+                        id="photo"
+                        src={this.props.image}
+                        onError={this.handleDisplayError.bind(this)}
+                    />
+                </div>
             )
         }
     }

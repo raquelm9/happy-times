@@ -1,5 +1,7 @@
-#photo {
-    width: 800px;
-    height: 500px;
-    margin-bottom: 20px;
+.one-image {
+    height: 450px;
+}
+
+.one-image img {
+    position: absolute;
 }

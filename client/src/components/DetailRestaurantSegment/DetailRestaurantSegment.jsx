@@ -5,26 +5,39 @@ import PaddedContainerClient from '../PaddedContainerClient/PaddedContainerClien
 import './DetailRestaurantSegment.css'
 
 class DetailRestaurantSegment extends React.Component {
+    constructor(props) {
+        super(props)
+    }
+
     render() {
         return (
             <>
                 <p
                     className="ui header restaurantName"
-                    style={{ color: 'white' }}
+                    style={{ color: 'black' }}
                 >
                     {this.props.restaurant.name}
                 </p>
-                <p className="address">
+
+                <p className="address font-size-details">
                     Address: {addressLabel(this.props.restaurant)}
                 </p>
-                <p>
+                <p className="font-size-details">
                     Website:{' '}
-                    <a href={this.props.restaurant.website} target="_blank">
+                    <a
+                        style={{ color: 'black' }}
+                        href={this.props.restaurant.website}
+                        target="_blank"
+                    >
                         {this.props.restaurant.website}
                     </a>
                 </p>
 
-                <p> {this.props.restaurant.description}</p>
+                <p className="font-size-details special-font-description">
+                    {' '}
+                    {this.props.restaurant.description}
+                </p>
+
                 <br></br>
                 <p>
                     <a

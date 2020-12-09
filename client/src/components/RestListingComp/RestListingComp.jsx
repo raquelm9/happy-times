@@ -105,7 +105,7 @@ class RestListingComp extends React.Component {
                                     className="btn btn-dark detail-restaurant-button"
                                     onClick={this.viewHappyHour.bind(this)}
                                 >
-                                    Know More
+                                    Check It Out
                                 </button>
                             </div>
                         </div>

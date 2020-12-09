@@ -15,12 +15,23 @@ class Navbar extends React.Component {
         this.props.history.push('/map')
     }
 
+    goToAboutMe() {
+        this.props.history.push('/about-me')
+    }
+
+    goToLogin() {
+        this.props.history.push('/login')
+    }
+
     render() {
         return (
             <>
                 <ul className="nav justify-content-end navbar-details">
                     <li className="nav-item">
-                        <a className="nav-link active" href="#">
+                        <a
+                            className="nav-link active"
+                            onClick={this.goToAboutMe.bind(this)}
+                        >
                             About
                         </a>
                     </li>
@@ -41,7 +52,10 @@ class Navbar extends React.Component {
                         </a>
                     </li>
                     <li className="nav-item">
-                        <a className="nav-link" href="#">
+                        <a
+                            className="nav-link"
+                            onClick={this.goToLogin.bind(this)}
+                        >
                             Login
                         </a>
                     </li>

@@ -1,4 +1,22 @@
-div.restaurant-detail-background-color {
-    height: 100vh;
+#restaurant-detail {
+    height: 100%;
+}
+
+#restaurant-detail .restaurant-detail-background-color {
     background-color: #121212;
+    position: fixed;
+    top: 0px;
+    bottom: 0;
+    width: 100%;
+    z-index: -1;
+}
+
+#restaurant-detail .inner {
+    max-width: 55%;
+    margin: 0 auto;
+}
+
+#restaurant-detail .column {
+    padding-left: 6px !important;
+    padding-right: 6px !important;
 }

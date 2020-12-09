@@ -1,4 +1,5 @@
 import React from 'react'
+import Navbar from '../components/Navbar/Navbar'
 
 import usePlacesAutocomplete, {
     getGeocode,
@@ -327,22 +328,7 @@ function Search({ panTo }) {
 
     return (
         <>
-            <div
-                style={{
-                    backgroundColor: '#121212',
-                }}
-            >
-                <ul className="nav justify-content-end">
-                    <li className="nav-item">
-                        <i className="nav-link location arrow icon restaurant-listing">
-                            <Locate panTo={panTo} />
-                        </i>
-                    </li>
-                    <li className="nav-item">
-                        <i className="nav-link list alternate icon restaurant-listing"></i>
-                    </li>
-                </ul>
-            </div>
+            <Navbar></Navbar>
             <div className="search">
                 <Combobox
                     onSelect={async (address) => {

@@ -7,3 +7,10 @@ a.nav-link {
     color: white;
     font-weight: 500;
 }
+
+a.nav-link:hover {
+    color: grey;
+    font-weight: 500;
+    transition: 1s;
+    cursor: pointer;
+}

@@ -1,17 +1,21 @@
 import React from 'react'
 import './PaddedContainerClient.css'
-import WoodImage from '../../assets/wood.jpg'
 
 class PaddedContainerClient extends React.Component {
     constructor(props) {
         super(props)
+        console.log(this.props.menu)
     }
 
     render() {
         return (
             <div
                 className="ui raised very padded container segment"
-                style={{ backgroundImage: `url(${WoodImage})`, color: 'white' }}
+                style={{
+                    backgroundColor: '#ece7db',
+                    color: 'black',
+                    marginTop: '100px',
+                }}
             >
                 {this.props.children}
             </div>

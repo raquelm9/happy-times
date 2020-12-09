@@ -5,7 +5,7 @@ import { HttpService } from '../services/http-service'
 import { withRouter } from 'react-router-dom'
 import './RestaurantDetail.css'
 import './RestaurantListing.css'
-import Diamond from '../assets/wood.jpg'
+import Navbar from '../components/Navbar/Navbar'
 
 class RestaurantDetail extends React.Component {
     constructor(props) {
@@ -32,46 +32,18 @@ class RestaurantDetail extends React.Component {
             (err) => {}
         )
     }
-    goToMap() {
-        this.props.history.push('/map/')
-    }
-    goToList() {
-        this.props.history.push('/restaurants/')
-    }
 
     render() {
         return (
-            <>
-                <div className="restaurant-detail-background-color">
-                    <div
-                        style={{
-                            backgroundColor: '#121212',
-                        }}
-                    >
-                        <ul className="nav justify-content-end">
-                            <li
-                                className="nav-item"
-                                style={{
-                                    marginTop: '5px',
-                                }}
-                            >
-                                <i
-                                    className="map icon restaurant-listing"
-                                    onClick={this.goToMap.bind(this)}
-                                ></i>
-                            </li>
-                            <li className="nav-item">
-                                <i
-                                    className="nav-link list alternate icon restaurant-listing"
-                                    onClick={this.goToList.bind(this)}
-                                ></i>
-                            </li>
-                        </ul>
-                        <OneImage image={this.state.restaurant.image} />
-                        <Grid restaurant={this.state.restaurant} />
-                    </div>
+            <div id="restaurant-detail">
+                <Navbar></Navbar>
+
+                <div className="restaurant-detail-background-color" />
+                <div className="inner">
+                    <OneImage image={this.state.restaurant.image} />
+                    <Grid restaurant={this.state.restaurant} />
                 </div>
-            </>
+            </div>
         )
     }
 }

@@ -1,3 +1,20 @@
+@font-face {
+    font-family: 'BadScript';
+    src: local('BadScript'),
+        url('../../assets/fonts/BadScript-Regular.ttf') format('truetype');
+}
+
 p.ui.header.restaurantName {
-    font-size: 22px;
+    font-size: 30px;
+    font-family: 'BadScript';
+}
+
+.font-size-details {
+    font-size: 1.1rem;
+}
+
+.special-font-description {
+    font-weight: 500;
+    font-size: 20px;
+    font-family: 'BadScript';
 }
