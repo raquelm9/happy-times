@@ -1,0 +1,12 @@
+@font-face {
+    font-family: 'BadScript';
+    src: local('BadScript'),
+        url('../../assets/fonts/BadScript-Regular.ttf') format('truetype');
+}
+
+.title-login {
+    font-size: 40px;
+    text-align: center;
+    font-family: 'BadScript';
+    margin: 50px 0;
+}
