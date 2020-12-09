@@ -1,4 +1,5 @@
-import React from "react";
+import React from 'react'
+import './Input.css'
 class SubmitButton extends React.Component {
   render() {
     return (
@@ -11,8 +12,8 @@ class SubmitButton extends React.Component {
           {this.props.text}
         </button>
       </div>
-    );
+    )
   }
 }
 
-export default SubmitButton;
+export default SubmitButton

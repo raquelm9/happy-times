@@ -1,5 +1,5 @@
-import React from "react";
-
+import React from 'react'
+import './Input.css'
 class InputField extends React.Component {
   render() {
     return (
@@ -12,8 +12,8 @@ class InputField extends React.Component {
           onChange={(e) => this.props.onChange(e.target.value)}
         />
       </div>
-    );
+    )
   }
 }
 
-export default InputField;
+export default InputField

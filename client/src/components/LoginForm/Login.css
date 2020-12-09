@@ -37,10 +37,11 @@ html,
 }
 
 .inputField {
-  padding-top: 16px;
+  padding-top: 0rem;
+  margin-top: 2rem;
 }
 
-.input {
+/* .input {
   box-sizing: border-box;
 
   outline: none;
@@ -58,13 +59,13 @@ html,
   font-size: 14px;
 
   background: rgba(255, 255, 255, 1);
-}
+} */
 
 .submitButton {
   padding-top: 16px;
 }
 
-.btn {
+/* .btn {
   width: 100%;
 
   min-width: 280px;
@@ -84,4 +85,15 @@ html,
   background: #fff;
 
   cursor: pointer;
+  transition: 4s;
+} */
+
+/* .btn:hover {
+  background-color: rgb(199, 81, 199);
+  border-radius: 50px;
+} */
+
+.BeerAnimation {
+  z-index: 10;
+  height: 150px;
 }
