@@ -80,8 +80,6 @@ class Login extends React.Component {
             <LoginForm />
             <BeerAnimation />
           </div>
-
-          <SubmitButton />
         </div>
       )
     }
