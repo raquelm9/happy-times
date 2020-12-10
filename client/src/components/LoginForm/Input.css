@@ -1,9 +1,8 @@
 .inputField {
-    position: relative;
+  position: relative;
 }
 
 .inputL {
-<<<<<<< HEAD
   width: 10.5em;
   color: white;
   font-size: inherit;
@@ -12,125 +11,116 @@
   padding: 0.5rem 1rem;
   border: 1px solid transparent;
   transition: background-color 0.3s ease-in-out;
-=======
-    color: white;
-    font-size: inherit;
-    font-family: inherit;
-    background-color: hsl(236, 32%, 26%);
-    padding: 0.5rem 2.5rem;
-    border: 1px solid transparent;
-    transition: background-color 0.3s ease-in-out;
->>>>>>> b3e5e09692cec452755a0ac90189bd0c7c32344f
 }
 
 .inputL:focus {
-    outline: none;
+  outline: none;
 }
 
 .inputL::placeholder {
-    color: white;
+  color: white;
 }
 
 #span {
-    position: absolute;
-    background-color: #eea55d;
-    transition: transform 1s ease;
+  position: absolute;
+  background-color: #eea55d;
+  transition: transform 1s ease;
 }
 
 .bottom,
 .top {
-    height: 1px;
-    left: 0;
-    right: 0;
-    transform: scaleX(0);
+  height: 1px;
+  left: 0;
+  right: 0;
+  transform: scaleX(0);
 }
 
 .left,
 .right {
-    width: 1px;
-    top: 0;
-    bottom: 0;
-    transform: scaleY(0);
+  width: 1px;
+  top: 0;
+  bottom: 0;
+  transform: scaleY(0);
 }
 
 .bottom {
-    bottom: 0;
-    transform-origin: bottom right;
+  bottom: 0;
+  transform-origin: bottom right;
 }
 
 .inputL:focus ~ .bottom {
-    transform-origin: bottom left;
-    transform: scaleX(1);
+  transform-origin: bottom left;
+  transform: scaleX(1);
 }
 
 .right {
-    right: 0;
-    transform-origin: top right;
+  right: 0;
+  transform-origin: top right;
 }
 
 .inputL:focus ~ .right {
-    transform-origin: bottom right;
-    transform: scaleY(1);
+  transform-origin: bottom right;
+  transform: scaleY(1);
 }
 
 .top {
-    top: 0;
-    transform-origin: top left;
+  top: 0;
+  transform-origin: top left;
 }
 
 .inputL:focus ~ .top {
-    transform-origin: top right;
-    transform: scaleX(1);
+  transform-origin: top right;
+  transform: scaleX(1);
 }
 
 .left {
-    left: 0;
-    transform-origin: bottom left;
+  left: 0;
+  transform-origin: bottom left;
 }
 
 .inputL:focus ~ .left {
-    transform-origin: top left;
-    transform: scaleY(1);
+  transform-origin: top left;
+  transform: scaleY(1);
 }
 
 /* Submit Button */
 #button-login {
-    margin-left: 2.5rem;
-    z-index: 1;
-    position: relative;
-    font-size: inherit;
-    font-family: inherit;
-    color: white;
-    padding: 0.5em 3.5em;
-    outline: none;
-    border: none;
-    background-color: hsl(236, 32%, 26%);
-    overflow: hidden;
-    transition: color 0.4s ease-in-out;
+  margin-left: 2.5rem;
+  z-index: 1;
+  position: relative;
+  font-size: inherit;
+  font-family: inherit;
+  color: white;
+  padding: 0.5em 3.5em;
+  outline: none;
+  border: none;
+  background-color: hsl(236, 32%, 26%);
+  overflow: hidden;
+  transition: color 0.4s ease-in-out;
 }
 
 #button-login::before {
-    content: '';
-    z-index: -1;
-    position: absolute;
-    bottom: 100%;
-    right: 100%;
-    width: 1em;
-    height: 1em;
-    border-radius: 50%;
-    background-color: #8f8d3c;
-    transform-origin: center;
-    transform: translate3d(50%, 50%, 0) scale3d(0, 0, 0);
-    transition: transform 0.45s ease-in-out;
+  content: '';
+  z-index: -1;
+  position: absolute;
+  bottom: 100%;
+  right: 100%;
+  width: 1em;
+  height: 1em;
+  border-radius: 50%;
+  background-color: #8f8d3c;
+  transform-origin: center;
+  transform: translate3d(50%, 50%, 0) scale3d(0, 0, 0);
+  transition: transform 0.45s ease-in-out;
 }
 
 #button-login:hover {
-    cursor: pointer;
-    color: #161616;
-    border-radius: 12px;
-    transition: 2s ease-out;
+  cursor: pointer;
+  color: #161616;
+  border-radius: 12px;
+  transition: 2s ease-out;
 }
 
 #button-login:hover::before {
-    transform: translate3d(300%, 50%, 0) scale3d(15, 15, 15);
+  transform: translate3d(300%, 50%, 0) scale3d(15, 15, 15);
 }

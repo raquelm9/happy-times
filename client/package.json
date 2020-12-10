@@ -18,6 +18,7 @@
     "react-bootstrap": "^1.4.0",
     "react-dom": "^17.0.1",
     "react-hook-form": "^6.11.3",
+    "react-leaflet": "^3.0.2",
     "react-lottie": "^1.2.3",
     "react-router-dom": "^5.2.0",
     "react-scripts": "3.4.4",
