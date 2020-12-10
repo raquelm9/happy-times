@@ -3,7 +3,7 @@ import './Input.css'
 class SubmitButton extends React.Component {
     render() {
         return (
-            <div className={submitButton}>
+            <div className="submitButton">
                 <button
                     className="btn button-login"
                     disabled={this.props.disabled}
