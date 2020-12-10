@@ -1,370 +1,95 @@
 import React from 'react'
 import Navbar from '../components/Navbar/Navbar'
+import { withRouter } from 'react-router-dom'
+import { MapContainer, TileLayer, Popup, Marker } from 'react-leaflet'
+import { HttpService } from '../services/http-service'
 
-import usePlacesAutocomplete, {
-    getGeocode,
-    getLatLng,
-} from 'use-places-autocomplete'
+import L from 'leaflet'
+import 'leaflet/dist/leaflet.js'
+import 'leaflet/dist/leaflet.css'
 
-import compass from '../assets/compass.png'
-import {
-    GoogleMap,
-    useLoadScript,
-    Marker,
-    InfoWindow,
-} from '@react-google-maps/api'
+import icon from 'leaflet/dist/images/marker-icon.png'
+import iconShadow from 'leaflet/dist/images/marker-shadow.png'
 
-import { formatRelative } from 'date-fns'
+let DefaultIcon = L.icon({
+    iconUrl: icon,
+    shadowUrl: iconShadow,
+})
 
-import {
-    Combobox,
-    ComboboxInput,
-    ComboboxPopover,
-    ComboboxList,
-    ComboboxOption,
-} from '@reach/combobox'
+L.Marker.prototype.options.icon = DefaultIcon
 
-import './Map.css'
+class MapClient extends React.Component {
+    constructor(props) {
+        super(props)
 
-const mapStyles = [
-    {
-        featureType: 'all',
-        elementType: 'geometry.fill',
-        stylers: [
-            {
-                weight: '2.00',
-            },
-        ],
-    },
-    {
-        featureType: 'all',
-        elementType: 'geometry.stroke',
-        stylers: [
-            {
-                color: '#9c9c9c',
-            },
-        ],
-    },
-    {
-        featureType: 'all',
-        elementType: 'labels.text',
-        stylers: [
-            {
-                visibility: 'on',
-            },
-        ],
-    },
-    {
-        featureType: 'landscape',
-        elementType: 'all',
-        stylers: [
-            {
-                color: '#f2f2f2',
-            },
-        ],
-    },
-    {
-        featureType: 'landscape',
-        elementType: 'geometry.fill',
-        stylers: [
-            {
-                color: '#ffffff',
-            },
-        ],
-    },
-    {
-        featureType: 'landscape.man_made',
-        elementType: 'geometry.fill',
-        stylers: [
-            {
-                color: '#ffffff',
-            },
-        ],
-    },
-    {
-        featureType: 'poi',
-        elementType: 'all',
-        stylers: [
-            {
-                visibility: 'off',
-            },
-        ],
-    },
-    {
-        featureType: 'road',
-        elementType: 'all',
-        stylers: [
-            {
-                saturation: -100,
-            },
-            {
-                lightness: 45,
-            },
-        ],
-    },
-    {
-        featureType: 'road',
-        elementType: 'geometry.fill',
-        stylers: [
-            {
-                color: '#eeeeee',
-            },
-        ],
-    },
-    {
-        featureType: 'road',
-        elementType: 'labels.text.fill',
-        stylers: [
-            {
-                color: '#7b7b7b',
-            },
-        ],
-    },
-    {
-        featureType: 'road',
-        elementType: 'labels.text.stroke',
-        stylers: [
-            {
-                color: '#ffffff',
-            },
-        ],
-    },
-    {
-        featureType: 'road.highway',
-        elementType: 'all',
-        stylers: [
-            {
-                visibility: 'simplified',
-            },
-        ],
-    },
-    {
-        featureType: 'road.arterial',
-        elementType: 'labels.icon',
-        stylers: [
-            {
-                visibility: 'off',
-            },
-        ],
-    },
-    {
-        featureType: 'transit',
-        elementType: 'all',
-        stylers: [
-            {
-                visibility: 'off',
-            },
-        ],
-    },
-    {
-        featureType: 'water',
-        elementType: 'all',
-        stylers: [
-            {
-                color: '#46bcec',
-            },
-            {
-                visibility: 'on',
-            },
-        ],
-    },
-    {
-        featureType: 'water',
-        elementType: 'geometry.fill',
-        stylers: [
-            {
-                color: '#c8d7d4',
-            },
-        ],
-    },
-    {
-        featureType: 'water',
-        elementType: 'labels.text.fill',
-        stylers: [
-            {
-                color: '#070707',
-            },
-        ],
-    },
-    {
-        featureType: 'water',
-        elementType: 'labels.text.stroke',
-        stylers: [
-            {
-                color: '#ffffff',
-            },
-        ],
-    },
-]
+        this.state = { restaurants: [] }
+    }
 
-const libraries = ['places']
-const mapContainerStyle = {
-    width: '100vw',
-    height: ' 100vh',
-}
-const center = {
-    lat: 51.048615,
-    lng: -114.070847,
-}
+    componentDidMount() {
+        this.loadData()
+    }
 
-const options = {
-    styles: mapStyles,
-    disableDefaultUI: true,
-    zoomControl: true,
-}
+    loadData = () => {
+        new HttpService().getRestaurants().then(
+            (data) => {
+                this.setState({ restaurants: data })
+            },
+            (err) => {}
+        )
+    }
 
-export default function App() {
-    const { isLoaded, loadError } = useLoadScript({
-        googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY,
-        libraries,
-    })
-    const [markers, setMarkers] = React.useState([])
+    viewHappyHour() {
+        // this.props.history.push({
+        //     pathname: '/restaurant/happy-hour',
+        //     search: 'id=' + restaurant.id,
+        // })
+    }
 
-    const [selected, setSelected] = React.useState(null)
-
-    const mapRef = React.useRef()
-    const onMapLoad = React.useCallback((map) => {
-        mapRef.current = map
-    }, [])
-
-    const panTo = React.useCallback(({ lat, lng }) => {
-        mapRef.current.panTo({ lat, lng })
-        mapRef.current.setZoom(14)
-    }, [])
-
-    if (loadError) return 'Error loading maps'
-    if (!isLoaded) return 'Loading Maps'
-
-    return (
-        <div>
-            <Search panTo={panTo} />
-
-            <GoogleMap
-                mapContainerStyle={mapContainerStyle}
-                zoom={11}
-                center={center}
-                options={options}
-                onLoad={onMapLoad}
-                onClick={(event) => {
-                    setMarkers((current) => [
-                        ...current,
-                        {
-                            lat: event.latLng.lat(),
-                            lng: event.latLng.lng(),
-                            time: new Date(),
-                        },
-                    ])
-                }}
+    buildMarkerCard = (restaurant) => {
+        const restaurantCoordenates = restaurant.address.coordinates
+        return (
+            <Marker
+                position={[
+                    restaurantCoordenates.latitude,
+                    restaurantCoordenates.longitude,
+                ]}
             >
-                {markers.map((marker) => (
-                    <Marker
-                        key={marker.time.toISOString()}
-                        position={{ lat: marker.lat, lng: marker.lng }}
-                        /*  icon={{
-        url:'./toast.png',
-        scaledSize: new window.google.maps.Size(30, 30),
-      }} */
-                        onClick={() => {
-                            setSelected(marker)
-                        }}
-                    />
-                ))}
-
-                {selected ? (
-                    <InfoWindow
-                        position={{ lat: selected.lat, lng: selected.lng }}
-                        onCloseClick={() => {
-                            setSelected(null)
-                        }}
+                <Popup>
+                    {restaurant.name}
+                    <br></br>
+                    {restaurant.address.unit}, {restaurant.address.street}
+                    <br></br>
+                    <button
+                        onClick={this.viewHappyHour.bind(this)}
+                        type="button"
+                        className="btn btn-dark btn-sm"
                     >
-                        <div>
-                            <h2>Happy Time!</h2>
-                            <p>
-                                Come and join us{' '}
-                                {formatRelative(selected.time, new Date())}
-                            </p>
-                        </div>
-                    </InfoWindow>
-                ) : null}
-            </GoogleMap>
-        </div>
-    )
-}
-//Locate Function
-function Locate({ panTo }) {
-    return (
-        <i
-            className="location arrow icon"
-            onClick={() => {
-                navigator.geolocation.getCurrentPosition(
-                    (position) => {
-                        panTo({
-                            lat: position.coords.latitude,
-                            lng: position.coords.longitude,
-                        })
-                    },
-                    () => null,
-                    options
-                )
-            }}
-        ></i>
-    )
-}
+                        Details
+                    </button>
+                </Popup>
+            </Marker>
+        )
+    }
 
-//It uses a hook
-function Search({ panTo }) {
-    const {
-        ready,
-        value,
-        suggestions: { status, data },
-        setValue,
-        clearSuggestions,
-    } = usePlacesAutocomplete({
-        requestOptions: {
-            location: { lat: () => 51.048615, lng: () => -114.070847 },
-            radius: 200 * 1000,
-        },
-    })
-
-    return (
-        <>
-            <Navbar></Navbar>
-            <div className="search">
-                <Combobox
-                    onSelect={async (address) => {
-                        setValue(address, false)
-                        clearSuggestions()
-                        try {
-                            const results = await getGeocode({ address })
-                            const { lat, lng } = await getLatLng(results[0])
-                            panTo({ lat, lng })
-                        } catch (error) {
-                            console.log('error')
-                        }
-                        console.log(address)
-                    }}
+    render() {
+        return (
+            <>
+                <Navbar />
+                <MapContainer
+                    style={{ width: '100%', height: '100%' }}
+                    center={[51.0447, -114.0719]}
+                    zoom={13}
+                    scrollWheelZoom={false}
                 >
-                    <ComboboxInput
-                        value={value}
-                        onChange={(e) => {
-                            setValue(e.target.value)
-                        }}
-                        disable={!ready}
-                        placeholder="Look for more Happy Times"
+                    <TileLayer
+                        attribution='&copy; <a href="https://stadiamaps.com/">Stadia Maps</a>, &copy; <a href="https://openmaptiles.org/">OpenMapTiles</a> &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors'
+                        url="https://tiles.stadiamaps.com/tiles/alidade_smooth/{z}/{x}/{y}{r}.png"
                     />
-                    <ComboboxPopover>
-                        <ComboboxList>
-                            {status === 'OK' &&
-                                data.map(({ id, description }) => (
-                                    <ComboboxOption
-                                        key={id}
-                                        value={description}
-                                    />
-                                ))}
-                        </ComboboxList>
-                    </ComboboxPopover>
-                </Combobox>
-            </div>
-        </>
-    )
+                    {this.state.restaurants.map(this.buildMarkerCard)}
+                </MapContainer>
+            </>
+        )
+    }
 }
+
+export default withRouter(MapClient)
