@@ -11,6 +11,10 @@ class InputField extends React.Component {
                     value={this.props.value}
                     onChange={(e) => this.props.onChange(e.target.value)}
                 />
+                <span id="span" className="bottom"></span>
+                <span id="span" className="right"></span>
+                <span id="span" className="top"></span>
+                <span id="span" className="left"></span>
             </div>
         )
     }

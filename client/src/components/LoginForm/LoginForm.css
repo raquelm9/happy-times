@@ -1,20 +1,21 @@
 @font-face {
-  font-family: 'BadScript';
-  src: local('BadScript'),
-    url('../../assets/fonts/BadScript-Regular.ttf') format('truetype');
+    font-family: 'BadScript';
+    src: local('BadScript'),
+        url('../../assets/fonts/BadScript-Regular.ttf') format('truetype');
 }
 
 .title-login {
-  font-size: 40px;
-  text-align: center;
-  font-family: 'BadScript';
-  margin: 50px 0;
+    font-size: 40px;
+    text-align: center;
+    font-family: 'BadScript';
+    margin: 40px;
+    margin-right: 15px;
 }
 
 #guestbutton {
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  padding: 0;
-  margin-top: 4rem;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 0;
+    margin-top: 4rem;
 }
