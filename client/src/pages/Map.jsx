@@ -38,11 +38,11 @@ class MapClient extends React.Component {
         )
     }
 
-    viewHappyHour() {
-        // this.props.history.push({
-        //     pathname: '/restaurant/happy-hour',
-        //     search: 'id=' + restaurant.id,
-        // })
+    viewHappyHour(restaurant) {
+        this.props.history.push({
+            pathname: '/restaurant/happy-hour',
+            search: 'id=' + restaurant.id,
+        })
     }
 
     buildMarkerCard = (restaurant) => {
@@ -60,7 +60,7 @@ class MapClient extends React.Component {
                     {restaurant.address.unit}, {restaurant.address.street}
                     <br></br>
                     <button
-                        onClick={this.viewHappyHour.bind(this)}
+                        onClick={() => this.viewHappyHour(restaurant)}
                         type="button"
                         className="btn btn-dark btn-sm"
                     >

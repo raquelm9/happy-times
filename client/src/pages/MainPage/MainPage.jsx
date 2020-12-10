@@ -7,8 +7,8 @@ class MainPage extends React.Component {
         super(props)
     }
 
-    goToListing() {
-        this.props.history.push('/restaurants')
+    goToLogin() {
+        this.props.history.push('/login')
     }
 
     render() {
@@ -31,7 +31,7 @@ class MainPage extends React.Component {
                         </div>
                         <div>
                             <button
-                                onClick={this.goToListing.bind(this)}
+                                onClick={this.goToLogin.bind(this)}
                                 type="button"
                                 className="btn btn-dark btn-lg main-page-button"
                             >
