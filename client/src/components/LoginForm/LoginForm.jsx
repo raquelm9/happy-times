@@ -77,31 +77,45 @@ class LoginForm extends React.Component {
 
     render() {
         return (
-            <div className="loginFrom">
-                <div className="title-login">Happy Times Login</div>
+            <div className="row">
+                <div className="col-lg-6 col-md-12">
+                    <div className="loginFrom">
+                        <div className="title-login">Happy Times Login</div>
 
-                <InputField
-                    type="text"
-                    placeholder="Username"
-                    value={this.state.username ? this.state.username : ''}
-                    onChange={(val) => this.setInputValue('username', val)}
-                />
-                <InputField
-                    type="password"
-                    placeholder="Password"
-                    value={this.state.password ? this.state.password : ''}
-                    onChange={(val) => this.setInputValue('password', val)}
-                />
-                <SubmitButton
-                    text="Login"
-                    disable={this.state.buttonDisable}
-                    onClick={() => this.doLogin()}
-                />
-                <SubmitButton
-                    text="Enter as a Guest"
-                    disable={this.state.buttonDisable}
-                    onClick={() => this.goToRestaurants()}
-                />
+                        <InputField
+                            type="text"
+                            placeholder="Username"
+                            value={
+                                this.state.username ? this.state.username : ''
+                            }
+                            onChange={(val) =>
+                                this.setInputValue('username', val)
+                            }
+                        />
+                        <InputField
+                            type="password"
+                            placeholder="Password"
+                            value={
+                                this.state.password ? this.state.password : ''
+                            }
+                            onChange={(val) =>
+                                this.setInputValue('password', val)
+                            }
+                        />
+                        <SubmitButton
+                            text="Login"
+                            disable={this.state.buttonDisable}
+                            onClick={() => this.doLogin()}
+                        />
+                    </div>
+                </div>
+                <div className="col-lg-6 col-md-12">
+                    <SubmitButton
+                        text="Enter as a Guest"
+                        disable={this.state.buttonDisable}
+                        onClick={() => this.goToRestaurants()}
+                    />
+                </div>
             </div>
         )
     }

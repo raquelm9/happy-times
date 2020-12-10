@@ -1,15 +1,16 @@
-.inputField {
-  position: relative;
+div.inputField {
+  display: block;
 }
 
 .inputL {
+  margin-left: 90px;
   width: 10.5em;
   color: white;
   font-size: inherit;
   font-family: inherit;
   background-color: hsl(236, 32%, 26%);
   padding: 0.5rem 1rem;
-  border: 2px solid transparent;
+  border: 1px solid transparent;
   transition: background-color 0.3s ease-in-out;
 }
 
@@ -84,8 +85,8 @@
 }
 
 /* Submit Button */
-#button-login {
-  margin-left: 2.5rem;
+.button-login {
+  margin-left: 110px;
   z-index: 1;
   position: relative;
   font-size: inherit;
@@ -99,7 +100,7 @@
   transition: color 0.4s ease-in-out;
 }
 
-#button-login::before {
+.button-login::before {
   content: '';
   z-index: -1;
   position: absolute;
@@ -114,13 +115,13 @@
   transition: transform 0.45s ease-in-out;
 }
 
-#button-login:hover {
+.button-login:hover {
   cursor: pointer;
   color: #161616;
   border-radius: 12px;
   transition: 2s ease-out;
 }
 
-#button-login:hover::before {
+.button-login:hover::before {
   transform: translate3d(300%, 50%, 0) scale3d(15, 15, 15);
 }
