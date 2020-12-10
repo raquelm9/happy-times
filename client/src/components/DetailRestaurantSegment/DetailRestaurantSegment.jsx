@@ -1,7 +1,7 @@
 import React from 'react'
 import { addressLabel } from '../../helpers/address'
 import HappyHourMenu from '../HappyHourMenu/HappyHourMenu'
-import PaddedContainerClient from '../PaddedContainerClient/PaddedContainerClient'
+import PaddedContainerMenu from '../PaddedContainerMenu/PaddedContainerMenu'
 import './DetailRestaurantSegment.css'
 
 class DetailRestaurantSegment extends React.Component {
@@ -58,11 +58,11 @@ class DetailRestaurantSegment extends React.Component {
                         style={{ backgroundColor: '#121212' }}
                     >
                         <div className="column">
-                            <PaddedContainerClient>
+                            <PaddedContainerMenu>
                                 <HappyHourMenu
                                     restaurant={this.props.restaurant}
                                 />
-                            </PaddedContainerClient>
+                            </PaddedContainerMenu>
                         </div>
                     </div>
                 </div>

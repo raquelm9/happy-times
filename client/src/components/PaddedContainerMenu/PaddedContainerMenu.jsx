@@ -1,6 +1,6 @@
 import React from 'react'
 
-class PaddedContainerClient extends React.Component {
+class PaddedContainerMenu extends React.Component {
     constructor(props) {
         super(props)
         console.log(this.props.menu)
@@ -13,7 +13,6 @@ class PaddedContainerClient extends React.Component {
                 style={{
                     backgroundColor: '#ece7db',
                     color: 'black',
-                    marginTop: '100px',
                 }}
             >
                 {this.props.children}
@@ -22,4 +21,4 @@ class PaddedContainerClient extends React.Component {
     }
 }
 
-export default PaddedContainerClient
+export default PaddedContainerMenu
