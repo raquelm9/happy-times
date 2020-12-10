@@ -3,6 +3,7 @@
 }
 
 .inputL {
+<<<<<<< HEAD
   width: 10.5em;
   color: white;
   font-size: inherit;
@@ -11,6 +12,16 @@
   padding: 0.5rem 1rem;
   border: 1px solid transparent;
   transition: background-color 0.3s ease-in-out;
+=======
+    width: 10.5em;
+    color: white;
+    font-size: inherit;
+    font-family: inherit;
+    background-color: hsl(236, 32%, 26%);
+    padding: 0.5rem 1rem;
+    border: 1px solid transparent;
+    transition: background-color 0.3s ease-in-out;
+>>>>>>> 31b1c0eee249cb20ed25ec3ee15e596f5dd1b9be
 }
 
 .inputL:focus {
