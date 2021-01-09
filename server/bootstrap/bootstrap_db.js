@@ -1,7 +1,10 @@
 import mongoose from "mongoose";
 
-export const bootstrapDB = (appName) => {
-  mongoose.connect(`mongodb://localhost:27017/${appName}`, {
+const MONGODB_URI =
+  process.env.MONGODB_URI || "mongodb://localhost:27017/happy-times";
+
+export const bootstrapDB = () => {
+  mongoose.connect(MONGODB_URI, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
   });

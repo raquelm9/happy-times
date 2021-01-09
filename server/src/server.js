@@ -22,7 +22,7 @@ import {
   deleteItem,
 } from "./restaurants/restaurant_schema.js";
 
-const SERVER_PORT = process.env.PORT || 3001;
+const SERVER_PORT = process.env.SERVER_PORT || 3001;
 const APP_NAME = "happy-times";
 
 var app = express();
@@ -362,8 +362,7 @@ app.put(
 );
 
 app.listen(SERVER_PORT, function () {
-  bootstrapDB(APP_NAME);
+  bootstrapDB();
   console.log(`--- Connected to databse ${APP_NAME} ---`);
-
   console.log(` --- Server running on port ${SERVER_PORT}! --`);
 });
