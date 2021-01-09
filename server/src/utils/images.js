@@ -1,4 +1,5 @@
 import fs from "fs";
+import { config } from "../config/config.js";
 
 export const createFolderIfDoesntExist = (path) => {
   if (!fs.existsSync(path)) {
@@ -23,7 +24,7 @@ export const saveBase64Image = (data) => {
     console.log(err);
   });
 
-  return `http://localhost:3001${imagePath}`;
+  return `${config.SERVER_URL}${imagePath}`;
 };
 
 export const isBase64 = (imageData) => {

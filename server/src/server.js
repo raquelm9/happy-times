@@ -4,14 +4,11 @@ import { HappyHour } from "./restaurants/happy_hours.js";
 import { MenuItem } from "./restaurants/menu_item.js";
 import { Menu } from "./restaurants/menu.js";
 import { Coordinates } from "./restaurants/coordinates.js";
-
 import { saveBase64Image } from "./utils/images.js";
-
 import express from "express";
 import cors from "cors";
 import bodyParser from "body-parser";
-
-import { bootstrapDB } from "../bootstrap/bootstrap_db.js";
+import { bootstrapDB } from "./bootstrap/bootstrap_db.js";
 import {
   createRestaurant,
   deleteRestaurant,
@@ -21,9 +18,7 @@ import {
   deleteHappyHour,
   deleteItem,
 } from "./restaurants/restaurant_schema.js";
-
-const SERVER_PORT = process.env.PORT || 3001;
-const APP_NAME = "happy-times";
+import { config } from "./config/config.js";
 
 var app = express();
 
@@ -361,8 +356,8 @@ app.put(
   }
 );
 
-app.listen(SERVER_PORT, function () {
+app.listen(config.PORT, function () {
   bootstrapDB();
-  console.log(`--- Connected to databse ${APP_NAME} ---`);
-  console.log(` --- Server running on port ${SERVER_PORT}! --`);
+  console.log(`--- Connected to databse ${config.APP_NAME} ---`);
+  console.log(` --- Server running on port ${config.PORT}! --`);
 });
