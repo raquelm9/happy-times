@@ -1,22 +1,19 @@
-#restaurant-detail {
-    height: 100%;
+@font-face {
+  font-family: 'BadScript';
+  src: local('BadScript'),
+    url('../assets/fonts/BadScript-Regular.ttf') format('truetype');
 }
 
-#restaurant-detail .restaurant-detail-background-color {
-    background-color: #121212;
-    position: fixed;
-    top: 0px;
-    bottom: 0;
-    width: 100%;
-    z-index: -1;
+.restaurant-listing-container {
+  padding-top: 50px;
+  height: 100%;
+  background-color: #121212;
 }
 
-#restaurant-detail .inner {
-    max-width: 55%;
-    margin: 0 auto;
-}
-
-#restaurant-detail .column {
-    padding-left: 6px !important;
-    padding-right: 6px !important;
+.background {
+  width: 100%;
+  height: 100%;
+  background-color: #121212;
+  position: fixed;
+  z-index: -1;
 }

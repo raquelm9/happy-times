@@ -1,34 +1,34 @@
 @font-face {
-    font-family: 'BadScript';
-    src: local('BadScript'),
-        url('../assets/fonts/BadScript-Regular.ttf') format('truetype');
+  font-family: 'BadScript';
+  src: local('BadScript'),
+    url('../assets/fonts/BadScript-Regular.ttf') format('truetype');
 }
 
 .restaurant-listing-container {
-    height: 100%;
-    background-color: #121212;
+  height: 100%;
+  background-color: #121212;
 }
 
-.restaurantListingImage {
+/* .restaurantListingImage {
     padding: 40px;
-}
+} */
 
 h1.restaurants-title {
-    font-family: 'BadScript';
-    font-size: 40px;
-    text-align: center;
-    color: white;
-    padding: 40px;
+  font-family: 'BadScript';
+  font-size: 40px;
+  text-align: center;
+  color: white;
+  padding: 40px;
 }
 
-i.restaurant-listing {
-    color: white;
-    display: block;
-    float: left;
-    margin-right: 30px;
-    font-size: 40px;
-}
+/* i.restaurant-listing {
+  color: white;
+  display: block;
+  float: left;
+  margin-right: 30px;
+  font-size: 40px;
+} */
 
 i.restaurant-listing:hover {
-    cursor: pointer;
+  cursor: pointer;
 }

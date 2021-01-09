@@ -3,19 +3,20 @@ import DetailRestaurantSegment from '../DetailRestaurantSegment/DetailRestaurant
 import PaddedContainerClient from '../PaddedContainerClient/PaddedContainerClient'
 
 class Grid extends React.Component {
-    render() {
-        return (
-            <div className="ui stackable one column grid">
-                <div className="column" style={{ textAlign: 'center' }}>
-                    <PaddedContainerClient>
-                        <DetailRestaurantSegment
-                            restaurant={this.props.restaurant}
-                        />
-                    </PaddedContainerClient>
-                </div>
-            </div>
-        )
-    }
+  constructor(props) {
+    super(props)
+  }
+  render() {
+    return (
+      <div className="ui stackable one column grid">
+        <div className="column" style={{ textAlign: 'center' }}>
+          <PaddedContainerClient>
+            <DetailRestaurantSegment restaurant={this.props.restaurant} />
+          </PaddedContainerClient>
+        </div>
+      </div>
+    )
+  }
 }
 
 export default Grid

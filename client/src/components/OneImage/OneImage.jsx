@@ -20,20 +20,18 @@ class OneImage extends React.Component {
     if (error) {
       return (
         <img
-          className="fluid centered image"
+          className="card-img-top"
           src={require('../../assets/placeholder.png')}
         />
       )
     } else {
       return (
-        <div className="one-image">
-          <img
-            className="ui fluid centered rounded image"
-            id="photo"
-            src={this.props.image}
-            onError={this.handleDisplayError.bind(this)}
-          />
-        </div>
+        <img
+          className="card-img-top"
+          id="photo"
+          src={this.props.image}
+          onError={this.handleDisplayError.bind(this)}
+        />
       )
     }
   }
