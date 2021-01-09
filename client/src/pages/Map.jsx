@@ -82,7 +82,7 @@ class MapClient extends React.Component {
           scrollWheelZoom={true}
         >
           <TileLayer
-            attribution='&copy; <a href="http://stadiamaps.com/">Stadia Maps</a>, &copy; <a href="https://openmaptiles.org/">OpenMapTiles</a> &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors'
+            attribution='&copy; <a href="http://stadiamaps.com/">Stadia Maps</a>, &copy; <a href="http://openmaptiles.org/">OpenMapTiles</a> &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors'
             url="http://tiles.stadiamaps.com/tiles/alidade_smooth/{z}/{x}/{y}{r}.png"
           />
           {this.state.restaurants.map(this.buildMarkerCard)}
