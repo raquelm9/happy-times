@@ -1,5 +1,25 @@
 {
-    "devDependencies": {
-        "prettier": "2.1.2"
-    }
+  "name": "happy-times",
+  "version": "1.0.0",
+  "description": "Happy hours for calgary",
+  "main": "./server/server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/raquelm9/happy-times.git"
+  },
+  "keywords": [
+    "happy-hours"
+  ],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/raquelm9/happy-times/issues"
+  },
+  "homepage": "https://github.com/raquelm9/happy-times#readme",
+  "dependencies": {
+    "prettier": "^2.2.1"
+  }
 }
