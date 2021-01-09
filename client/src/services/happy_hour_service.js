@@ -1,4 +1,4 @@
-const SERVER_URL = process.env.SERVER_URL || 'http://localhost:3001'
+const SERVER_URL = process.env.REACT_APP_SERVER_URL || 'http://localhost:3001'
 
 export class HappyHourService {
   static createHappyHour(restaurantId, happyHour) {
