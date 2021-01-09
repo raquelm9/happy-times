@@ -1,6 +1,10 @@
 {
   "name": "happy-times-server",
   "version": "1.0.0",
+  "engines": {
+    "node": "15.x",
+    "npm": "7.x"
+  },
   "description": "Find discounts and happy hours in your local area",
   "main": "index.js",
   "type": "module",
@@ -8,7 +12,7 @@
     "start": "node ./build/server.js",
     "start:watch": "nodemon ./src/server.js",
     "clean": "rm -rf build && rm -rf ../uploads/",
-    "build": "babel src -d build",
+    "build": "babel -d ./build ./src -s",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
@@ -24,8 +28,5 @@
   },
   "devDependencies": {
     "babel-cli": "^6.26.0"
-  },
-  "engines": {
-    "node": "10.x"
   }
 }
