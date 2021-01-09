@@ -5,7 +5,7 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "start": "node ./src/server.js",
+    "start": "node ./build/server.js",
     "start:watch": "nodemon ./src/server.js",
     "clean": "rm -rf build && rm -rf ../uploads/",
     "build": "babel src -d build",
@@ -14,6 +14,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@babel/preset-env": "^7.12.11",
     "babel-preset-env": "^1.7.0",
     "body-parser": "^1.19.0",
     "cors": "^2.8.5",
