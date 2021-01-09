@@ -1,9 +1,9 @@
-import { Restaurant } from "./src/restaurants/restaurants.js";
-import { Address } from "./src/restaurants/address.js";
-import { HappyHour } from "./src/restaurants/happy_hours.js";
-import { MenuItem } from "./src/restaurants/menu_item.js";
-import { Menu } from "./src/restaurants/menu.js";
-import { Coordinates } from "./src/restaurants/coordinates.js";
+import { Restaurant } from "./restaurants/restaurants.js";
+import { Address } from "./restaurants/address.js";
+import { HappyHour } from "./restaurants/happy_hours.js";
+import { MenuItem } from "./restaurants/menu_item.js";
+import { Menu } from "./restaurants/menu.js";
+import { Coordinates } from "./restaurants/coordinates.js";
 
 import { saveBase64Image } from "./utils/images.js";
 
@@ -11,7 +11,7 @@ import express from "express";
 import cors from "cors";
 import bodyParser from "body-parser";
 
-import { bootstrapDB } from "./bootstrap/bootstrap_db.js";
+import { bootstrapDB } from "../bootstrap/bootstrap_db.js";
 import {
   createRestaurant,
   deleteRestaurant,
@@ -20,7 +20,7 @@ import {
   updateRestaurant,
   deleteHappyHour,
   deleteItem,
-} from "./src/restaurants/restaurant_schema.js";
+} from "./restaurants/restaurant_schema.js";
 
 const SERVER_PORT = 3001;
 const APP_NAME = "happy-times";

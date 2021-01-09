@@ -3,3 +3,4 @@ server/node_modules/
 server/uploads/
 client/node_modules/
 .DS_Store
+build/
