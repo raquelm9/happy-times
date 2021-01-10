@@ -41,7 +41,7 @@ class MainPage extends React.Component {
               >
                 Enter The Happy World
               </button>
-              <p className="main">
+              <p className="second">
                 Important: This app is intended to show the skills of the
                 developer, it is not for public use
               </p>
