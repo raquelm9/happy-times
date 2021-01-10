@@ -43,7 +43,7 @@ class MainPage extends React.Component {
               </button>
               <p className="second">
                 Important: This app is intended to show the skills of the
-                developer, it is not for public use
+                developer, it is not for public use.
               </p>
             </div>
           </div>
