@@ -71,9 +71,9 @@ button.btn.btn-dark.btn-lg.main-page-button {
 }
 
 p.second {
-  font-size: 15px;
-  color: #fff;
-  font-weight: 300;
+  font-size: 15px !important;
+  color: #fff !important;
+  font-weight: 300 !important;
 }
 
 .titleMessage .heading .sub {
