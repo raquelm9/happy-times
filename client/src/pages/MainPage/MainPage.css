@@ -70,6 +70,10 @@ button.btn.btn-dark.btn-lg.main-page-button {
   font-family: 'BadScript';
 }
 
+.second {
+  font-size: 40px;
+}
+
 .titleMessage .heading .sub {
   font-size: 33px;
   font-family: 'BadScript';
