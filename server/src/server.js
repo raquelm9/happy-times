@@ -56,39 +56,40 @@ app.delete("/restaurants/:restaurantId", function (req, res) {
     .then((allRestaurants) => res.status(200).send(allRestaurants));
 });
 
-app.post("/restaurants", async function (req, res) {
+app.post("/restaurants", function (req, res) {
   const reqBodyRest = req.body;
-
   const uploader = new CloudinaryImageUploader();
-  const path = await uploader.upload(reqBodyRest.image);
 
-  const newAddress = new Address(
-    reqBodyRest.address.unit,
-    reqBodyRest.address.street,
-    reqBodyRest.address.postalCode,
-    reqBodyRest.address.city,
-    reqBodyRest.address.province,
-    Coordinates.from(reqBodyRest.address.coordinates)
-  );
+  uploader.upload(reqBodyRest.image).then((path) => {
+    const newAddress = new Address(
+      reqBodyRest.address.unit,
+      reqBodyRest.address.street,
+      reqBodyRest.address.postalCode,
+      reqBodyRest.address.city,
+      reqBodyRest.address.province,
+      Coordinates.from(reqBodyRest.address.coordinates)
+    );
 
-  const newRest = new Restaurant(
-    undefined,
-    reqBodyRest.name,
-    reqBodyRest.description,
-    reqBodyRest.website,
-    path,
-    newAddress
-  );
+    const newRest = new Restaurant(
+      undefined,
+      reqBodyRest.name,
+      reqBodyRest.description,
+      reqBodyRest.website,
+      path,
+      newAddress
+    );
 
-  createRestaurant(newRest).then((savedRestaurant) => {
-    res.status(200).send(savedRestaurant);
+    createRestaurant(newRest).then((savedRestaurant) => {
+      res.status(200).send(savedRestaurant);
+    });
   });
 });
 
 app.put("/restaurants/:restaurantId", function (req, res) {
+  let uploadPromise = Promise.resolve();
   var restaurantId = req.params.restaurantId;
 
-  findRestaurantById(restaurantId).then(async (rest) => {
+  findRestaurantById(restaurantId).then((rest) => {
     const address = req.body.address;
 
     if (req.body.name) {
@@ -97,8 +98,9 @@ app.put("/restaurants/:restaurantId", function (req, res) {
 
     if (req.body.image) {
       const uploader = new CloudinaryImageUploader();
-      const path = await uploader.upload(req.body.image);
-      rest.setImage(path);
+      uploadPromise = uploader.upload(req.body.image).then((path) => {
+        rest.setImage(path);
+      });
     }
 
     if (req.body.description) {
@@ -122,9 +124,9 @@ app.put("/restaurants/:restaurantId", function (req, res) {
     }
 
     if (rest) {
-      return updateRestaurant(rest).then((updated) =>
-        res.status(200).send(updated)
-      );
+      return uploadPromise
+        .then(() => updateRestaurant(rest))
+        .then((updated) => res.status(200).send(updated));
     } else {
       res.status(400).send({ error: "Restaurant Id not found" });
     }

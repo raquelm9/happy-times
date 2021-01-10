@@ -1,4 +1,3 @@
 {
-  "presets": [["env", { "modules": false }]],
-  "plugins": ["transform-async-to-generator"]
+  "presets": [["env", { "modules": false }]]
 }
