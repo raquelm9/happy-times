@@ -21,9 +21,9 @@ class AboutMe extends React.Component {
                 <p className="second">Our Story</p>
                 <br></br>
                 <p className="third">
-                  We are four aspiring developers, eager to help you find a
-                  Happy Hour near your location, so you can enjoy the best
-                  moments with your friends and loved ones.
+                  We are eager to help you find a Happy Hour near your location,
+                  so you can enjoy the best moments with your friends and loved
+                  ones.
                   <br />
                   <br />A lot has happened in 2020, motivating us to create this
                   application for Albertans. We are proud to help people in

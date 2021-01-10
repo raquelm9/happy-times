@@ -4,7 +4,7 @@ import { HappyHour } from "./restaurants/happy_hours.js";
 import { MenuItem } from "./restaurants/menu_item.js";
 import { Menu } from "./restaurants/menu.js";
 import { Coordinates } from "./restaurants/coordinates.js";
-import { saveBase64Image } from "./utils/images.js";
+import { CloudinaryImageUploader } from "./utils/images.js";
 import express from "express";
 import cors from "cors";
 import bodyParser from "body-parser";
@@ -56,9 +56,11 @@ app.delete("/restaurants/:restaurantId", function (req, res) {
     .then((allRestaurants) => res.status(200).send(allRestaurants));
 });
 
-app.post("/restaurants", function (req, res) {
+app.post("/restaurants", async function (req, res) {
   const reqBodyRest = req.body;
-  const path = saveBase64Image(reqBodyRest.image);
+
+  const uploader = new CloudinaryImageUploader();
+  const path = await uploader.upload(reqBodyRest.image);
 
   const newAddress = new Address(
     reqBodyRest.address.unit,
@@ -86,7 +88,7 @@ app.post("/restaurants", function (req, res) {
 app.put("/restaurants/:restaurantId", function (req, res) {
   var restaurantId = req.params.restaurantId;
 
-  findRestaurantById(restaurantId).then((rest) => {
+  findRestaurantById(restaurantId).then(async (rest) => {
     const address = req.body.address;
 
     if (req.body.name) {
@@ -94,7 +96,8 @@ app.put("/restaurants/:restaurantId", function (req, res) {
     }
 
     if (req.body.image) {
-      const path = saveBase64Image(req.body.image);
+      const uploader = new CloudinaryImageUploader();
+      const path = await uploader.upload(req.body.image);
       rest.setImage(path);
     }
 

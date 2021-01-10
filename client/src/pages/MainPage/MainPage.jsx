@@ -8,7 +8,7 @@ class MainPage extends React.Component {
   }
 
   goToLogin() {
-    this.props.history.push('/about-me')
+    this.props.history.push('/restaurants')
   }
 
   render() {
