@@ -21,6 +21,14 @@ h1.restaurants-title {
   padding: 40px;
 }
 
+p.loading-info {
+  font-family: 'BadScript';
+  font-size: 15px;
+  text-align: center;
+  color: white;
+  padding: 40px;
+}
+
 /* i.restaurant-listing {
   color: white;
   display: block;
