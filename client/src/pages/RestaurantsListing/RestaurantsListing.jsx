@@ -1,9 +1,9 @@
 import React from 'react'
-import { HttpService } from '../services/http-service'
-import RestListingComp from '../components/RestListingComp/RestListingComp'
+import { HttpService } from '../../services/http-service'
+import RestListingComp from '../../components/RestListingComp/RestListingComp'
 import { withRouter } from 'react-router-dom'
 import './RestaurantListing.css'
-import Navbar from '../components/Navbar/Navbar'
+import Navbar from '../../components/Navbar/Navbar'
 
 class RestaurantsListing extends React.Component {
   constructor(props) {

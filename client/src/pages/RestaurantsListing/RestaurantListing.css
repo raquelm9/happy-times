@@ -1,7 +1,7 @@
 @font-face {
   font-family: 'BadScript';
   src: local('BadScript'),
-    url('../assets/fonts/BadScript-Regular.ttf') format('truetype');
+    url('../../assets/fonts/BadScript-Regular.ttf') format('truetype');
 }
 
 .restaurant-listing-container {

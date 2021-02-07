@@ -1,14 +1,14 @@
 import React from 'react'
-import Navbar from '../components/Navbar/Navbar'
+import Navbar from '../../components/Navbar/Navbar'
 import { withRouter } from 'react-router-dom'
 import { MapContainer, TileLayer, Popup, Marker } from 'react-leaflet'
-import { HttpService } from '../services/http-service'
+import { HttpService } from '../../services/http-service'
 
 import L from 'leaflet'
 import 'leaflet/dist/leaflet.js'
 import 'leaflet/dist/leaflet.css'
 
-import icon from '../assets/cheers.png'
+import icon from '../../assets/cheers.png'
 // import iconShadow from 'leaflet/dist/images/marker-shadow.png'
 
 let DefaultIcon = L.icon({

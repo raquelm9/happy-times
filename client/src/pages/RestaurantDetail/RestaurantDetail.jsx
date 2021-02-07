@@ -1,12 +1,12 @@
 import React from 'react'
-import OneImage from '../components/OneImage/OneImage'
-import Grid from '../components/Grid/Grid'
-import { HttpService } from '../services/http-service'
+import OneImage from '../../components/OneImage/OneImage'
+import Grid from '../../components/Grid/Grid'
+import { HttpService } from '../../services/http-service'
 import { withRouter } from 'react-router-dom'
 import './RestaurantDetail.css'
-import './RestaurantListing.css'
-import Navbar from '../components/Navbar/Navbar'
-import DetailCard from '../components/DetailCard/DetailCard'
+import '../RestaurantsListing/RestaurantListing.css'
+import Navbar from '../../components/Navbar/Navbar'
+import DetailCard from '../../components/DetailCard/DetailCard'
 
 class RestaurantDetail extends React.Component {
   constructor(props) {

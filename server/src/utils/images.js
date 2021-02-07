@@ -24,7 +24,7 @@ export class CloudinaryImageUploader extends ImageUploader {
   }
 
   upload(data) {
-    if (!this.isBase64(data)) return data;
+    if (!this.isBase64(data)) return Promise.resolve(data);
 
     const uploadPromise = new Promise((resolve, reject) => {
       cloudinary.v2.uploader.upload(data, {}, (error, result) => {
@@ -32,7 +32,6 @@ export class CloudinaryImageUploader extends ImageUploader {
           reject(error);
         } else {
           const imageUrl = result.secure_url;
-          console.warn("HERE", imageUrl);
           resolve(imageUrl);
         }
       });
